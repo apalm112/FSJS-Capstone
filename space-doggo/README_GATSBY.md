@@ -34,21 +34,20 @@ Gatsby reads the site’s config file when starting.
 
 * **Note that if you use gatsby-plugin-typography with the default starter, you’ll need to delete the default layout.css used by that starter as it overrides the Typography.js CSS**
 
-*
 
 ## NASA API
 
 
-Your API key for apalm112@protonmail.com is:
+The NASA API key is in the config dir.
 
-FTn2P1g5bTSNIUmegVy8mxeO97XB8Uj9vCle4ahZ
+
 You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
 
-https://api.nasa.gov/planetary/apod?api_key=FTn2P1g5bTSNIUmegVy8mxeO97XB8Uj9vCle4ahZ
+https://api.nasa.gov/planetary/apod?api_key=<api_key_here>
 For additional support, please contact us. When contacting us, please tell us what API you're accessing and provide the following account details so we can quickly find you:
 
-Account Email: apalm112@protonmail.com
-Account ID: db2b62e6-0f2b-4a03-8a02-f1dff3d6865a
+Account Email:
+Account ID:
 
 #### Use For Neo-Feed
 
@@ -187,5 +186,3 @@ https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&
 ```
 
 * The `url_nasa_details:` goes to the page:	https://cneos.jpl.nasa.gov/sentry/details.html#?des=1979%20XB
-
-* 
