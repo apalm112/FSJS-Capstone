@@ -1,0 +1,801 @@
+{
+  "nodes": {
+    "SitePage /dev-404-page/": {
+      "jsonName": "dev-404-page-5f9",
+      "internalComponentName": "ComponentDev404Page",
+      "path": "/dev-404-page/",
+      "component": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/.cache/dev-404-page.js",
+      "componentChunkName": "component---cache-dev-404-page-js",
+      "context": {},
+      "pluginCreator___NODE": "d48d1c52-fe48-53cb-8f08-aa4b47dde5a5",
+      "pluginCreatorId": "d48d1c52-fe48-53cb-8f08-aa4b47dde5a5",
+      "componentPath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/.cache/dev-404-page.js",
+      "id": "SitePage /dev-404-page/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "73a02901813c2da1ecc1690841aa166c",
+        "description": "d48d1c52-fe48-53cb-8f08-aa4b47dde5a5",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "d48d1c52-fe48-53cb-8f08-aa4b47dde5a5": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/dev-404-page",
+      "id": "d48d1c52-fe48-53cb-8f08-aa4b47dde5a5",
+      "name": "dev-404-page",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "createPagesStatefully"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/dev-404-page",
+      "packageJson": {
+        "name": "dev-404-page",
+        "description": "Internal plugin to add a 404 page in development with helpful information",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "4826670493f004f5fcbd193a0c313dd1",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "1fc32581-893a-55e8-8927-bcd667e2b700": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/load-babel-config",
+      "id": "1fc32581-893a-55e8-8927-bcd667e2b700",
+      "name": "load-babel-config",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onPreBootstrap"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/load-babel-config",
+      "packageJson": {
+        "name": "load-babel-config",
+        "description": "Internal plugin that handles loading Babel configs",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "737dedff9603e5f6c5d9f7997c6d12f0",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "a5079d69-ba80-53dc-82f9-0f440bd5448c": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/internal-data-bridge",
+      "id": "a5079d69-ba80-53dc-82f9-0f440bd5448c",
+      "name": "internal-data-bridge",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "sourceNodes",
+        "onCreatePage"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/internal-data-bridge",
+      "packageJson": {
+        "name": "internal-data-bridge",
+        "description": "An internal Gatsby plugin which creates data nodes from internal data",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "5094a16d7b0d4d1f196220dce6e05486",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "f795702c-a3b8-5a88-88ee-5d06019d44fa": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/prod-404",
+      "id": "f795702c-a3b8-5a88-88ee-5d06019d44fa",
+      "name": "prod-404",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreatePage"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/prod-404",
+      "packageJson": {
+        "name": "prod-404",
+        "description": "Internal plugin to detect various flavors of 404 pages and ensure there's a 404.html path created as well to ensure compatability with static hosts",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "42ddf655c32762cb579c13f6815a3141",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "84dad27f-1d44-51fc-ac56-4db2e5222995": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/query-runner",
+      "id": "84dad27f-1d44-51fc-ac56-4db2e5222995",
+      "name": "query-runner",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreatePage"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby/dist/internal-plugins/query-runner",
+      "packageJson": {
+        "name": "query-runner",
+        "description": "Internal plugin for running queries",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "982085aa387962a11b3b4f10f47a92a8",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "b1fcf96b-f839-590f-9bd4-9242f34f1691": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-source-mongodb",
+      "id": "b1fcf96b-f839-590f-9bd4-9242f34f1691",
+      "name": "gatsby-source-mongodb",
+      "version": "2.0.8",
+      "pluginOptions": {
+        "plugins": [],
+        "dbName": "books",
+        "collection": "users",
+        "server": {
+          "address": "ds163156.mlab.com",
+          "port": 63156
+        },
+        "auth": {
+          "user": "capstone",
+          "password": "get_books1"
+        },
+        "map": {
+          "documents": {
+            "description": "application/json"
+          }
+        }
+      },
+      "nodeAPIs": [
+        "sourceNodes"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-source-mongodb",
+      "packageJson": {
+        "name": "gatsby-source-mongodb",
+        "description": "Source plugin for pulling data into Gatsby from MongoDB collections",
+        "version": "2.0.8",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin"
+        ],
+        "author": {
+          "name": "jhermans85@hotmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "@babel/runtime",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "lodash",
+            "version": "^4.17.10"
+          },
+          {
+            "name": "mongodb",
+            "version": "^2.2.30"
+          },
+          {
+            "name": "query-string",
+            "version": "^6.1.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "@babel/cli",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "@babel/core",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "babel-preset-gatsby-package",
+            "version": "^0.1.2"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.1.4"
+          }
+        ],
+        "peerDependencies": [
+          {
+            "name": "gatsby",
+            "version": ">2.0.0-alpha"
+          }
+        ],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "4f178645fbd0954a9543a1a0564752c7",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "1943ff2f-9c0c-558d-8d0c-006603e8106a": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-plugin-react-helmet",
+      "id": "1943ff2f-9c0c-558d-8d0c-006603e8106a",
+      "name": "gatsby-plugin-react-helmet",
+      "version": "3.0.2",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [],
+      "browserAPIs": [],
+      "ssrAPIs": [
+        "onRenderBody"
+      ],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-plugin-react-helmet",
+      "packageJson": {
+        "name": "gatsby-plugin-react-helmet",
+        "description": "Manage document head data with react-helmet. Provides drop-in server rendering support for Gatsby.",
+        "version": "3.0.2",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin",
+          "favicon",
+          "react-helmet",
+          "seo",
+          "document",
+          "head",
+          "title",
+          "meta",
+          "link",
+          "script",
+          "base",
+          "noscript",
+          "style"
+        ],
+        "author": {
+          "name": "Kyle Mathews",
+          "email": "matthews.kyle@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "@babel/runtime",
+            "version": "^7.0.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "@babel/cli",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "@babel/core",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "babel-preset-gatsby-package",
+            "version": "^0.1.2"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.1.4"
+          }
+        ],
+        "peerDependencies": [
+          {
+            "name": "gatsby",
+            "version": ">2.0.0-alpha"
+          },
+          {
+            "name": "react-helmet",
+            "version": ">=5.1.3"
+          }
+        ],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "f181db4535e067bd7e1e7a60b55a5dd8",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "9f28d07a-37b6-51d1-b2d0-5071b57d6dd2": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-transformer-remark",
+      "id": "9f28d07a-37b6-51d1-b2d0-5071b57d6dd2",
+      "name": "gatsby-transformer-remark",
+      "version": "2.1.12",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreateNode",
+        "setFieldsOnGraphQLNodeType"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-transformer-remark",
+      "packageJson": {
+        "name": "gatsby-transformer-remark",
+        "description": "Gatsby transformer plugin for Markdown using the Remark library and ecosystem",
+        "version": "2.1.12",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin",
+          "markdown",
+          "remark"
+        ],
+        "author": {
+          "name": "Kyle Mathews",
+          "email": "mathews.kyle@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "@babel/runtime",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "bluebird",
+            "version": "^3.5.0"
+          },
+          {
+            "name": "gray-matter",
+            "version": "^4.0.0"
+          },
+          {
+            "name": "hast-util-raw",
+            "version": "^4.0.0"
+          },
+          {
+            "name": "hast-util-to-html",
+            "version": "^4.0.0"
+          },
+          {
+            "name": "lodash",
+            "version": "^4.17.10"
+          },
+          {
+            "name": "mdast-util-to-hast",
+            "version": "^3.0.0"
+          },
+          {
+            "name": "mdast-util-toc",
+            "version": "^2.0.1"
+          },
+          {
+            "name": "remark",
+            "version": "^9.0.0"
+          },
+          {
+            "name": "remark-parse",
+            "version": "^5.0.0"
+          },
+          {
+            "name": "remark-retext",
+            "version": "^3.1.0"
+          },
+          {
+            "name": "remark-stringify",
+            "version": "^5.0.0"
+          },
+          {
+            "name": "retext-english",
+            "version": "^3.0.0"
+          },
+          {
+            "name": "sanitize-html",
+            "version": "^1.18.2"
+          },
+          {
+            "name": "underscore.string",
+            "version": "^3.3.4"
+          },
+          {
+            "name": "unified",
+            "version": "^6.1.5"
+          },
+          {
+            "name": "unist-util-remove-position",
+            "version": "^1.1.2"
+          },
+          {
+            "name": "unist-util-select",
+            "version": "^1.5.0"
+          },
+          {
+            "name": "unist-util-visit",
+            "version": "^1.3.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "@babel/cli",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "@babel/core",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "babel-preset-gatsby-package",
+            "version": "^0.1.2"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.1.4"
+          }
+        ],
+        "peerDependencies": [
+          {
+            "name": "gatsby",
+            "version": "^2.0.33"
+          }
+        ],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "ad1f89687e4edf2afb7fedeb530eb1b7",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "7374ebf2-d961-52ee-92a2-c25e7cb387a9": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb",
+      "id": "7374ebf2-d961-52ee-92a2-c25e7cb387a9",
+      "name": "default-site-plugin",
+      "version": "bf4bfd5286b8c72a5ae511cf7b15364a",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "createPages"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb",
+      "packageJson": {
+        "name": "using-mongodb",
+        "description": "Gatsby example site using gatsby-source-mongodb",
+        "main": "n/a",
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "gatsby",
+            "version": "^2.0.0"
+          },
+          {
+            "name": "gatsby-plugin-react-helmet",
+            "version": "^3.0.0"
+          },
+          {
+            "name": "gatsby-source-mongodb",
+            "version": "^2.0.5"
+          },
+          {
+            "name": "gatsby-transformer-remark",
+            "version": "^2.1.1"
+          },
+          {
+            "name": "react",
+            "version": "^16.4.1"
+          },
+          {
+            "name": "react-dom",
+            "version": "^16.4.1"
+          },
+          {
+            "name": "react-helmet",
+            "version": "^5.2.0"
+          }
+        ],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "c74d11c00d08fdfee52c0e4205448a13",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "9bfc5a21-54c5-5bb0-a0ce-768b985913a7": {
+      "resolve": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-plugin-page-creator",
+      "id": "9bfc5a21-54c5-5bb0-a0ce-768b985913a7",
+      "name": "gatsby-plugin-page-creator",
+      "version": "2.0.4",
+      "pluginOptions": {
+        "plugins": [],
+        "path": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/src/pages",
+        "pathCheck": false
+      },
+      "nodeAPIs": [
+        "createPagesStatefully"
+      ],
+      "browserAPIs": [],
+      "ssrAPIs": [],
+      "pluginFilepath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/node_modules/gatsby-plugin-page-creator",
+      "packageJson": {
+        "name": "gatsby-plugin-page-creator",
+        "description": "Gatsby plugin that automatically creates pages from React components in specified directories",
+        "version": "2.0.4",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin"
+        ],
+        "author": {
+          "name": "Kyle Mathews",
+          "email": "mathews.kyle@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "@babel/runtime",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "bluebird",
+            "version": "^3.5.0"
+          },
+          {
+            "name": "chokidar",
+            "version": "^1.7.0"
+          },
+          {
+            "name": "fs-exists-cached",
+            "version": "^1.0.0"
+          },
+          {
+            "name": "glob",
+            "version": "^7.1.1"
+          },
+          {
+            "name": "lodash",
+            "version": "^4.17.10"
+          },
+          {
+            "name": "micromatch",
+            "version": "^3.1.10"
+          },
+          {
+            "name": "parse-filepath",
+            "version": "^1.0.1"
+          },
+          {
+            "name": "slash",
+            "version": "^1.0.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "@babel/cli",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "@babel/core",
+            "version": "^7.0.0"
+          },
+          {
+            "name": "babel-preset-gatsby-package",
+            "version": "^0.1.2"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.0.5"
+          }
+        ],
+        "peerDependencies": [
+          {
+            "name": "gatsby",
+            "version": ">2.0.0-alpha"
+          }
+        ],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "c9140bf67cabce20485272b8aa8c7ae5",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Site": {
+      "siteMetadata": {
+        "title": "Gatsby with MongoDB"
+      },
+      "port": "8000",
+      "host": "localhost",
+      "pathPrefix": "",
+      "polyfill": true,
+      "buildTime": "2018-11-16T18:40:23.947Z",
+      "id": "Site",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "ff5b5b97cb548797cee4206a7f1f6b38",
+        "type": "Site",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "3f704703-03cc-5c24-b6b3-a10568cdf33c": {
+      "fullName": "Spaced Potato",
+      "emailAddress": "space@aol.net",
+      "password": "$2b$10$C3O.0XfBdIY9lwWlKBFEze1MQ6VdrsCOf4Vn5D3KW8n5aO95mUHOy",
+      "__v": 0,
+      "id": "3f704703-03cc-5c24-b6b3-a10568cdf33c",
+      "mongodb_id": "5bef0d7ef05e4e20e3b03ecd",
+      "parent": "__users__",
+      "children": [],
+      "internal": {
+        "type": "mongodbBooksUsers",
+        "content": "{\"fullName\":\"Spaced Potato\",\"emailAddress\":\"space@aol.net\",\"password\":\"$2b$10$C3O.0XfBdIY9lwWlKBFEze1MQ6VdrsCOf4Vn5D3KW8n5aO95mUHOy\",\"__v\":0}",
+        "contentDigest": "ce2136e99a829d24475b2876e3108560",
+        "owner": "gatsby-source-mongodb"
+      }
+    },
+    "bf0de4f0-3abc-5618-a77d-af387b06b9e8": {
+      "fullName": "Slutbags Sallys",
+      "emailAddress": "sally@aol.com",
+      "password": "$2b$10$3aotARP3B4Vh4Sbeo.QEe.firiMM/rk55MXSLdmGJ.0SHCnH7M6Wy",
+      "__v": 0,
+      "id": "bf0de4f0-3abc-5618-a77d-af387b06b9e8",
+      "mongodb_id": "5bef0d9ff05e4e20e3b03ece",
+      "parent": "__users__",
+      "children": [],
+      "internal": {
+        "type": "mongodbBooksUsers",
+        "content": "{\"fullName\":\"Slutbags Sallys\",\"emailAddress\":\"sally@aol.com\",\"password\":\"$2b$10$3aotARP3B4Vh4Sbeo.QEe.firiMM/rk55MXSLdmGJ.0SHCnH7M6Wy\",\"__v\":0}",
+        "contentDigest": "4223c8c48da96b86160455f30f1ea172",
+        "owner": "gatsby-source-mongodb"
+      }
+    },
+    "cee9046e-c5bc-5128-93ce-13fad35e38a7": {
+      "fullName": "Dildo Shaggins",
+      "emailAddress": "dildo@aol.com",
+      "password": "$2b$10$W1svLRHnHgt5wiXRaRKSve7ObaDFg29b2LJxKWXNZVgIs/0sZMUES",
+      "__v": 0,
+      "id": "cee9046e-c5bc-5128-93ce-13fad35e38a7",
+      "mongodb_id": "5bef0db2f05e4e20e3b03ecf",
+      "parent": "__users__",
+      "children": [],
+      "internal": {
+        "type": "mongodbBooksUsers",
+        "content": "{\"fullName\":\"Dildo Shaggins\",\"emailAddress\":\"dildo@aol.com\",\"password\":\"$2b$10$W1svLRHnHgt5wiXRaRKSve7ObaDFg29b2LJxKWXNZVgIs/0sZMUES\",\"__v\":0}",
+        "contentDigest": "936decb37f7613d95a5a05f89c8587d4",
+        "owner": "gatsby-source-mongodb"
+      }
+    },
+    "SitePage /": {
+      "jsonName": "index",
+      "internalComponentName": "ComponentIndex",
+      "path": "/",
+      "component": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/src/pages/index.js",
+      "componentChunkName": "component---src-pages-index-js",
+      "context": {},
+      "pluginCreator___NODE": "9bfc5a21-54c5-5bb0-a0ce-768b985913a7",
+      "pluginCreatorId": "9bfc5a21-54c5-5bb0-a0ce-768b985913a7",
+      "componentPath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/src/pages/index.js",
+      "id": "SitePage /",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "a02328e21f13403c422df635e528e610",
+        "description": "9bfc5a21-54c5-5bb0-a0ce-768b985913a7",
+        "owner": "internal-data-bridge"
+      }
+    }
+  },
+  "status": {
+    "plugins": {},
+    "PLUGINS_HASH": "6e3ca81c2643d304d5e54990c9df99af"
+  },
+  "componentDataDependencies": {
+    "nodes": {},
+    "connections": {
+      "mongodbBooksUsers": [
+        "/"
+      ]
+    }
+  },
+  "jsonDataPaths": {
+    "dev-404-page-5f9": "920/path---dev-404-page-5-f-9-fab-NZuapzHg3X9TaN1iIixfv1W23E",
+    "index": "921/path---index-6a9-DUjFxeMHNFHVS7xRvINEmSm7BIc"
+  },
+  "components": {
+    "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/.cache/dev-404-page.js": {
+      "query": "",
+      "componentPath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/.cache/dev-404-page.js"
+    },
+    "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/src/pages/index.js": {
+      "query": "query homeSofaKingTeamTreehouseProjectsProject12FsjsCapstoneProjectGatsbyUsingMongodbSrcPagesIndexJs1097733396 {\n  allMongodbBooksUsers {\n    totalCount\n    edges {\n      node {\n        id\n        fullName\n        emailAddress\n        password\n      }\n    }\n  }\n}\n",
+      "componentPath": "/home/sofa_king/Team_Treehouse/Projects/Project12/fsjs-capstone-project/gatsby-using-mongodb/src/pages/index.js"
+    }
+  },
+  "staticQueryComponents": {}
+}

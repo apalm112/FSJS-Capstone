@@ -1,0 +1,472 @@
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2018 The New York Times Company.  All Rights Reserved.",
+  "num_results": 10,
+  "last_modified": "2017-03-21T13:38:01-04:00",
+  "results": [
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 1,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/Hamilton-The-Revolution-Lin-Manuel-Miranda-ebook/dp/B015X056G4?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1455539740",
+          "isbn13": "9781455539741"
+        },
+        {
+          "isbn10": "1455567531",
+          "isbn13": "9781455567539"
+        },
+        {
+          "isbn10": "1478913649",
+          "isbn13": "9781478913641"
+        },
+        {
+          "isbn10": "1495069885",
+          "isbn13": "9781495069888"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "HAMILTON: THE REVOLUTION",
+          "description": "The libretto of the Grammy-, Tony- and Pulitzer Prize-winning musical, annotated by its creator, along with backstage photos,interviews and a production history.",
+          "contributor": "by Lin-Manuel Miranda and Jeremy McCarter",
+          "author": "Lin-Manuel Miranda and Jeremy McCarter",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Grand Central/Melcher Media",
+          "primary_isbn13": "9781455539741",
+          "primary_isbn10": "1455539740"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 2,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "https://www.amazon.com/Born-Crime-Stories-African-Childhood-ebook/dp/B01DHWACVY?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "0399588175",
+          "isbn13": "9780399588174"
+        },
+        {
+          "isbn10": "0399588183",
+          "isbn13": "9780399588181"
+        },
+        {
+          "isbn10": "1531865038",
+          "isbn13": "9781531865030"
+        },
+        {
+          "isbn10": "1531865046",
+          "isbn13": "9781531865047"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "BORN A CRIME",
+          "description": "A memoir about growing up in South Africa by the comedian, now the host of “The Daily Show,” whose parents were in an illegal (under apartheid) interracial relationship.",
+          "contributor": "by Trevor Noah",
+          "author": "Trevor Noah",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Spiegel & Grau",
+          "primary_isbn13": "9780399588174",
+          "primary_isbn10": "0399588175"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 3,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "https://www.amazon.com/Daily-Show-Book-History-Correspondents/dp/1455565385?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1455565385",
+          "isbn13": "9781455565382"
+        },
+        {
+          "isbn10": "1455565350",
+          "isbn13": "9781455565351"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "THE DAILY SHOW (THE BOOK)",
+          "description": "An oral history of the show, based on extensive interviews with Jon Stewart and others.",
+          "contributor": "by Chris Smith",
+          "author": "Chris Smith",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Grand Central",
+          "primary_isbn13": "9781455565382",
+          "primary_isbn10": "1455565385"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "https://www.nytimes.com/2016/12/01/books/review/daily-show-oral-history-chris-smith.html",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 4,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "https://www.amazon.com/Case-Beasts-Explore-Wizardry-Fantastic/dp/0062571370?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "0062571370",
+          "isbn13": "9780062571373"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "THE CASE OF BEASTS",
+          "description": "Filmmaking secrets, photography and artwork from “Fantastic Beasts and Where to Find Them,” written by J. K. Rowling.",
+          "contributor": "by Mark Salisbury",
+          "author": "Mark Salisbury",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "HarperDesign",
+          "primary_isbn13": "9780062571373",
+          "primary_isbn10": "0062571370"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 5,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/Humans-New-York-Brandon-Stanton/dp/1250058902?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1250058902",
+          "isbn13": "9781250058904"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "HUMANS OF NEW YORK: STORIES",
+          "description": "Photographs and interviews from the creator of the blog and the book “Humans of New York.”",
+          "contributor": "by Brandon Stanton",
+          "author": "Brandon Stanton",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "St. Martin's",
+          "primary_isbn13": "9781250058904",
+          "primary_isbn10": "1250058902"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 6,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/Sapiens-A-Brief-History-Humankind-ebook/dp/B00ICN066A?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "0062316095",
+          "isbn13": "9780062316097"
+        },
+        {
+          "isbn10": "0062316109",
+          "isbn13": "9780062316103"
+        },
+        {
+          "isbn10": "0062796232",
+          "isbn13": "9780062796233"
+        },
+        {
+          "isbn10": "1494576902",
+          "isbn13": "9781494576905"
+        },
+        {
+          "isbn10": "0062316117",
+          "isbn13": "9780062316110"
+        },
+        {
+          "isbn10": "1494506904",
+          "isbn13": "9781494506902"
+        },
+        {
+          "isbn10": "1494556901",
+          "isbn13": "9781494556907"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "SAPIENS",
+          "description": "How Homo sapiens became Earth’s dominant species.",
+          "contributor": "by Yuval Noah Harari",
+          "author": "Yuval Noah Harari",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Harper",
+          "primary_isbn13": "9780062316097",
+          "primary_isbn10": "0062316095"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 7,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/Humans-New-York-Brandon-Stanton/dp/1250038820?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1250038820",
+          "isbn13": "9781250038821"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "HUMANS OF NEW YORK",
+          "description": "Four hundred color photos of New Yorkers, with brief commentary by the author.",
+          "contributor": "by Brandon Stanton",
+          "author": "Brandon Stanton",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "St. Martin's",
+          "primary_isbn13": "9781250038821",
+          "primary_isbn10": "1250038820"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 8,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/Existentialist-Café-Cocktails-Jean-Paul-Merleau-Ponty/dp/1590514882?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1590514882",
+          "isbn13": "9781590514887"
+        },
+        {
+          "isbn10": "1590514890",
+          "isbn13": "9781590514894"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "AT THE EXISTENTIALIST CAFE",
+          "description": "An account of the birth of one of the 20th century's major intellectual movements and the revolutionary thinkers who shaped it: Jean-Paul Sartre, Simone de Beauvoir, Albert Camus, and others.",
+          "contributor": "by Sarah Bakewell",
+          "author": "Sarah Bakewell",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Other Press",
+          "primary_isbn13": "9781590514887",
+          "primary_isbn10": "1590514882"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "https://www.nytimes.com/2016/04/17/books/review/at-the-existentialist-cafe-by-sarah-bakewell.html",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 9,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "http://www.amazon.com/SPQR-A-History-Ancient-Rome/dp/0871404230?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "1631491253",
+          "isbn13": "9781631491252"
+        },
+        {
+          "isbn10": "0871404230",
+          "isbn13": "9780871404237"
+        },
+        {
+          "isbn10": "1631492225",
+          "isbn13": "9781631492228"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "SPQR",
+          "description": "A concise history of ancient Rome.",
+          "contributor": "by Mary Beard",
+          "author": "Mary Beard",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Liveright",
+          "primary_isbn13": "9781631492228",
+          "primary_isbn10": "1631492225"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    },
+    {
+      "list_name": "Culture",
+      "display_name": "Culture",
+      "bestsellers_date": "2016-12-31",
+      "published_date": "2017-01-15",
+      "rank": 10,
+      "rank_last_week": 0,
+      "weeks_on_list": 0,
+      "asterisk": 0,
+      "dagger": 0,
+      "amazon_product_url": "https://www.amazon.com/Speaking-American-Youse-Visual-Guide/dp/0544703391?tag=NYTBS-20",
+      "isbns": [
+        {
+          "isbn10": "0544703391",
+          "isbn13": "9780544703391"
+        }
+      ],
+      "book_details": [
+        {
+          "title": "SPEAKING AMERICAN",
+          "description": "The creator of The New York Times dialect quiz provides a guide to how words are pronounced in different parts of the country. \n",
+          "contributor": "by Josh Katz",
+          "author": "Josh Katz",
+          "contributor_note": "",
+          "price": 0,
+          "age_group": "",
+          "publisher": "Houghton Mifflin Harcourt",
+          "primary_isbn13": "9780544703391",
+          "primary_isbn10": "0544703391"
+        }
+      ],
+      "reviews": [
+        {
+          "book_review_link": "",
+          "first_chapter_link": "",
+          "sunday_review_link": "",
+          "article_chapter_link": ""
+        }
+      ]
+    }
+  ]
+}
