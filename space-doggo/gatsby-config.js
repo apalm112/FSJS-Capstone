@@ -3,6 +3,10 @@ const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 	{	path: '/best-seller/:id',
 // 			(path = '') =>
 // 			(path.split('/').pop()),
+
+// TODO: use the list below to create a function that will iterate thru it to:
+// 	make an api fetch for that each topic
+
 /*Topics Update in 2018:
 --------------------------
 Science
@@ -17,7 +21,7 @@ Hardcover Nonfiction
 Hardcover Fiction
 Combined Print and E-Book Fiction
 Combined Print and E-Book Nonfiction*/
-var path = 'animals';
+// var path = 'science';
 
 module.exports = {
 	siteMetadata: {
@@ -58,8 +62,10 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-apiserver',
 			options: {
+				// Type prefix of entities from server
+				typePrefix: 'NYT__',
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists//${path}.json?&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//science.json?&api-key=${NYT_BOOK_KEY}`,
 
 				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=${path}&api-key=${NYT_BOOK_KEY}`,
 
@@ -75,7 +81,7 @@ module.exports = {
 
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
-				name: `${path}`,
+				name: `science`,
 
 				// Simple authentication, if optional, set it null
 				auth: null,
@@ -98,10 +104,190 @@ module.exports = {
 				skipCreateNode: false, // skip import to graphQL, only use if localSave is all you want
 			}
 		},
+	/*	{
+			resolve: 'gatsby-source-apiserver',
+			options: {
+				// Type prefix of entities from server
+				typePrefix: 'NYT__',
+				// The url, this should be the endpoint you are attempting to pull data from
+				url: `https://api.nytimes.com/svc/books/v3/lists//sports.json?&api-key=${NYT_BOOK_KEY}`,
+
+				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=sports&api-key=${NYT_BOOK_KEY}`,
+
+
+				method: 'get',
+
+				headers: {
+					'Content-Type': 'application/json'
+				},
+
+				// Request body
+				data: {},
+
+				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
+				// using this name. i.e. posts.json
+				name: `sports`,
+
+				// Simple authentication, if optional, set it null
+				auth: null,
+
+				// Optionally save the JSON data to a file locally
+				// Default is false
+				localSave: true,
+
+				//	Required folder path where the data should be saved if using localSave option
+				//	This folder must already exist
+				path: `${__dirname}/src/data/auth/`,
+
+				// Optionally include some output when building
+				// Default is false
+				verboseOutput: true, // For debugging purposes
+
+				// Optionally skip creating nodes in graphQL.	Use this if you only want
+				// The data to be saved locally
+				// Default is false
+				skipCreateNode: false, // skip import to graphQL, only use if localSave is all you want
+			}
+		},
+		{
+			resolve: 'gatsby-source-apiserver',
+			options: {
+				// Type prefix of entities from server
+				// typePrefix: 'NYT__',
+				// The url, this should be the endpoint you are attempting to pull data from
+				url: `https://api.nytimes.com/svc/books/v3/lists//business books.json?&api-key=${NYT_BOOK_KEY}`,
+
+				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=business-books&api-key=${NYT_BOOK_KEY}`,
+
+
+				method: 'get',
+
+				headers: {
+					'Content-Type': 'application/json'
+				},
+
+				// Request body
+				data: {},
+
+				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
+				// using this name. i.e. posts.json
+				name: `business books`,
+
+				// Simple authentication, if optional, set it null
+				auth: null,
+
+				// Optionally save the JSON data to a file locally
+				// Default is false
+				localSave: true,
+
+				//	Required folder path where the data should be saved if using localSave option
+				//	This folder must already exist
+				path: `${__dirname}/src/data/auth/`,
+
+				// Optionally include some output when building
+				// Default is false
+				verboseOutput: true, // For debugging purposes
+
+				// Optionally skip creating nodes in graphQL.	Use this if you only want
+				// The data to be saved locally
+				// Default is false
+				skipCreateNode: false, // skip import to graphQL, only use if localSave is all you want
+			}
+		},
+		{
+			resolve: 'gatsby-source-apiserver',
+			options: {
+				// Type prefix of entities from server
+				typePrefix: 'NYT__',
+				// The url, this should be the endpoint you are attempting to pull data from
+				url: `https://api.nytimes.com/svc/books/v3/lists//hardcover nonfiction.json?&api-key=${NYT_BOOK_KEY}`,
+
+				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=hardcover-nonfiction&api-key=${NYT_BOOK_KEY}`,
+
+
+				method: 'get',
+
+				headers: {
+					'Content-Type': 'application/json'
+				},
+
+				// Request body
+				data: {},
+
+				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
+				// using this name. i.e. posts.json
+				name: `hardcover nonfiction`,
+
+				// Simple authentication, if optional, set it null
+				auth: null,
+
+				// Optionally save the JSON data to a file locally
+				// Default is false
+				localSave: true,
+
+				//	Required folder path where the data should be saved if using localSave option
+				//	This folder must already exist
+				path: `${__dirname}/src/data/auth/`,
+
+				// Optionally include some output when building
+				// Default is false
+				verboseOutput: true, // For debugging purposes
+
+				// Optionally skip creating nodes in graphQL.	Use this if you only want
+				// The data to be saved locally
+				// Default is false
+				skipCreateNode: false, // skip import to graphQL, only use if localSave is all you want
+			}
+		},
+		{
+			resolve: 'gatsby-source-apiserver',
+			options: {
+				// Type prefix of entities from server
+				typePrefix: 'NYT__',
+				// The url, this should be the endpoint you are attempting to pull data from
+				url: `https://api.nytimes.com/svc/books/v3/lists//advice how to and miscellaneous.json?&api-key=${NYT_BOOK_KEY}`,
+
+				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=advice how to and miscellaneous&api-key=${NYT_BOOK_KEY}`,
+
+
+				method: 'get',
+
+				headers: {
+					'Content-Type': 'application/json'
+				},
+
+				// Request body
+				data: {},
+
+				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
+				// using this name. i.e. posts.json
+				name: `advice how to and miscellaneous`,
+
+				// Simple authentication, if optional, set it null
+				auth: null,
+
+				// Optionally save the JSON data to a file locally
+				// Default is false
+				localSave: true,
+
+				//	Required folder path where the data should be saved if using localSave option
+				//	This folder must already exist
+				path: `${__dirname}/src/data/auth/`,
+
+				// Optionally include some output when building
+				// Default is false
+				verboseOutput: true, // For debugging purposes
+
+				// Optionally skip creating nodes in graphQL.	Use this if you only want
+				// The data to be saved locally
+				// Default is false
+				skipCreateNode: false, // skip import to graphQL, only use if localSave is all you want
+			}
+		},*/
 	],
-	mapping: {
-		// Not working:
-		// https://www.gatsbyjs.org/docs/gatsby-config/#mapping-node-types
-		'ScienceJson.results.book_details.primary_isbn13': `IsbnJson`
-	},
+	// mapping: {
+	// 	// Not working:
+	// 	// https://www.gatsbyjs.org/docs/gatsby-config/#mapping-node-types
+	// 	'ScienceJson.results.book_details.primary_isbn13': `IsbnJson`
+	// },
 };
