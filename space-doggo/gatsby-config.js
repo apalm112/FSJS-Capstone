@@ -1,4 +1,5 @@
 const MLAB_KEYS = require('./config/keys');
+const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 	{	path: '/best-seller/:id',
 // 			(path = '') =>
 // 			(path.split('/').pop()),
@@ -49,7 +50,7 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists.json?list-name=${path}&api-key=a6d1504118a0464fa218b046be6047e3`,
+				url: `https://api.nytimes.com/svc/books/v3/lists.json?list-name=${path}&api-key=${NYT_BOOK_KEY}`,
 
 				method: 'get',
 
