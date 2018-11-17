@@ -3,11 +3,7 @@ const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 	{	path: '/best-seller/:id',
 // 			(path = '') =>
 // 			(path.split('/').pop()),
-var path = 'science';
-// var image = 'animalsImage'
-// const GoogleBookURL = `https://www.googleapis.com/books/v1/volumes?q=isbn:`;
-// const GOOGLE_BOOKS_KEY = 'AIzaSyAY6UYtv3B71w0qz1Mnx6sKHBEHE4BPbL0';
-// const coverImage = '9780393609394';
+var path = 'animals';
 
 module.exports = {
 	siteMetadata: {
@@ -17,7 +13,6 @@ module.exports = {
 	plugins: [
 		{
 			//	https://www.gatsbyjs.org/packages/gatsby-source-mongodb/
-			//  MLABS Connection String: 'mongodb://test_user:hobbits1@ds141633.mlab.com:41633/books'
 			resolve: `gatsby-source-mongodb`,
 			options: {
 				dbName: MLAB_KEYS.dbName,
@@ -38,7 +33,7 @@ module.exports = {
 			},
 		},
 		`gatsby-plugin-react-helmet`,
-		`gatsby-transformer-remark`,
+		// `gatsby-transformer-remark`,
 		`gatsby-plugin-emotion`,
 		{
 			resolve: 'gatsby-plugin-typography',
@@ -50,7 +45,10 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists.json?list-name=${path}&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//${path}.json?&api-key=${NYT_BOOK_KEY}`,
+
+				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=${path}&api-key=${NYT_BOOK_KEY}`,
+
 
 				method: 'get',
 

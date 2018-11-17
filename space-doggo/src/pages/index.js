@@ -36,7 +36,7 @@ export default ({ data }) => {
 							border: 1px solid red;
 						`}
 							>
-								{node.results[0].list_name}{" "}
+								{node.results.list_name}{" "}
 								<br />
 								<span
 									className={css`
@@ -100,12 +100,14 @@ export const query = graphql`
 					results {
 						list_name
 						bestsellers_date
-						amazon_product_url
-						book_details {
+						books {
+							rank
+							primary_isbn13
 							title
 							description
 							author
-							primary_isbn13
+							book_image
+							amazon_product_url
 						}
 					}
 				}
