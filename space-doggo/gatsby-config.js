@@ -6,7 +6,6 @@ const NYT_BOOK_KEY = require('./config/NYT_KEY');
 var path = 'science';
 // var image = 'animalsImage'
 // const GoogleBookURL = `https://www.googleapis.com/books/v1/volumes?q=isbn:`;
-// const GOOGLE_BOOKS_KEY = 'AIzaSyAY6UYtv3B71w0qz1Mnx6sKHBEHE4BPbL0';
 // const coverImage = '9780393609394';
 
 module.exports = {
