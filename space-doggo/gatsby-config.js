@@ -3,6 +3,20 @@ const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 	{	path: '/best-seller/:id',
 // 			(path = '') =>
 // 			(path.split('/').pop()),
+/*Topics Update in 2018:
+--------------------------
+Science
+Sports
+Business Books
+audio Nonfiction
+audio Fiction
+Picture Books
+Advice How-To and Miscellaneous
+Paperback Nonfiction
+Hardcover Nonfiction
+Hardcover Fiction
+Combined Print and E-Book Fiction
+Combined Print and E-Book Nonfiction*/
 var path = 'animals';
 
 module.exports = {
