@@ -5,6 +5,9 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = ({ node, getNode, actions }) => {
 	// This API will add slugs for your pages.
 	const { createNodeField } = actions
+
+	console.log('NODE.INTERNAL.TYPE: ', node.internal.type)
+
 	if (node.internal.type === `AuthJson`) {
 		console.log('NODE.INTERNAL.TYPE: ', node.internal.type)
 		const fileNode = getNode(node.parent)
