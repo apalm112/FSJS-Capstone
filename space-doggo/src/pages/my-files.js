@@ -27,10 +27,10 @@ export default ({ data }) => {
 								<tr key={idx}>
 									<td><a href={curr.amazon_product_url}>Buy</a></td>
 
-									<td>{curr.book_details[0].title}</td>
-									<td>{curr.book_details[0].author}</td>
-									<td>{curr.book_details[0].description}</td>
-									<td>{curr.book_details[0].primary_isbn13}</td>
+									<td>{curr.books[0].title}</td>
+									<td>{curr.books[0].author}</td>
+									<td>{curr.books[0].description}</td>
+									<td>{curr.books[0].primary_isbn13}</td>
 								</tr>
 							))
 						))}
@@ -63,15 +63,14 @@ export const books_query = graphql`
 	     edges {
 	       node {
 	         results  {
-						 isbns {
-							 isbn13
-						 }
-	           amazon_product_url
-	           book_details {
-	             title
-	             author
-	             description
-	             primary_isbn13
+          	books {
+							rank
+							primary_isbn13
+            	title
+							description
+            	author
+							book_image
+						 	amazon_product_url
 	           }
 	         }
 	       }

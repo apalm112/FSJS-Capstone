@@ -5,6 +5,9 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = ({ node, getNode, actions }) => {
 	// This API will add slugs for your pages.
 	const { createNodeField } = actions
+
+	console.log('NODE.INTERNAL.TYPE: ', node.internal.type)
+
 	if (node.internal.type === `AuthJson`) {
 		console.log('NODE.INTERNAL.TYPE: ', node.internal.type)
 		const fileNode = getNode(node.parent)
@@ -36,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
 				}
 			}
 		`).then(result => {
-			console.log('RESULT: ', JSON.stringify(result, null, 4))
+			console.log('RESULT from gatsby-node-js: ', JSON.stringify(result, null, 4))
 			result.data.allAuthJson.edges.forEach(({ node }) => {
 				createPage({
 					path: node.fields.slug,

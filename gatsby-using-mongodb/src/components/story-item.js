@@ -2,12 +2,16 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 class StoryItem extends React.Component {
+	//	///////////////////////////////////////////
+	//	This is the repeatable document data display comonent.
+	//	Has red border.
+	//	///////////////////////////////////////////
   render() {
     const item = this.props.item
     return (
-      <li>
+      <li style={{'border': '1px solid red'}}>
         <div>
-					<ul>
+					<ul style={{'border': '1px solid red'}} >
 						<li>User: {item.fullName}</li>
 						<li>Email: {item.emailAddress}</li>
 						<li>Hashed password: {item.password}</li>
