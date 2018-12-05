@@ -39,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
 				}
 			}
 		`).then(result => {
-			console.log('RESULT: ', JSON.stringify(result, null, 4))
+			console.log('RESULT from gatsby-node-js: ', JSON.stringify(result, null, 4))
 			result.data.allAuthJson.edges.forEach(({ node }) => {
 				createPage({
 					path: node.fields.slug,

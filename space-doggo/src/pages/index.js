@@ -3,11 +3,76 @@ import { Link, graphql } from 'gatsby'
 import { css } from 'react-emotion'
 import { rhythm } from '../utils/typography'
 import Layout from '../components/layout'
+// import notFound from '../pages/notFound'
 // import Selects from '../components/selects'
 
+import BestSeller from '../data/models'
+
 export default ({ data }) => {
-	// console.log('INDEX.JS DATA', data)
-	// const { allMongodbBookDocuments } = this.props.data
+
+
+	function potato({ data }) {
+		console.log('yep');
+		console.log('INDEX.JS DATA', data)
+	}
+	potato({ data });
+
+	// IDEA: What if you can get the data here which is already available from graphql, just look at the dev console for the log above, and then iterate thru all 13 nodes, since they are/will be hard wired anyhow!, and get all the best seller lists book data needed then save all that data to the mLabs!
+	// // TODO:
+/*	allAuthJson
+			totalCount
+			edges
+			 [idx]
+			 	node
+					last_modified
+					num_results
+					results
+						list_name
+						bestsellers_date
+						books [
+							[idx]
+								amazon_product_url
+								author
+								book_image
+								description
+								primary_isbn13
+								rank
+								title
+						]
+						{
+						*/
+
+
+					/*	  allAuthJson {
+						    totalCount
+						    edges {
+						      node {
+						        id
+						        num_results
+						        last_modified
+						        fields {
+						          slug
+						        }
+						        results {
+						          list_name
+						          bestsellers_date
+						          books {
+						            rank
+						            primary_isbn13
+						            description
+						            title
+						            author
+						            book_image
+						            amazon_product_url
+						          }
+						        }
+						      }
+						    }
+						  }
+						}*/
+
+
+
 	return (
 		<Layout>
 			<div>
