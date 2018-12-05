@@ -1,3 +1,4 @@
+/* eslint-disable */
 const MLAB_KEYS = require('./config/keys');
 const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 	{	path: '/best-seller/:id',
@@ -22,6 +23,28 @@ Hardcover Fiction
 Combined Print and E-Book Fiction
 Combined Print and E-Book Nonfiction*/
 
+// Does absolutely nothing:
+const listType = {
+	num_results: String,
+	last_modified: Date,
+	results: {
+		list_name: String,
+	  bestsellers_date: Date,
+	  books: [
+			{
+				rank: Number,
+				primary_isbn13: Number,
+				description: String,
+				title: String,
+				author: String,
+				book_image: String,
+				amazon_product_url: String
+			}
+		]
+	}
+};
+
+
 module.exports = {
 	siteMetadata: {
 		title: 'Book Marks or Asteroids',
@@ -33,7 +56,7 @@ module.exports = {
 			resolve: `gatsby-source-mongodb`,
 			options: {
 				dbName: MLAB_KEYS.dbName,
-				collection: [ `users` ],
+				collection: [ `bestsellers` ],
 				auth: {	user: MLAB_KEYS.user, password: MLAB_KEYS.password	},
 				server: {	address: MLAB_KEYS.address,	port: MLAB_KEYS.port	},
 				map: { documents: {	body: 'application/json'	}	},
@@ -72,16 +95,19 @@ module.exports = {
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
 				name: `science`,
+
+				schemaType: listType,
+
 				// Simple authentication, if optional, set it null
 				auth: null,
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -120,11 +146,11 @@ module.exports = {
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -163,11 +189,11 @@ module.exports = {
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -206,11 +232,11 @@ module.exports = {
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -249,11 +275,11 @@ module.exports = {
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -269,7 +295,7 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists//education.json?&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//audio-Nonfiction.json?&api-key=${NYT_BOOK_KEY}`,
 
 				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=advice how to and miscellaneous&api-key=${NYT_BOOK_KEY}`,
 
@@ -285,18 +311,18 @@ module.exports = {
 
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
-				name: `education`,
+				name: `audioNonfiction`,
 
 				// Simple authentication, if optional, set it null
 				auth: null,
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -312,7 +338,7 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists//manga.json?&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//picture-books.json?&api-key=${NYT_BOOK_KEY}`,
 
 				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=advice how to and miscellaneous&api-key=${NYT_BOOK_KEY}`,
 
@@ -328,18 +354,18 @@ module.exports = {
 
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
-				name: `manga`,
+				name: `pictureBooks`,
 
 				// Simple authentication, if optional, set it null
 				auth: null,
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -355,7 +381,7 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists//food-and-fitness.json?&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//paperback-nonfiction.json?&api-key=${NYT_BOOK_KEY}`,
 
 				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=advice how to and miscellaneous&api-key=${NYT_BOOK_KEY}`,
 
@@ -371,18 +397,18 @@ module.exports = {
 
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
-				name: `foodAndFitness`,
+				name: `paperbackNonfiction`,
 
 				// Simple authentication, if optional, set it null
 				auth: null,
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false
@@ -398,7 +424,7 @@ module.exports = {
 			resolve: 'gatsby-source-apiserver',
 			options: {
 				// The url, this should be the endpoint you are attempting to pull data from
-				url: `https://api.nytimes.com/svc/books/v3/lists//animals.json?&api-key=${NYT_BOOK_KEY}`,
+				url: `https://api.nytimes.com/svc/books/v3/lists//combined-print-and-e-book-nonfiction.json?&api-key=${NYT_BOOK_KEY}`,
 
 				// url: `https://api.nytimes.com/svc/books/v3/lists/.json?list-name=advice how to and miscellaneous&api-key=${NYT_BOOK_KEY}`,
 
@@ -414,18 +440,18 @@ module.exports = {
 
 				// Name of the data to be downloaded.	Will show in graphQL or be saved to a file
 				// using this name. i.e. posts.json
-				name: `animals`,
+				name: `combinedPrintAndEBookNonfiction`,
 
 				// Simple authentication, if optional, set it null
 				auth: null,
 
 				// Optionally save the JSON data to a file locally
 				// Default is false
-				localSave: true,
+				// localSave: true,
 
 				//	Required folder path where the data should be saved if using localSave option
 				//	This folder must already exist
-				path: `${__dirname}/src/data/auth/`,
+				// path: `${__dirname}/src/data/auth/`,
 
 				// Optionally include some output when building
 				// Default is false

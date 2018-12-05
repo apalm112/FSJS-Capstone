@@ -2,12 +2,17 @@ import React from "react"
 import { Link } from "gatsby"
 import Helmet from "react-helmet"
 
+
+//	///////////////////////////////////////////
+//	This is the top level comonent.
+//	Has blue border.
+//	///////////////////////////////////////////
 class DefaultLayout extends React.Component {
   render() {
     let siteMetadata = { title: `mongoDB within Gatsby.JS` }
 
     return (
-      <div className="websites">
+      <div className="websites" style={{'border': '2px solid blue'}}>
         <Helmet defaultTitle={siteMetadata.title}>
           <meta
             name="description"

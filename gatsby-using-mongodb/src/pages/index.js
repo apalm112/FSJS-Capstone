@@ -4,12 +4,17 @@ import StoryItem from "../components/story-item"
 import Layout from "../layouts"
 
 class Index extends React.Component {
+	//	///////////////////////////////////////////
+	//	This is a smaller container comonent.
+	//	Has lime border.
+	//	///////////////////////////////////////////
   render() {
     const { allMongodbBooksUsers } = this.props.data
+	console.log('PAGES=========================', this.props.data);
 
     return (
       <Layout>
-        <div>
+        <div style={{'border': '2px solid lime'}}>
           <h1>Website information stored in MongoDB via MLABS!</h1>
 					<h3>This Data is being pulled from mLabs database that I sent up!</h3>
 					<h6>/Projects/Project12/MERN_Research/gatsby_tutorial/gatsby-using-mongodb/</h6>

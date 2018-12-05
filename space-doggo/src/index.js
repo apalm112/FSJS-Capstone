@@ -1,0 +1,101 @@
+'use strict';
+
+// load modules
+const express = require('express');
+const app = express();
+
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const apiRoutes = require('./routes');
+const db_key = require('./database/mlab');
+
+// set our port
+app.set('port', process.env.PORT || 5000);
+
+// morgan gives us http request logging
+app.use(logger('dev'));
+
+/********************************/
+/*   mLabs experiment code:
+			comment out this mong.connect for the original one below
+/*********************************/
+mongoose.connect(db_key, { autoIndex: false, useNewUrlParser: true });
+/*********************************/
+
+// mongoose.connect('mongodb://localhost:27017/api', { useNewUrlParser: true });
+// mongoose.set('debug', true);  //<--runs debugger in terminal
+
+
+// Create a variable to hold the database connection object.
+const database = mongoose.connection;
+
+// app object registers middleware w/ use(), applies it to all routes.
+app.use(express.json());
+// express body-parser middleware parses request to make it accessible to req.body
+app.use(express.urlencoded({ extended: false }));
+
+
+/********************************/
+// Possible Solution for Error: 'Topology was destroyed'
+// Sauce:  https://stackoverflow.com/a/53001171/6495470
+// listen on this port
+const port = 3000
+
+// global database client object
+var client = null
+
+// listen on the configured port once database connection is established
+/*MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err, res) => {
+  assert.equal(null, err)
+  client = res
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+})
+
+// use the client global object for database operations
+app.get('/', (req, res) => {
+  db = req.query.db
+  col = req.query.col
+  client.db(db).collection(col).find({}).toArray((err, docs) => {
+    assert.equal(null, err)
+    res.send(JSON.stringify(docs))
+  })
+})*/
+/********************************/
+
+
+
+database.on('error', (error) => {
+	// set terminal stdout color red for error message
+	console.log('\x1b[31m%s\x1b[0m', '-----------------Error Connecting to Database. Connection Failed------------------------');
+	console.error('\x1b[31m%s\x1b[0m', (error.message.slice(0, 81) + ']'));
+});
+
+database.once('open', () => {
+	console.log('\x1b[32m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
+});
+
+// Binds the routes to app object, mounts the routes to the express app specifiying '/api' as the path.
+app.use('/api', apiRoutes);
+
+// Acts as a placeholder for the browser in this project. Otherwise the express global error handler will be triggered when the path is set to '/'
+app.get('/', (req, res) => {
+	res.json();
+});
+
+// Catches requests that fall through w/out triggering any route handlers, send 404 if no other route matched
+app.use((req, res, next) => {
+	let error = new Error('Something went wrong.  API Route Not Found.');
+	error.status = 404;
+	next(error);
+});
+
+// global error handler { "error": {} }
+app.use((error, req, res, next) => {
+	res.status(error.status || 500)
+	.json({ error: { message: error.message} });
+});
+
+// start listening on our port
+const server = app.listen(app.get('port'), () => {
+	console.log('\x1b[32m%s\x1b[0m', `Express server is listening on port ${server.address().port}`);
+});
