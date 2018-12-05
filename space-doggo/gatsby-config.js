@@ -5,6 +5,7 @@ const NYT_BOOK_KEY = require('./config/NYT_KEY');
 // 			(path = '') =>
 // 			(path.split('/').pop()),
 
+
 // TODO: use the list below to create a function that will iterate thru it to:
 // 	make an api fetch for that each topic
 
