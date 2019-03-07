@@ -2,11 +2,11 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const http = require('https');
 const sassMiddleware = require('node-sass-middleware');
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const http = require('https');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -65,17 +65,13 @@ database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
 });
 /***********************************************************/
+const socrataView = {};
 
+socrataView.fetchData = function() {
+	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
+	const url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
 
-/* On server start up immediately check mLab DB for documents,if not there then fetch Socratea data, save to mLab DB. ********/
-var socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
-var url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
-// Query checks mLab DB if data is already saved
-let query = School.countDocuments({ }, (err, count) => {
-	console.log('COUNT===========================',	count );
-	if (!count) {
-		//	--if not, then do fetch data from socrata
-		console.log('COUNT IS TRUE');
+	const fetchData = function () {
 		http.get(url, (res) => {
 			var body = '';
 			res.on('data',  (chunk) => {
@@ -93,18 +89,39 @@ let query = School.countDocuments({ }, (err, count) => {
 			}).on('error', (e) => {
 				console.log('Got an error: ', e);
 			});
-		});
-		console.log('Express, data got fetched');
-	} else {
-		// 	--if so, then do not fetch data
-		console.log('COUNT IS FALSE');
-		console.log(':::::::::::::::::::: DB is already populated ::::::::::::');
-		console.log('Express, DB data already populated in mLab.');
-	}
-});
+		})};
+
+	// Query checks mLab DB if data is already saved
+	let query = School.countDocuments({ }, (err, count) => {
+		console.log('COUNT===========================',	count );
+		//	--if not, then do fetch data from socrata
+		if (!count) {
+			console.log('COUNT IS TRUE  Express, data got fetched');
+			fetchData();
+			// 	--if so, then do not fetch data
+		} else {
+			console.log(':::::::::::::::::::: COUNT IS FALSE    DB is already populated ::::::::::::');
+		}
+	});
+}
+socrataView.fetchData();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /************************************************************/
-
-
 /* Error Handling **********************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
