@@ -1,12 +1,12 @@
 const express = require('express');
-const path = require('path');
-const logger = require('morgan');
 const bodyParser = require('body-parser');
-const sassMiddleware = require('node-sass-middleware');
 const createError = require('http-errors');
+const http = require('https');
+const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const http = require('https');
+const path = require('path');
+const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -14,8 +14,8 @@ const schoolsRouter = require('./routes/schools');
 
 const School = require('./database/models').School;
 
-const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
+const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 const app = express();
 
@@ -30,6 +30,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 // express || body-parser middleware parses request to make it accessible to req.body
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(sassMiddleware({
 	src: path.join(__dirname, 'public'),
 	dest: path.join(__dirname, 'public'),
@@ -47,7 +48,8 @@ app.use('/', schoolsRouter);
 app.use(require('cors')());
 app.use(methodOverride('_method'));
 
-/**********************************************************/
+
+/* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
 
 // Create a variable to hold the database connection object.
@@ -64,7 +66,9 @@ database.on('error', (error) => {
 database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
 });
-/***********************************************************/
+
+
+/* Validate mLab Schools collection if it's already populated or not.************************/
 const socrataView = {};
 
 socrataView.fetchData = function() {
@@ -107,22 +111,7 @@ socrataView.fetchData = function() {
 socrataView.fetchData();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************************************************************/
-/* Error Handling **********************************************/
+/* Error Handling ****************************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
@@ -150,7 +139,7 @@ app.use((err, req, res, next) => {
 	});
 });
 
-// start listening on our port
+// start listening on our port, log message to stdout
 app.listen(app.get('port'), () => {
 	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization application is running on localhost ${port}`, '\n');
 });
