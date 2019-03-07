@@ -1,6 +1,7 @@
 {
   "name": "fsjs-capstone-project",
   "version": "1.0.0",
+	"author": "adam palmer",
   "private": false,
   "scripts": {
 		"start": "node ./src/server/server.js",

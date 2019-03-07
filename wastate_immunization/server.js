@@ -1,29 +1,36 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var sassMiddleware = require('node-sass-middleware');
-const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
 const createError = require('http-errors');
+const http = require('https');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const path = require('path');
+const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var schoolsRouter = require('./routes/schools');
+const indexRouter = require('./routes/index');
+const schoolsRouter = require('./routes/schools');
+
+const School = require('./database/models').School;
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
+const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
-var app = express();
+const app = express();
 
 //	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 let port = process.env.PORT || 3000;
 app.set('port', port);
 
+app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
 // app object registers middleware w/ use(), applies it to all routes.
-app.use(express.json());
+app.use(bodyParser.json());
 // express || body-parser middleware parses request to make it accessible to req.body
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(sassMiddleware({
 	src: path.join(__dirname, 'public'),
 	dest: path.join(__dirname, 'public'),
@@ -35,13 +42,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
 app.use('/', indexRouter);
-app.use('/schools', schoolsRouter);
+app.use('/', schoolsRouter);
 
 // Not sure about this line here, trying it out tho:
 app.use(require('cors')());
 app.use(methodOverride('_method'));
 
-/**********************************************************/
+
+/* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
 
 // Create a variable to hold the database connection object.
@@ -58,9 +66,52 @@ database.on('error', (error) => {
 database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
 });
-/***********************************************************/
 
-/* Error Handling **********************************************/
+
+/* Validate mLab Schools collection if it's already populated or not.************************/
+const socrataView = {};
+
+socrataView.fetchData = function() {
+	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
+	const url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
+
+	const fetchData = function () {
+		http.get(url, (res) => {
+			var body = '';
+			res.on('data',  (chunk) => {
+				body += chunk;
+			});
+			res.on('end', () => {
+				var data = JSON.parse(body);
+				console.log('# of schools: ', data[0]);
+				data.map( (eachSchool) => {
+					var school = new School(eachSchool);
+					school.save( (error) => {
+						if(error) return next(error);
+					});
+				});
+			}).on('error', (e) => {
+				console.log('Got an error: ', e);
+			});
+		})};
+
+	// Query checks mLab DB if data is already saved
+	let query = School.countDocuments({ }, (err, count) => {
+		console.log('COUNT===========================',	count );
+		//	--if not, then do fetch data from socrata
+		if (!count) {
+			console.log('COUNT IS TRUE  Express, data got fetched');
+			fetchData();
+			// 	--if so, then do not fetch data
+		} else {
+			console.log(':::::::::::::::::::: COUNT IS FALSE    DB is already populated ::::::::::::');
+		}
+	});
+}
+socrataView.fetchData();
+
+
+/* Error Handling ****************************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
@@ -88,7 +139,7 @@ app.use((err, req, res, next) => {
 	});
 });
 
-// start listening on our port
+// start listening on our port, log message to stdout
 app.listen(app.get('port'), () => {
 	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization application is running on localhost ${port}`, '\n');
 });
