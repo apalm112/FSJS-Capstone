@@ -75,6 +75,14 @@ database.once('open', () => {
 // Tried running this code from inside the routes/index.js file, but it would not work.  Only seems to work properly here in the server.js
 const socrataView = {};
 
+socrataView.dropSchools = function() {
+	// drop the collection from the mLab DB
+	database.dropCollection('schools');
+	console.log(':::::::::::::::::::: COUNT IS FALSE    Collection has been dropped ::::::::::::');
+	// then call method to repopulate it
+	socrataView.fetchAll();
+}
+
 socrataView.fetchAll = function() {
 	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
 	const url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
@@ -90,7 +98,7 @@ socrataView.fetchAll = function() {
 			data.map( (eachSchool) => {
 				var school = new School(eachSchool);
 				school.save( (error) => {
-					if(error) return next(error);
+					if(error) return (error);
 				});
 			});
 		}).on('error', (e) => {
@@ -101,7 +109,7 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// Query checks mLab DB if data is already saved
-	let query = School.countDocuments({ }, (err, count) => {
+	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT===========================',	count );
 		//	--if not, then do fetch data from socrata
 		if (!count) {
@@ -109,7 +117,8 @@ socrataView.checkMLabDBForData = function () {
 			socrataView.fetchAll();
 			// 	--if so, then do not fetch data
 		} else {
-			console.log(':::::::::::::::::::: COUNT IS FALSE    DB is already populated ::::::::::::');
+			// call function to first drop the collection each time
+			socrataView.dropSchools();
 		}
 	});
 };
