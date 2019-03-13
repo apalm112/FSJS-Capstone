@@ -1,7 +1,9 @@
+'use strict';
+
 const express = require('express');
-const bodyParser = require('body-parser');
 const createError = require('http-errors');
 const http = require('https');
+// const fs = require('fs');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
@@ -9,10 +11,11 @@ const path = require('path');
 const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
+// const MarkerClusterer = require('./public/vendors/scripts/markerclusterer');
+const School = require('./database/models').School;
+
 const indexRouter = require('./routes/index');
 const schoolsRouter = require('./routes/schools');
-
-const School = require('./database/models').School;
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
 const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
@@ -20,16 +23,16 @@ const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 const app = express();
 
 //	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
-let port = process.env.PORT || 3000;
-app.set('port', port);
+// let port = process.env.PORT || 3000;
+app.set('port', process.env.PORT || 4000);
 
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
 // app object registers middleware w/ use(), applies it to all routes.
-app.use(bodyParser.json());
+app.use(express.json());
 // express || body-parser middleware parses request to make it accessible to req.body
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(sassMiddleware({
 	src: path.join(__dirname, 'public'),
@@ -37,8 +40,8 @@ app.use(sassMiddleware({
 	indentedSyntax: true, // true = .sass and false = .scss
 	sourceMap: true
 }));
-//	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the build folder for that.
-app.use(express.static(path.join(__dirname, 'public')));
+//	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
+app.use(express.static(path.join(__dirname, 'client', 'public')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
 app.use('/', indexRouter);
@@ -67,8 +70,9 @@ database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
 });
 
-
+/**********************************************************************************/
 /* Validate mLab Schools collection if it's already populated or not.************************/
+// Tried running this code from inside the routes/index.js file, but it would not work.  Only seems to work properly here in the server.js
 const socrataView = {};
 
 socrataView.fetchAll = function() {
@@ -112,6 +116,57 @@ socrataView.checkMLabDBForData = function () {
 socrataView.checkMLabDBForData();
 
 
+
+// Put all API endpoints under '/api'
+app.get('/api/schools', (req, res) => {
+	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
+		.exec(function(error, schools) {
+			console.log('From server.js file /api/schools route:------>\n', schools);
+			res.json(schools);
+		});
+});
+
+
+/**********************************************************************************/
+// IS NOT WORKING
+/*var mapView = {};
+
+mapView.initMap = function(dataPassedIn) {
+	console.log('+++++++++++++++++++++++++++++++++++++++++++++++++');
+	var waCenter = { lat: 47.3232, lng: -120.3232 };
+	var map = new window.google.maps.Map(document.getElementById('map'), {
+		center: waCenter,
+		zoom: 6
+	});
+	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var markers = dataPassedIn.map(function(school, idx) {
+		return new google.maps.Marker({
+			position: school,
+			label: labels[idx % labels.length]
+		});
+	});
+	var markerCluster = new MarkerClusterer(map, markers,
+		{imagePath: './public/vendors/images/m'});
+};
+
+mapView.getAll = function(next) {
+	fs.readFile('http://localhost:4000/database/schools.json', (res) => {
+		this.localStorage.hackerIpsum = JSON.stringify(res);
+		mapView.initMap(res);
+	});
+};
+
+mapView.getAll();*/
+/**********************************************************************************/
+
+
+
+// Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
+});
+
+
 /* Error Handling ****************************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -141,6 +196,6 @@ app.use((err, req, res, next) => {
 });
 
 // start listening on our port, log message to stdout
-app.listen(app.get('port'), () => {
-	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization application is running on localhost ${port}`, '\n');
+const server = app.listen(app.get('port'), () => {
+	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization Express server is listening on port ${server.address().port}`, '\n');
 });
