@@ -62,12 +62,12 @@ const database = mongoose.connection;
 
 database.on('error', (error) => {
 	// set terminal stdout color red for error message
-	console.log('\n       \x1b[41m%s\x1b[0m', '-----------------Error Connecting to Database. Connection Failed------------------------');
-	console.error('\x1b[31m%s\x1b[0m', (error.message.slice(0, 81) + ']'));
+	console.log('\n       \x1b[41m%s\x1b[0m', '-----------------Error Connecting to Database. Connection Failed------------------------');	// eslint-disable-line no-console
+	console.error('\x1b[31m%s\x1b[0m', (error.message.slice(0, 81) + ']')); // eslint-disable-line no-console
 });
 
 database.once('open', () => {
-	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');
+	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');	// eslint-disable-line no-console
 });
 
 /**********************************************************************************/
@@ -135,41 +135,6 @@ app.get('/api/schools', (req, res) => {
 		});
 });
 
-
-/**********************************************************************************/
-// IS NOT WORKING
-/*var mapView = {};
-
-mapView.initMap = function(dataPassedIn) {
-	console.log('+++++++++++++++++++++++++++++++++++++++++++++++++');
-	var waCenter = { lat: 47.3232, lng: -120.3232 };
-	var map = new window.google.maps.Map(document.getElementById('map'), {
-		center: waCenter,
-		zoom: 6
-	});
-	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	var markers = dataPassedIn.map(function(school, idx) {
-		return new google.maps.Marker({
-			position: school,
-			label: labels[idx % labels.length]
-		});
-	});
-	var markerCluster = new MarkerClusterer(map, markers,
-		{imagePath: './public/vendors/images/m'});
-};
-
-mapView.getAll = function(next) {
-	fs.readFile('http://localhost:4000/database/schools.json', (res) => {
-		this.localStorage.hackerIpsum = JSON.stringify(res);
-		mapView.initMap(res);
-	});
-};
-
-mapView.getAll();*/
-/**********************************************************************************/
-
-
-
 // Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
@@ -206,5 +171,5 @@ app.use((err, req, res, next) => {
 
 // start listening on our port, log message to stdout
 const server = app.listen(app.get('port'), () => {
-	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization Express server is listening on port ${server.address().port}`, '\n');
+	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization Express server is listening on port ${server.address().port}`, '\n');	// eslint-disable-line no-console
 });
