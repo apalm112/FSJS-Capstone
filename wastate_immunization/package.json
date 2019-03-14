@@ -8,6 +8,7 @@
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "es6-promise": "^4.2.6",
@@ -20,8 +21,8 @@
   },
   "devDependencies": {
     "morgan": "^1.9.1",
-		"http-errors": "^1.7.2",
-		"debug": "~2.6.9"
+    "http-errors": "^1.7.2",
+    "debug": "~2.6.9"
   },
   "engines": {
     "node": "10.15.1"
