@@ -156,7 +156,7 @@ const writeSchoolsFile = (data) => {
 // Put all API endpoints under '/api'Put all API endpoints under '/api'
 app.get('/api/schools', (req, res) => {
 	// School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-	School.find({})	// Find All Schools in Collection: There 2248 Schools w/ valid coordinates. 
+	School.find({})	// Find All Schools in Collection: There 2248 Schools w/ valid coordinates. There are 347 Schools which have the coordinates as an empty value, i.e.-- {}
 		.exec(function(error, schools) {
 			// console.log('From server.js file /api/schools route:------>\n', schools);
 			var getMuhData = schools.map(curr => {
