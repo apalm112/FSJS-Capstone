@@ -5,6 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "client": "cd client && npm run start",
+    "server": "node ./server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
@@ -20,9 +23,10 @@
     "node-sass-middleware": "0.11.0"
   },
   "devDependencies": {
-    "morgan": "^1.9.1",
+    "concurrently": "^4.1.0",
+    "debug": "~2.6.9",
     "http-errors": "^1.7.2",
-    "debug": "~2.6.9"
+    "morgan": "^1.9.1"
   },
   "engines": {
     "node": "10.15.1"
