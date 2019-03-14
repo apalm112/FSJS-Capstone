@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Loading from './Loading';
-import ErrorBoundary from './ErrorBoundary';
-import Map from './map';
 import './App.css';
+import ErrorBoundary from './ErrorBoundary';
+import Loading from './Loading';
+import Map from './map';
+import Navbar from './components/Navbar';
 
 // import MarkerClusterer from '@google/markerclusterer';
 // import schools from './schools.json';
@@ -112,6 +113,7 @@ class App extends Component {
     return (
       <div className="App">
 				<ErrorBoundary>
+					<Navbar />
 					<p>{this.state.response}</p>
 					<form onSubmit={this.handleSubmit}>
 						<p>
@@ -127,10 +129,10 @@ class App extends Component {
 					</form>
 					<h3><strong>{this.state.responseToPost}</strong></h3>
 	        <header className="App-header">
-	        	<p>You Waht?</p>
+	        	<h1>WA State School Immuninzation Rates</h1>
 						<h5>From:         /Project12/fsjs-capstone-project/wastate_immunization/client/src/App.js</h5>
 	        </header>
-					<h2>{this.state.searchQuery}</h2>
+					<h3>Current Express Route: {this.state.searchQuery}</h3>
 
 					{/* Put a function here to reload the map & marker clusterer for each button click.
 						Pass in the query results & markers as props.  */}
