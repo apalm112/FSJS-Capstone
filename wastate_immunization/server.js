@@ -27,6 +27,8 @@ const app = express();
 //	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
+app.use(require('cors')());
+
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
@@ -219,6 +221,23 @@ app.get('/schools/coords/yes', (req, res) => {
 		.exec(function(error, schools) {
 			console.log('# of schools: ', schools.length);
 			res.json(schools);
+		});
+});
+
+app.get('/schools/reported_yes', (req, res) => {
+// This route will display the results for all schools w/ which DID REPORT immunizations && Have Coordinates.
+//	 there are 2478 Total.
+//	2147 HAVE COORDINATES
+// 	 331 HAVE NO COORDINATES
+	School.find({ 'reported': { $eq: 'Y' },
+		'location_1.coordinates': { $ne: [] } })
+		.exec(function(error, schools) {
+			console.log('# of schools: ', schools.length);
+			var reportYes = schools.map(curr => {
+				var coords = curr.location_1.coordinates;
+				return { lng: coords[0], lat: coords[1] };
+			});
+			res.send(reportYes);
 		});
 });
 

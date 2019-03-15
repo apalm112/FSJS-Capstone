@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
+ // eslint-disable-next-line
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import ErrorBoundary from './ErrorBoundary';
 import Loading from './Loading';
 import Map from './map';
 import Navbar from './components/Navbar';
-
-// import MarkerClusterer from '@google/markerclusterer';
-// import schools from './schools.json';
-
-// Makes the API call.
-// import axios from 'axios'
-
 
 class App extends Component {
 	constructor(props) {
@@ -36,6 +31,14 @@ class App extends Component {
 			searchQuery: '',
 		}
 	}
+
+	// CURRENT STOPPING POINT THIRDSDAY NITE: TRYING TO GET THE DATA PASSED INTO REACT FRUM EXPRESS
+	// getSchools = (query='/schools/reported_yes') => {
+	// // This function return 2147 schools
+	// 	fetch(`${query}`)	// should return 2147 school coordinates
+	// 	.then(res => res.json())
+	// 	.then(schools => this.setState({ schools: res.reportYes, searchQuery: query }));
+	// }
 
 	getSchools = (query='/schools/coords/yes') => {
 	// This function not working, doesn't always return 117 schools
@@ -67,9 +70,9 @@ class App extends Component {
 			console.error("You What!?  Error axiosing the Express server....");
 		})
 	}*/
-
 	componentDidMount() {
 		this.callApi()
+		//                             res.send({ express: 'Hellos froms Expresses' });
 			.then(res => this.setState({ response: res.express }))
 			.catch(err => console.error(err));
 
@@ -95,12 +98,17 @@ class App extends Component {
 		const body = await response.text();
 		this.setState({ responseToPost: body });
 	};
-	handleSchoolQuery = async event => {
-		event.preventDefault();
-		const response = await fetch('/re')
-	}
+	// handleSchoolQuery = async event => {
+	// 	event.preventDefault();
+	// 	const response = await fetch('/re')
+	// }
 
   render() {
+
+		// Show number of unimmunized kids at each school***********************************/
+		// How many kids are NOT vaccinated by the whole area
+		// Then be able to narrow that down by section.
+		// Show Data by Percentage, then break out further data in each Marker infoWindow.
 
 		var getEm = this.state.schools;
 		var getMuhData = getEm.map(curr => {
@@ -111,38 +119,39 @@ class App extends Component {
 		// var schoolQuery = this.state.schools;
 
     return (
-      <div className="App">
-				<ErrorBoundary>
-					<Navbar />
-					<p>{this.state.response}</p>
-					<form onSubmit={this.handleSubmit}>
-						<p>
-							<strong>Post to Server:</strong>
-						</p>
-						<input
-							type="text"
-							value={this.state.post}
-							onChange={event => this.setState({ post: event.target.value })}
-							onSubmit={event => event.value.reset()}
-						/>
-						<button type="submit">Submit Teh Post!</button>
-					</form>
-					<h3><strong>{this.state.responseToPost}</strong></h3>
-	        <header className="App-header">
-	        	<h1>WA State School Immuninzation Rates</h1>
-						<h5>From:         /Project12/fsjs-capstone-project/wastate_immunization/client/src/App.js</h5>
-	        </header>
-					<h3>Current Express Route: {this.state.searchQuery}</h3>
+			<BrowserRouter>
+	      <div className="App">
+					<ErrorBoundary>
+		        <header className="App-header">
+		        	<h1>WA State School Immuninzation Rates</h1>
+							<Navbar />
+		        </header>
+						<h3>Current Express Route: {this.state.searchQuery}</h3>
 
-					{/* Put a function here to reload the map & marker clusterer for each button click.
-						Pass in the query results & markers as props.  */}
-					{ (this.state.isLoading) ? <Loading />
-						: <Map
-						searchQuery={this.state.searchQuery}
+						{/* Put a function here to reload the map & marker clusterer for each button click.
+							Pass in the query results & markers as props.  */}
+						{ (this.state.isLoading) ? <Loading />
+							: <Map
+							searchQuery={this.state.searchQuery}
+								/>
+						}
+						<p>{this.state.response}</p>
+						<form onSubmit={this.handleSubmit}>
+							<p>
+								<strong>Post to Server:</strong>
+							</p>
+							<input
+								type="text"
+								value={this.state.post}
+								onChange={event => this.setState({ post: event.target.value })}
+								onSubmit={event => event.value.reset()}
 							/>
-					}
-				</ErrorBoundary>
-      </div>
+							<button type="submit">Submit Teh Post!</button>
+						</form>
+						<h3><strong>{this.state.responseToPost}</strong></h3>
+					</ErrorBoundary>
+	      </div>
+			</BrowserRouter>
     );
   }
 }
