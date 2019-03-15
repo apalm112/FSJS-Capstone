@@ -10,8 +10,13 @@ const Navbar = (props) => {
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
 
-					<li className="nav-item">
-						<a className="nav-link" href="/schools/all">All Schools</a>
+					<li className="nav-item dropdown">
+						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
+						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a className="dropdown-item" href="/completed_for_all">100% Immuninzation Rates</a>
+							<div className="dropdown-divider"></div>
+							<a className="dropdown-item" href="/school_district">School District</a>
+						</div>
 					</li>
 
 					<li className="nav-item dropdown">

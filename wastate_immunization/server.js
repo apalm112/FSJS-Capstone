@@ -2,6 +2,7 @@
 
 const express = require('express');
 const createError = require('http-errors');
+const cors = require('cors');
 // Node packages.
 const fs = require('fs');
 const http = require('https');
@@ -27,7 +28,12 @@ const app = express();
 //	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
-app.use(require('cors')());
+app.use(cors());
+app.use(function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
 
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
@@ -167,6 +173,44 @@ app.get('/api/schools', (req, res) => {
 			});
 			res.json(getMuhData);
 		});
+});
+
+app.get('/schools/complete_for_all', (req, res) => {
+// This route will display the results for all schools w/ which have a percentage complete for all immunizations === 100% && Have Coordinates.
+//	74 there are  Total.
+//	65 HAVE COORDINATES
+// 	 9 HAVE NO COORDINATES
+	School.find({ 'percent_complete_for_all_immunizations': { $eq: 100 },
+		'location_1.coordinates': { $ne: [] } })
+		.exec(function(error, schools) {
+			console.log('# of schools: ', schools.length);
+		/*	var allImms = schools.map(curr => {
+				var coords = curr.location_1.coordinates;
+					return { lng: coords[0], lat: coords[1]};
+			});*/
+			res.send(schools);
+		});
+		/*	school_district
+			school_name
+			school_year
+			grade_levels
+			k_12_enrollment
+			location_1: { coordinates	}
+			location_1_address
+			location_1_city
+			reported
+			percent_complete_for_all_immunizations
+			percent_exempt_for_diphtheria_tetanus
+			percent_exempt_for_hepatitisb
+			percent_exempt_for_measles_mumps_rubella
+			percent_exempt_for_pertussis
+			percent_exempt_for_polio
+			percent_exempt_for_varicella
+			percent_with_any_exemption
+			percent_with_medical_exemption
+			percent_with_personal_exemption
+			percent_with_religious_exemption
+			percent_with_religious_membership_exemption*/
 });
 
 app.get('/schools/mumps', (req, res) => {
