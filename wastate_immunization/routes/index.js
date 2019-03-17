@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const http = require('https');
+const path = require('path');
 
 const School = require('../database/models').School;
 
@@ -9,15 +10,12 @@ const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 
 /* GET home page. */
-router.get('/api/node_express_send_data_to_react-app', function(req, res) {
-	res.json({ express: '// WARNING: // WARNING: // WARNING: ' });
-
-
-
-	/* Validate mLab Schools collection if it's already populated or not.***********************
+router.get('/', (req, res) => {
+	/*
 	This code does not work here.
+	TODO: 	** Tried running this code from inside the routes/index.js file, but it would not work.  Only works properly in the server.js file.
 	*/
-/*	const socrataView = {};
+	const socrataView = {};
 
 	socrataView.fetchAll = function() {
 		const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
@@ -30,36 +28,41 @@ router.get('/api/node_express_send_data_to_react-app', function(req, res) {
 			});
 			res.on('end', () => {
 				var data = JSON.parse(body);
-				console.log('# of schools: ', data[0]);
+				// console.log('# of schools: ', data[0]);
 				data.map( (eachSchool) => {
 					var school = new School(eachSchool);
 					school.save( (error) => {
-						if(error) return next(error);
+						if(error) return (error);
 					});
 				});
 			}).on('error', (e) => {
-				console.log('Got an error: ', e);
+				console.error('Error fetching the data: ', e); //eslint-disable-line no-console
 			});
-		})
+		});
 	};	// end socrataView.fetchAll()
 
 	socrataView.checkMLabDBForData = function () {
+		// drop the collection from the mLab DB
+		database.dropCollection('schools');
+		console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 		// Query checks mLab DB if data is already saved
-		let query = School.countDocuments({ }, (err, count) => {
+		School.countDocuments({ }, (err, count) => {
 			console.log('COUNT===========================',	count );
 			//	--if not, then do fetch data from socrata
 			if (!count) {
 				console.log('COUNT IS TRUE  Express, data got fetched');
 				socrataView.fetchAll();
 				// 	--if so, then do not fetch data
-			} else {
-				console.log(':::::::::::::::::::: COUNT IS FALSE    DB is already populated ::::::::::::');
 			}
+			// else {
+			// 	// call function to first drop the collection each time
+			// 	socrataView.dropSchools();
+			// }
 		});
 	};
-socrataView.checkMLabDBForData();
-*/
-	// res.render('index', { title: 'Express' });
+	socrataView.checkMLabDBForData();
+	res.send('/index');
+	// res.send(path.join(__dirname, 'client', 'public', 'index.html'));
 });
 
 

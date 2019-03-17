@@ -3,10 +3,7 @@
 const express = require('express');
 const createError = require('http-errors');
 const cors = require('cors');
-// Node packages.
-const fs = require('fs');
 const http = require('https');
-
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
@@ -14,11 +11,12 @@ const path = require('path');
 const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
-// const MarkerClusterer = require('./public/vendors/scripts/markerclusterer');
 const School = require('./database/models').School;
 
-const indexRouter = require('./routes/index');
-const schoolsRouter = require('./routes/schools');
+// const indexRouter = require('./routes/index');
+const immunizationRouter = require('./routes/immunization');
+const schoolRouter = require('./routes/school');
+const reasonRouter = require('./routes/reason');
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
 const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
@@ -53,13 +51,14 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'client', 'public')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
-app.use('/', indexRouter);
-app.use('/', schoolsRouter);
+// app.use('/', indexRouter);
+app.use('/immunization', immunizationRouter);
+app.use('/school', schoolRouter);
+app.use('/reason', reasonRouter);
 
 // Not sure about this line here, trying it out tho:
 app.use(require('cors')());
 app.use(methodOverride('_method'));
-
 
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
@@ -87,22 +86,11 @@ database.once('open', () => {
 		res.send(`Express server received your POST request. This is what you sent: ${req.body.post}`);
 	});
 
-
-
-
 /**********************************************************************************/
 /* Validate mLab Schools collection if it's already populated or not.************************/
 // TODO: 	** Tried running this code from inside the routes/index.js file, but it would not work.  Only seems to work properly here in the server.js
 //				** Place the socrataView{} inside a post route??
 const socrataView = {};
-
-// socrataView.dropSchools = function() {
-// 	// drop the collection from the mLab DB
-// 	database.dropCollection('schools');
-// 	console.log(':::::::::::::::::::: COUNT IS FALSE    Collection has been dropped ::::::::::::');
-// 	// then call method to repopulate it
-// 	socrataView.fetchAll();
-// };
 
 socrataView.fetchAll = function() {
 	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
@@ -149,81 +137,10 @@ socrataView.checkMLabDBForData = function () {
 };
 socrataView.checkMLabDBForData();
 
-const writeSchoolsFile = (data) => {
-	// This isn't working either!!!!!!!!!!!!!!!!!!
-	var saveData = JSON.stringify(data);
-	fs.writeFile('./client/src/schools.json', saveData, (err) => {
-		if (err) throw err;
-		console.log('File successfully written! --Check directory for file.');
-	});
-};
 /***************************************************
 	routes to query mLab DB & return data to React	 *
                                                    *
  ***************************************************/
-// Put all API endpoints under '/api'Put all API endpoints under '/api'
-app.get('/api/schools', (req, res) => {
-	// School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-	School.find({})	// Find All Schools in Collection: There 2248 Schools w/ valid coordinates. There are 347 Schools which have the coordinates as an empty value, i.e.-- {}
-		.exec(function(error, schools) {
-			// console.log('From server.js file /api/schools route:------>\n', schools);
-			var getMuhData = schools.map(curr => {
-				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
-			});
-			res.json(getMuhData);
-		});
-});
-
-app.get('/schools/complete_for_all', (req, res) => {
-// This route will display the results for all schools w/ which have a percentage complete for all immunizations === 100% && Have Coordinates.
-//	74 there are  Total.
-//	65 HAVE COORDINATES
-// 	 9 HAVE NO COORDINATES
-	School.find({ 'percent_complete_for_all_immunizations': { $eq: 100 },
-		'location_1.coordinates': { $ne: [] } })
-		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
-		/*	var allImms = schools.map(curr => {
-				var coords = curr.location_1.coordinates;
-					return { lng: coords[0], lat: coords[1]};
-			});*/
-			res.send(schools);
-		});
-		/*	school_district
-			school_name
-			school_year
-			grade_levels
-			k_12_enrollment
-			location_1: { coordinates	}
-			location_1_address
-			location_1_city
-			reported
-			percent_complete_for_all_immunizations
-			percent_exempt_for_diphtheria_tetanus
-			percent_exempt_for_hepatitisb
-			percent_exempt_for_measles_mumps_rubella
-			percent_exempt_for_pertussis
-			percent_exempt_for_polio
-			percent_exempt_for_varicella
-			percent_with_any_exemption
-			percent_with_medical_exemption
-			percent_with_personal_exemption
-			percent_with_religious_exemption
-			percent_with_religious_membership_exemption*/
-});
-
-app.get('/schools/mumps', (req, res) => {
-// This route will display the results for 'exempt_for_mumps'. There are 2253 shools from this query.
-	// var exempt_for_mumps = '$where=percent_exempt_for_measles_mumps_rubella>0.0&$limit=3000';
-	School.find({ 'number_exempt_for_measles_mumps_rubella': { $gt: 0 } })
-		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
-			res.json(schools.length);
-		});
-});
-
-
 app.get('/schools/victor', (req, res) => {
 // This route will display the results for "VICTOR FALLS ELEMENTARY".
 //	Which DOES NOT HAVE COORDINATES.
@@ -245,103 +162,11 @@ app.get('/schools/desert', (req, res) => {
 		});
 });
 
-app.get('/schools/coords/no', (req, res) => {
-// This route will display the results for all schools w/ NO COORDINATES. There are 347
-//	https://data.wa.gov/resource/ndsp-2k9r.json?$where=within_circle(location_1, 47.59, -122.33, 1000)
-/*		 "location_1": {
-        "coordinates": []
-    }
-*/
-	School.find({ 'location_1.coordinates': { $eq: [] } })
-		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
-			res.json(schools.length);
-		});
-});
-
-app.get('/schools/coords/yes', (req, res) => {
-// This route will display the results for all schools w/ COORDINATES. There are 2248
-	School.find({ 'location_1.coordinates': { $ne: [] } })
-		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
-			res.json(schools);
-		});
-});
-
-app.get('/schools/reported_yes', (req, res) => {
-// This route will display the results for all schools w/ which DID REPORT immunizations && Have Coordinates.
-//	 there are 2478 Total.
-//	2147 HAVE COORDINATES
-// 	 331 HAVE NO COORDINATES
-	School.find({ 'reported': { $eq: 'Y' },
-		'location_1.coordinates': { $ne: [] } })
-		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
-			var reportYes = schools.map(curr => {
-				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
-			});
-			res.send(reportYes);
-		});
-});
-
-app.get('/schools/reported_no', (req, res) => {
-// This route will display the results for all schools w/ which DID NOT REPORT immunizations, there are 117.
-	School.find({ 'reported': { $eq: 'N' } })
-		.exec(function(error, schools) {
-			// console.log('# of schools: ', schools.length);
-			var reportNo = schools.map(curr => {
-				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
-			});
-			// writeSchoolsFile(reportNo); NOT WORKING
-			res.json(reportNo);
-		});
-});
-
-app.get('/schools/personal_exemption_zero', (req, res) => {
-// This route will display the results for all schools w/ which DID NOT REPORT immunizations, there are 235.  46 have NO coordinates and 189 do Have coordinates.
-//	This route is creates an array of coordinates for loading cluster markers into the map.
-	School.find({
-		'number_with_personal_exemption': { $eq: 0.0 },
-		'location_1.coordinates': { $ne: [] } })
-		.exec(function(error, schools) {
-			var locale = schools.map(function (eachSchool) {
-				var coords = eachSchool.location_1.coordinates;
-				// console.log( coords );
-				return { lng: coords[0], lat: coords[1] };
-			});
-			console.log(locale);
-			res.json(locale);
-		});
-});
-
-app.get('/schools/personal_exemption_zero/no_coords', (req, res) => {
-// This route will display the results for all schools w/ which DID NOT REPORT immunizations, there are 235, AND have NO coordinates, there are 46!
-//	This route is for loading cluster markers into the map.
-	School.find({
-		'number_with_personal_exemption': { $eq: 0.0 },
-		'location_1.coordinates': { $eq: [] } })
-		.exec(function(error, schools) {
-			var locale = schools.map(function (eachSchool) {
-				var coords = {
-					'address': eachSchool.location_1_address,
-					'city': eachSchool.location_1_city
-				};
-					return coords;
-			});
-			console.log('# of schools: ', locale);
-			res.json(locale.length);
-		});
-});
-/******************************************************************************/
-
-
 // Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
-});
-
+});*/
+/******************************************************************************/
 
 /* Error Handling ****************************************************************************/
 // catch 404 and forward to error handler
