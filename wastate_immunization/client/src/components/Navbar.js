@@ -13,22 +13,15 @@ const Navbar = (props) => {
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a className="dropdown-item" href="/completed_for_all">100% Immuninzation Rates</a>
+							<a className="dropdown-item" href="/school/all">All Schools</a>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/school_district">School District</a>
+							<a className="dropdown-item" href="/school/complete_for_all">100% Immuninzation Rates</a>
+							<div className="dropdown-divider"></div>
+							<a className="dropdown-item" href="/school/reported_yes">Reported Immuninzation Rates</a>
+							<div className="dropdown-divider"></div>
+							<a className="dropdown-item" href="/school/reported_no">Did Not Report Immuninzation Rates</a>
 						</div>
 					</li>
-
-					<li className="nav-item dropdown">
-						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Reported Immuninzations
-						</a>
-						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a className="dropdown-item" href="/reported_yes">Yes</a>
-							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/reported_no">No</a>
-						</div>
-						</li>
 
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

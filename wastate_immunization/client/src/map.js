@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { render } from 'react-dom';
 import './App.css';
 import MarkerClusterer from '@google/markerclusterer';
-import searchQuery from './100percent.json';
+// import searchQuery from './100percent.json';
 
 class Map extends Component {
 	constructor(props) {
@@ -10,19 +10,21 @@ class Map extends Component {
 		this.onScriptLoad = this.onScriptLoad.bind(this);
 	}
 
-	initMap = (map, searchQuery) => {
+	initMap = (map, gotData) => {
 		// Create an array of alphabetical characters used to label the markers.
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+		// TODO: Edit the infoWindow so it renders each schools data
+		// probably have to modify the routes/ to return the
+		// required data.  Right now only coordinates get returned.
 		var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<h1 id="firstHeading" class="firstHeading">Darmok</h1>'+
       '<div id="bodyContent">'+
       `<p>school_district: ${this.props.schools.school_district}</p>`+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
+      '<p>And: Jalod, at__Tanagra '+
+      '(last visited September 1991).</p>'+
       '</div>'+
       '</div>';
 /* eslint-disable */
@@ -52,9 +54,10 @@ class Map extends Component {
 			var infowindow = new window.google.maps.InfoWindow({ content: contentString });
 
 	// TODO: Change the current schools.json to a changeable parameter that can be taken from the text value of a submit button click event,
-		var markers = searchQuery.map(function(school, idx) {
+		var markers = gotData.map(function(school, idx) {
 			// Add some markers to the map.
 			var marker = new window.google.maps.Marker({
+				// position: school[idx].location_1.coordinates,
 				position: school,
 				map: map,
 				label: labels[idx % labels.length]
@@ -65,6 +68,7 @@ class Map extends Component {
 			});
 			return marker;
 		});	// End of searchQuery.map()
+
 		new MarkerClusterer(map, markers, {imagePath: 'images/m'});
 	}	// End of initMap()
 
@@ -74,11 +78,16 @@ class Map extends Component {
 			{	center: { lat: 47.3232, lng: -120.3232 },	zoom: 4	},
 			this.initMap);
 
-		this.initMap(map, searchQuery);
+		const gotData = this.props.schools;
+
+		this.initMap(map, gotData);
 	}
 
 	componentDidMount() {
-		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MAP.JS::{this.props}', this.props);
+		var gotData = this.props.schools;
+		console.log('>>>>>>>>>componentDidMount--MAP.JS::{this.props}', this.props);
+		console.log('OVER HERE LEONARDS!: ', gotData);
+
 		if (!window.google) {
 			let createScriptMap = document.createElement('script');
 			createScriptMap.type =  'text/javascript';
@@ -96,16 +105,29 @@ class Map extends Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.props.state !== prevProps.state) {
+	componentDidUpdate(prevProps) {
+		// console.log('////////////: ', this.props.schools[0].location_1.coordinates);
+		if (this.props.schools !== prevProps.schools) {
 			this.onScriptLoad();
-		} }// NOT WORKING
+		}
+	}
+/*	componentDidUpdate(prevProps) {
+	// NOT WORKING
+		if (this.props.schools !== prevProps.schools) {
+			console.log('HOBOS CALLIN componentDidUpdate YO!');
+			this.initMap( (this.props.searchQuery));
+		}
+	}*/
 
-	// UNSAFE_componentWillReceiveProps(props) {
-	// 	(this.props.state.schools)
-	// 	? this.props.onSearch(props.state.schools)
-	// 	: this.props.onSearch(props.state.schools)
-	// }
+/*	componentDidUpdate() {
+     this.map.panTo(new google.maps.LatLng(this.props.lat, this.props.lng));
+	 }*/
+
+	/*UNSAFE_componentWillReceiveProps(props) {
+		(this.props.state.schools)
+		? this.props.onSearch(props.state.schools)
+		: this.props.onSearch(props.state.schools)
+	}*/
 
 
 
