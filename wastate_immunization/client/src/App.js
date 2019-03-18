@@ -72,7 +72,7 @@ class App extends Component {
 	// Create a way to pass in the param from the NavBar href to control the
 	// route.
 	// 											(`${routeClickedOn}`)
-		this.handleSchoolQuery('/school/complete_for_all');
+		this.handleSchoolQuery('/school/all');
 		// this.get100PercentImmunizedSchools();
 	}	// End componentDidMount()
 

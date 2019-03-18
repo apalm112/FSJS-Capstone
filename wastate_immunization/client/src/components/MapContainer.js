@@ -32,6 +32,7 @@ class MapContainer extends Component {
 		});
 		console.log('INFOSTIRNG HERE:::::::: ', typeof(contentString));*/
 /* eslint-disable */
+
 		/*	school_district
 			school_name
 			school_year
@@ -53,7 +54,8 @@ class MapContainer extends Component {
 			percent_with_personal_exemption
 			percent_with_religious_exemption
 			percent_with_religious_membership_exemption*/
-																																	//   JSON.stringify(contentString)
+
+	//   JSON.stringify(contentString)
 
 	/*		var schools = this.props.schools;
 			var gub = schools.map((school, idx) => {
@@ -73,11 +75,14 @@ class MapContainer extends Component {
 				label: labels[idx % labels.length],
 				content:
 									'<div id="content">'+
-									`<div id="siteNotice"><h2>Percent Complete for All Immuninzations: ${this.props.schools[idx].allImms}%</h2></div>`+
-									`<h3 id="firstHeading" class="firstHeading">${this.props.schools[idx].name}</h3>`+
+									`<div id="siteNotice"><h2>${this.props.schools[idx].specificRouteData}</h2></div>`+
+									`<h3 id="firstHeading" class="firstHeading">School:  ${this.props.schools[idx].name}</h3>`+
 									'<div id="bodyContent">'+
-									`<h3>${this.props.schools[idx].address}</h3>`+
-									`<h3>${this.props.schools[idx].district}</h3>`+
+									`<h5>Grade Levels: ${this.props.schools[idx].levels}</h5>`+
+									`<h5>K-12 Enrollment: ${this.props.schools[idx].k12}</h5>`+
+									`<h5>${this.props.schools[idx].address}</h5>`+
+									`<h5>City: ${this.props.schools[idx].city}</h5>`+
+									`<h5>School District:  ${this.props.schools[idx].district}</h5>`+
 									'</div>'+
 									'</div>'
 								,

@@ -5,17 +5,31 @@ const School = require('../database/models').School;
 
 // Put all API endpoints under '/schools'
 router.get('/all', (req, res) => {
-	// Find All Schools in the mLab DB Collection:
-	// 	There 2248 Schools w/ valid coordinates.
-	// There are 347 Schools which have the coordinates as an empty value, i.e.-- {}
+	// Find All Schools in the mLab DB Collection: There 2248 Schools w/ valid coordinates.
+	// 347 Schools which have the coordinates as an empty value, i.e.-- {}
 	School.find({ 'location_1.coordinates': { $ne: [] }  })
-	// School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
 		.exec(function(error, schools) {
 			var getAllSchoolsCoords = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: `Percent Complete for All Immuninzations: ${allImms}%`,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12
+				};
 			});
-			console.log('coords.length: ', getAllSchoolsCoords.length);
 			res.send(getAllSchoolsCoords);
 		});
 });
@@ -33,17 +47,24 @@ router.get('/complete_for_all', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map((curr) => {
 				var coords = curr.location_1.coordinates;
-				var name = curr.school_name;
-				var district = curr.school_district;
 				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
 				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
 				return {
 					lng: coords[0],
 					lat: coords[1],
+					specificRouteData: `Percent Complete for All Immuninzations: ${allImms}%`,
+					// allImms: `Percent Complete for All Immuninzations: ${allImms}%`,
+					name: name,
 					address: address,
-					allImms: allImms,
+					city: city,
 					district: district,
-					name:name
+					levels: grade_levels,
+					k12: k_12
 				};
 			});
 			res.send(results);
@@ -98,11 +119,29 @@ router.get('/reported_no', (req, res) => {
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			// console.log('# of schools: ', schools.length);
-			var reportNo = schools.map(curr => {
+			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				// return { lng: coords[0], lat: coords[1] };
+				var name = curr.school_name;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var grade_levels = curr.grade_levels;
+				// var k_12 = curr.k_12_enrollment;
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					address: address,
+					city: city,
+					specificRouteData: `Reported Immuninzation Rates: ${reported}o`,
+					district: district,
+					name:name,
+					levels: grade_levels,
+					k12: 'not reported'  // reported_no schools seems to not have this data.
+				};
 			});
-			res.send(reportNo);
+			res.send(results);
 		});
 });
 
