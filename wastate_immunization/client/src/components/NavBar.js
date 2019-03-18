@@ -1,7 +1,16 @@
 import React from 'react';
+import {
+	Route,
+	Link,
+	Redirect
+} from 'react-router-dom';
 
-const Navbar = (props) => {
-	return (
+import MapContainer from './MapContainer';
+
+const Navbar = (props) => (
+	<header className="App-header">
+		<h1>WA State School Immuninzation Rates</h1>
+
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
@@ -13,47 +22,47 @@ const Navbar = (props) => {
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a className="dropdown-item" href="/school/all">All Schools</a>
+							<Link className="dropdown-item" to="/school/all">All Schools</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/school/complete_for_all">100% Immuninzation Rates</a>
+							<Link className="dropdown-item" to="/school/complete_for_all">100% Immuninzation Rates</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/school/reported_yes">Reported Immuninzation Rates</a>
+							<Link className="dropdown-item" to="/school/reported_yes">Reported Immuninzation Rates</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/school/reported_no">Did Not Report Immuninzation Rates</a>
+							<Link className="dropdown-item" to="/school/reported_no">Did Not Report Immuninzation Rates</Link>
 						</div>
 					</li>
 
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Exemption by Immuninzation Type
+							Exemption by Immuninzation Type
 						</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a className="dropdown-item" href="/immunization/hebatitis_b">Hepatitis B</a>
+							<Link className="dropdown-item" to="/immunization/hebatitis_b">Hepatitis B</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/immunization/measles">Measles</a>
+							<Link className="dropdown-item" to="/immunization/measles">Measles</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/immunization/pertussis">Pertussis</a>
+							<Link className="dropdown-item" to="/immunization/pertussis">Pertussis</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/immunization/polio">Polio</a>
+							<Link className="dropdown-item" to="/immunization/polio">Polio</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/immunization/tetanus">Tetanus</a>
+							<Link className="dropdown-item" to="/immunization/tetanus">Tetanus</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/immunization/varicella">Varicella</a>
+							<Link className="dropdown-item" to="/immunization/varicella">Varicella</Link>
 						</div>
 					</li>
 
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Exemption by Reason
+							Exemption by Reason
 						</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a className="dropdown-item" href="/reason/medical">Medical</a>
+							<Link className="dropdown-item" to="/reason/medical">Medical</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/reason/personal">Personal</a>
+							<Link className="dropdown-item" to="/reason/personal">Personal</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/reason/religous">Religous</a>
+							<Link className="dropdown-item" to="/reason/religous">Religous</Link>
 							<div className="dropdown-divider"></div>
-							<a className="dropdown-item" href="/reason/any">Any Exemption</a>
+							<Link className="dropdown-item" to="/reason/any">Any Exemption</Link>
 						</div>
 					</li>
 				</ul>
@@ -63,7 +72,14 @@ const Navbar = (props) => {
 				</form>
 			</div>
 		</nav>
-	);
-}
+		<h3>Current Express Route: {props.searchQuery}</h3>
+		
+
+		{/* Write routes here... YA HOBO!*/}
+		<Route path="/reason/medical" component={MapContainer} />
+
+
+	</header>
+);
 
 export default Navbar;

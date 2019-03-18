@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
- // eslint-disable-next-line
-import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
-import ErrorBoundary from './ErrorBoundary';
-import Loading from './Loading';
-import Navbar from './components/Navbar';
-import Map from './map';
+import {
+	BrowserRouter,
+	// eslint-disable-next-line
+	Redirect,
+	Route,
+	Switch
+} from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
+import Loading from './components/Loading';
+import NavBar from './components/NavBar';
+import MapContainer from './components/MapContainer';
 
 class App extends Component {
 	constructor() {
@@ -68,7 +72,7 @@ class App extends Component {
 	// Create a way to pass in the param from the NavBar href to control the
 	// route.
 	// 											(`${routeClickedOn}`)
-		this.handleSchoolQuery('/school/reported_no');
+		this.handleSchoolQuery('/school/complete_for_all');
 		// this.get100PercentImmunizedSchools();
 	}	// End componentDidMount()
 
@@ -81,22 +85,25 @@ class App extends Component {
 		var getSchoolState = this.state.schools;
 		console.log('===========searchQuery & Schools.length: ', this.state.searchQuery, getSchoolState.length, getSchoolState[0]);
 
+		// TODO: Teh MarkerClusterer is only rendering on the home page route.
     return (
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
-		        <header className="App-header">
-		        	<h1>WA State School Immuninzation Rates</h1>
-							<Navbar />
-		        </header>
-						<h3>Current Express Route: {this.state.searchQuery}</h3>
-						{/* Pass in the query results & markers as props.  */}
+
+						<Route path="/" render={ () => { return <NavBar searchQuery={this.state.searchQuery} /> } } />
+
+						{/* <Switch> */}
+
 						{ (this.state.isLoading) ? <Loading />
-						: <Map
+						: <MapContainer
+							handleSchoolQuery={this.handleSchoolQuery}
+							isLoading={this.state.isLoading}
 							schools={this.state.schools}
 							searchQuery={this.state.searchQuery}
 							/>
 						}
+						{/* </Switch> */}
 					</ErrorBoundary>
 	      </div>
 			</BrowserRouter>

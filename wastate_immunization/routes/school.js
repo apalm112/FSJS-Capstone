@@ -31,11 +31,22 @@ router.get('/complete_for_all', (req, res) => {
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			console.log('# of schools: ', schools.length);
-			var allImms = schools.map(curr => {
+			var results = schools.map((curr) => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1]};
+				var name = curr.school_name;
+				var district = curr.school_district;
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var address = curr.location_1_address;
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					address: address,
+					allImms: allImms,
+					district: district,
+					name:name
+				};
 			});
-			res.send(allImms);
+			res.send(results);
 		});
 	/*	school_district
 			school_name
@@ -80,7 +91,7 @@ router.get('/reported_yes', (req, res) => {
 });
 
 router.get('/reported_no', (req, res) => {
-// This route will display the results for all schools w/ which DID NOT REPORT immunizations, there are 117.
+// This route will display the results for all schools w/ which DID NOT REPORT immunizations, there are 117 BUT:
 //	101 HAVE COORDINATES
 // 	16 HAVE NO COORDINATES
 	School.find({ 'reported': { $eq: 'N' },
