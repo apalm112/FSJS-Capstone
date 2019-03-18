@@ -17,14 +17,20 @@ class MapContainer extends Component {
 		// TODO: Edit the infoWindow so it renders each schools data
 		// probably have to modify the routes/ to return the
 		// required data.  Right now only coordinates get returned.
-		var contentString = '<div id="content">'+
-      `<div id="siteNotice"><p>Percent Complete for All Immuninzations: ${this.props.schools[0].allImms}%</p></div>`+
-      `<h1 id="firstHeading" class="firstHeading">${this.props.schools[0].name}</h1>`+
+/*		var contentString = gotData.map((school, idx) => {
+			// Works!  But needs to be a string.
+			var infoString = '<div id="content">'+
+      `<div id="siteNotice"><h2>Percent Complete for All Immuninzations: ${this.props.schools[0].allImms}%</h2></div>`+
+      `<h3 id="firstHeading" class="firstHeading">${this.props.schools[0].name}</h3>`+
       '<div id="bodyContent">'+
-      `<p>school_address: ${this.props.schools[0].address}</p>`+
-      `<p>${this.props.schools[0].district}</p>`+
+      `<h3>${this.props.schools[idx].address}</h3>`+
+      `<h3>${this.props.schools[idx].district}</h3>`+
       '</div>'+
       '</div>';
+			console.log('INFOSTIRNG HERE:::::::: ', infoString);
+			return infoString;
+		});
+		console.log('INFOSTIRNG HERE:::::::: ', typeof(contentString));*/
 /* eslint-disable */
 		/*	school_district
 			school_name
@@ -47,25 +53,37 @@ class MapContainer extends Component {
 			percent_with_personal_exemption
 			percent_with_religious_exemption
 			percent_with_religious_membership_exemption*/
-			var infowindow = new window.google.maps.InfoWindow({ content: contentString });
+																																	//   JSON.stringify(contentString)
 
-			var schools = this.props.schools;
+	/*		var schools = this.props.schools;
 			var gub = schools.map((school, idx) => {
 				// return position = { lng: school[0].lng, lat: school[0].lat }; <-----original & works
 				var position = { lng: school.lng, lat: school.lat };
-				console.log('XXXXXXXXXXXXXXXXXXXXX', position);
+				// console.log('XXXXXXXXXXXXXXXXXXXXX', position);
 				return position;
-			});
+			});*/
 
 	// TODO: Change the current schools.json to a changeable parameter that can be taken from the text value of a submit button click event,
-		var markers = gotData.map(function(school, idx) {
+		var markers = gotData.map((school, idx) => {
 			// Add some markers to the map.
 			var marker = new window.google.maps.Marker({
 				// position: school[idx].location_1.coordinates,
-				position: school,
+				position: { lng: this.props.schools[idx].lng, lat: this.props.schools[idx].lat },
 				map: map,
-				label: labels[idx % labels.length]
+				label: labels[idx % labels.length],
+				content:
+									'<div id="content">'+
+									`<div id="siteNotice"><h2>Percent Complete for All Immuninzations: ${this.props.schools[idx].allImms}%</h2></div>`+
+									`<h3 id="firstHeading" class="firstHeading">${this.props.schools[idx].name}</h3>`+
+									'<div id="bodyContent">'+
+									`<h3>${this.props.schools[idx].address}</h3>`+
+									`<h3>${this.props.schools[idx].district}</h3>`+
+									'</div>'+
+									'</div>'
+								,
 			});
+			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
+			// console.log('INFOSTIRNG HERE:::::::: ', content);
 			window.google.maps.event.addListener(marker, 'click', function(event) {
 				// infowindow.setContent(content);
 				infowindow.open(map, marker);
