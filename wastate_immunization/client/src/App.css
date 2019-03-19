@@ -118,6 +118,17 @@ html, body {
   background: rgba(108, 194, 241, 0.5);
 }
 
+/* InfodWindow Styles ****************** */
+.gm-ui-hover-effect {
+  background: darkgreyslate;
+	height: 55px;
+	width: 50px; }
+
+.gm-ui-hover-effect > .img {
+  height: 50px;
+  width: 50px; }
+
+
 /* MEDIA QUERIES These are not needed, Bootstrap has this covered***************************/
 /*@media only screen and (max-width: 767px)  {
   body {

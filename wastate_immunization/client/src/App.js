@@ -9,15 +9,16 @@ import {
 import ErrorBoundary from './components/ErrorBoundary';
 import Loading from './components/Loading';
 import NavBar from './components/NavBar';
+import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			schools: [],
 			isLoading: true,
 			searchQuery: '',
+			schools: [],
 		}
 	}
 
@@ -25,7 +26,7 @@ class App extends Component {
 	// This function returns whatever query is sent to it.
 		fetch(`${query}`)
 		.then(res => res.json())
-		.then(schools => this.setState({ schools: schools, searchQuery: query, isLoading: false }));
+		.then(schools => this.setState({ isLoading: false, searchQuery: query, schools: schools }));
 	}
 /*	These two routes work, but don't need them
 	//  This route code kindof runs, BUT the app is in race conditions, so it only works sometimes.
@@ -68,24 +69,16 @@ class App extends Component {
 	}*/
 
 	componentDidMount() {
-	// TODO: if the param is left empty, then this function throws an error!
-	// Create a way to pass in the param from the NavBar href to control the
-	// route.
+	// TODO: Create a way to pass in the param from the NavBar href to control the route.
 	// 											(`${routeClickedOn}`)
 		this.handleSchoolQuery('/school/all');
-		// this.get100PercentImmunizedSchools();
-	}	// End componentDidMount()
+	}
 
   render() {
 		// Show number of unimmunized kids at each school
 		// How many kids are NOT vaccinated by the whole area
 		// Then be able to narrow that down by section.
 		// Show Data by Percentage, then break out further data in each Marker infoWindow.
-
-		var getSchoolState = this.state.schools;
-		console.log('===========searchQuery & Schools.length: ', this.state.searchQuery, getSchoolState.length, getSchoolState[0]);
-
-		// TODO: Teh MarkerClusterer is only rendering on the home page route.
     return (
 			<BrowserRouter>
 	      <div className="App">
@@ -93,17 +86,19 @@ class App extends Component {
 
 						<Route path="/" render={ () => { return <NavBar searchQuery={this.state.searchQuery} /> } } />
 
-						{/* <Switch> */}
+						<Switch>
+							{/* // TODO: a MapContainer for each of the 14 routes? */}
 
-						{ (this.state.isLoading) ? <Loading />
-						: <MapContainer
-							handleSchoolQuery={this.handleSchoolQuery}
-							isLoading={this.state.isLoading}
-							schools={this.state.schools}
-							searchQuery={this.state.searchQuery}
-							/>
-						}
-						{/* </Switch> */}
+							{ (this.state.isLoading) ? <Loading />
+							: <MapContainer
+								handleSchoolQuery={this.handleSchoolQuery}
+								isLoading={this.state.isLoading}
+								schools={this.state.schools}
+								searchQuery={this.state.searchQuery}
+								/>
+							}
+							<Route component={NotFound} />
+							</Switch>
 					</ErrorBoundary>
 	      </div>
 			</BrowserRouter>

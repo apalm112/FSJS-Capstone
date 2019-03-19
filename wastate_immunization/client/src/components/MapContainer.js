@@ -50,26 +50,24 @@ class MapContainer extends Component {
 				content:
 									'<div id="content">'+
 									`<div id="siteNotice"><h2>${this.props.schools[idx].specificRouteData}</h2></div>`+
-									`<h3 id="firstHeading" class="firstHeading">${this.props.schools[idx].name}</h3>`+
+									`<h3 id="firstHeading" class="firstHeading">School:  ${this.props.schools[idx].name}</h3>`+
 									'<div id="bodyContent">'+
 									`<h5>Grade Levels: ${this.props.schools[idx].levels}</h5>`+
-									`<h5>Enrollment: ${this.props.schools[idx].k12}</h5>`+
-									`<h6>${this.props.schools[idx].address}</h6>`+
-									`<h6>${this.props.schools[idx].city}</h6>`+
-									`<h6>${this.props.schools[idx].district}</h6>`+
+									`<h5>K-12 Enrollment: ${this.props.schools[idx].k12}</h5>`+
+									`<h5>${this.props.schools[idx].address}</h5>`+
+									`<h5>City: ${this.props.schools[idx].city}</h5>`+
+									`<h5>School District:  ${this.props.schools[idx].district}</h5>`+
 									'</div>'+
-									'</div>',
-				boxStyle: {	button: { background: 'darkgreyslate' } }
+									'</div>'
 			});
 			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
 
 			window.google.maps.event.addListener(marker, 'click', function(event) {
-				// infowindow.setOptions(opt_opts:	background: { 'darkgreyslate' }});
+				// infowindow.setContent(content);
 				infowindow.open(map, marker);
 			});
 
-			// Event that closes the Info Window with a click on the map
-			google.maps.event.addListener(map, 'click', function() {
+			google.maps.event.addListener(map, 'click', function(event) {
 				infowindow.close();
 			});
 

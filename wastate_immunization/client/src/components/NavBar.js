@@ -2,14 +2,27 @@ import React from 'react';
 import {
 	Route,
 	Link,
-	Redirect
+	NavLink
 } from 'react-router-dom';
-
-import MapContainer from './MapContainer';
 
 const Navbar = (props) => (
 	<header className="App-header">
 		<h1>WA State School Immuninzation Rates</h1>
+
+		{/* <nav className="main-nav">
+			<ul>
+				<li><NavLink
+			// The to="" prop controls what displays in the URL.
+			to="/">All</NavLink></li>
+				<li><NavLink
+			to="/school/complete_for_all">Percent Complete</NavLink></li>
+				<li><NavLink
+			to="/school/reported_yes">Yes</NavLink></li>
+				<li><NavLink
+			to="/school/reported_no">No</NavLink></li>
+			</ul>
+		</nav>*/ }
+
 
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,12 +86,6 @@ const Navbar = (props) => (
 			</div>
 		</nav>
 		<h3>Current Express Route: {props.searchQuery}</h3>
-		
-
-		{/* Write routes here... YA HOBO!*/}
-		<Route path="/reason/medical" component={MapContainer} />
-
-
 	</header>
 );
 

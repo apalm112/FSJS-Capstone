@@ -51,6 +51,10 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'client', 'public')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
+/***************************************************
+	routes to query mLab DB & return data to React	 *
+                                                   *
+ ***************************************************/
 // app.use('/', indexRouter);
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
@@ -136,31 +140,6 @@ socrataView.checkMLabDBForData = function () {
 	});
 };
 socrataView.checkMLabDBForData();
-
-/***************************************************
-	routes to query mLab DB & return data to React	 *
-                                                   *
- ***************************************************/
-app.get('/schools/victor', (req, res) => {
-// This route will display the results for "VICTOR FALLS ELEMENTARY".
-//	Which DOES NOT HAVE COORDINATES.
-	School.find({ 'school_name': 'VICTOR FALLS ELEMENTARY' })
-		.exec(function(error, schools) {
-			console.log('MT', schools[0].location_1.coordinates);
-			res.json(schools);
-		});
-});
-
-
-app.get('/schools/desert', (req, res) => {
-// This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
-//	Which HAS COORDINATES.
-	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-		.exec(function(error, schools) {
-			console.log(schools);
-			res.json(schools[0].location_1.coordinates);
-		});
-});
 
 // Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
 /*app.get('/', (req, res) => {

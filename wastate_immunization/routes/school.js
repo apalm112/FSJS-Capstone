@@ -3,7 +3,6 @@ const router = express.Router();
 
 const School = require('../database/models').School;
 
-// Put all API endpoints under '/schools'
 router.get('/all', (req, res) => {
 	// Find All Schools in the mLab DB Collection: There 2248 Schools w/ valid coordinates.
 	// 347 Schools which have the coordinates as an empty value, i.e.-- {}
@@ -21,7 +20,7 @@ router.get('/all', (req, res) => {
 				return {
 					lng: coords[0],
 					lat: coords[1],
-					specificRouteData: `Percent Complete for All Immuninzations: ${allImms}%`,
+					specificRouteData: `Complete for All Immuninzations: ${allImms}%`,
 					name: name,
 					address: address,
 					city: city,
@@ -57,7 +56,7 @@ router.get('/complete_for_all', (req, res) => {
 				return {
 					lng: coords[0],
 					lat: coords[1],
-					specificRouteData: `Percent Complete for All Immuninzations: ${allImms}%`,
+					specificRouteData: `Complete for All Immuninzations: ${allImms}%`,
 					// allImms: `Percent Complete for All Immuninzations: ${allImms}%`,
 					name: name,
 					address: address,
@@ -105,7 +104,25 @@ router.get('/reported_yes', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var reportYes = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				// return { lng: coords[0], lat: coords[1] };
+				var name = curr.school_name;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					address: address,
+					city: city,
+					specificRouteData: `Reported Immuninzation Rates: ${reported}es`,
+					district: district,
+					name:name,
+					levels: grade_levels,
+					k12: k_12
+				};
 			});
 			res.send(reportYes);
 		});
@@ -153,5 +170,25 @@ router.get('/coords/no', (req, res) => {
 			res.send(schools);
 		});
 });
+
+/*router.get('/schools/victor', (req, res) => {
+// This route will display the results for "VICTOR FALLS ELEMENTARY".
+//	Which DOES NOT HAVE COORDINATES.
+	School.find({ 'school_name': 'VICTOR FALLS ELEMENTARY' })
+		.exec(function(error, schools) {
+			console.log('MT', schools[0].location_1.coordinates);
+			res.json(schools);
+		});
+});
+
+router.get('/schools/desert', (req, res) => {
+// This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
+//	Which HAS COORDINATES.
+	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
+		.exec(function(error, schools) {
+			console.log(schools);
+			res.json(schools[0].location_1.coordinates);
+		});
+});*/
 
 module.exports = router;
