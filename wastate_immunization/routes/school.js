@@ -15,18 +15,30 @@ router.get('/all', (req, res) => {
 				var address = curr.location_1_address;
 				var city = curr.location_1_city;
 				var district = curr.school_district;
+				var reported = curr.reported;
 				var grade_levels = curr.grade_levels;
 				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
 				return {
 					lng: coords[0],
 					lat: coords[1],
-					specificRouteData: `Complete for All Immuninzations: ${allImms}%`,
+					specificRouteData: allImms,
 					name: name,
 					address: address,
 					city: city,
 					district: district,
 					levels: grade_levels,
-					k12: k_12
+					k12: k_12,
+					reported: reported
 				};
 			});
 			res.send(getAllSchoolsCoords);
@@ -171,16 +183,17 @@ router.get('/coords/no', (req, res) => {
 		});
 });
 
-/*router.get('/schools/victor', (req, res) => {
+router.get('/elma', (req, res) => {
 // This route will display the results for "VICTOR FALLS ELEMENTARY".
 //	Which DOES NOT HAVE COORDINATES.
-	School.find({ 'school_name': 'VICTOR FALLS ELEMENTARY' })
+	School.find({ 'school_name': 'MARY M KNIGHT HIGH SCHOOL' })
 		.exec(function(error, schools) {
-			console.log('MT', schools[0].location_1.coordinates);
+			console.log('XXXXXXXXX', schools[0]);
 			res.json(schools);
 		});
 });
 
+/*
 router.get('/schools/desert', (req, res) => {
 // This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
 //	Which HAS COORDINATES.

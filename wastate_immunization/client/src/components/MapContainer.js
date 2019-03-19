@@ -50,13 +50,14 @@ class MapContainer extends Component {
 				content:
 									'<div id="content">'+
 									`<div id="siteNotice"><h2>${this.props.schools[idx].specificRouteData}</h2></div>`+
-									`<h3 id="firstHeading" class="firstHeading">School:  ${this.props.schools[idx].name}</h3>`+
+									`<h3>${this.props.schools[idx].reported}</h3>`+
+									`<h3 id="firstHeading" class="firstHeading">${this.props.schools[idx].name}</h3>`+
 									'<div id="bodyContent">'+
 									`<h5>Grade Levels: ${this.props.schools[idx].levels}</h5>`+
-									`<h5>K-12 Enrollment: ${this.props.schools[idx].k12}</h5>`+
+									`<h5>${this.props.schools[idx].k12}</h5>`+
 									`<h5>${this.props.schools[idx].address}</h5>`+
-									`<h5>City: ${this.props.schools[idx].city}</h5>`+
-									`<h5>School District:  ${this.props.schools[idx].district}</h5>`+
+									`<h5>${this.props.schools[idx].city}</h5>`+
+									`<h5>${this.props.schools[idx].district}</h5>`+
 									'</div>'+
 									'</div>'
 			});
