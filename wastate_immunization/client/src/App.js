@@ -20,17 +20,18 @@ export default class App extends Component {
 		// Show Data by Percentage, then break out further data in each Marker infoWindow.
 		// <Route path="/" render={ () => {return <MapContainer
 		// 	onClick={this.handleClick.bind(this)} /> }} />
+		// <Route exact path="/" component={MapContainer} />
     return (
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
 
 						<Route component={NavBar} />
-						
+
 						<Switch>
 							{/* TODO: a MapContainer for each of the 14 routes? */}
 
-							<Route exact path="/" component={MapContainer} />
+							<Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } />
 
 							<Route path="/school/all" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/all"} /> }} />

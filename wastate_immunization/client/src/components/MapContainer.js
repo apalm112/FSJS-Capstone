@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import loadGoogleMaps from '../modules/load-google-maps';
-import Loading from './Loading';
 import MarkerClusterer from '@google/markerclusterer';
 
 class MapContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isLoading: false,
-			markers: [],
 			searchQuery: '',
 			schools: [],
 			clusterManager: [],
@@ -20,7 +17,7 @@ class MapContainer extends Component {
 
 	handleInitMap() {
 		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
-		const options = {	center: Wenatchee,	zoom: 6	};
+		const options = {	center: Wenatchee,	zoom: 3	};
 
 		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
@@ -52,7 +49,6 @@ class MapContainer extends Component {
 									'</div>',
 				// icon: 'images/icon-mapmarker.png'
 			});
-			this.setState({	markers: markers });
 
 			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
 			window.google.maps.event.addListener(marker, 'click', function(event) {
@@ -64,23 +60,23 @@ class MapContainer extends Component {
 			return marker;
 		});	// End of schoolData.map()
 
-		this.newMarkerClustererCreateHandler(map, markers);
-   // var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m'});
+		this.handlerMarkerCluster(map, markers);
 	}	// End of handleMarkersCreate()
 
-	newMarkerClustererCreateHandler = (map, markers) => {
-		this.setState({ clusterManager: new MarkerClusterer(map, markers, {imagePath: '../images/m'})
-		});
+	handlerMarkerCluster = (map, markers) => {
+		var clusterManager = new MarkerClusterer(map, markers, {imagePath: '../images/m'})
+		this.setState({ clusterManager: clusterManager });
+		var getCM = this.state.clusterManager;
+		console.log('99999999', getCM);
+		return () => { clusterManager.clearMarkers() }
 	}
 
-	handleSchoolQuery = (schoolQueryRoute='/school/all') => {
+	handleSchoolQuery = (schoolQueryRoute) => {
 	// This function returns whatever schoolQueryRoute is sent to it.
-	this.setState({ isLoading: !this.state.isLoading });
 		fetch(`${schoolQueryRoute}`)
 		.then(res => res.json())
 		.then(
 			schools => this.setState({
-				isLoading: !this.state.isLoading,
 				searchQuery: schoolQueryRoute,
 				schools: schools,
 			}),
@@ -100,65 +96,49 @@ class MapContainer extends Component {
 		var getCM = this.state.clusterManager;
 		// this.setState({ clusterManager: null });
 		getCM.clearMarkers();
-		console.log('The link was clicked: ', getCM);
+		console.log('The clusterManager was cleared: ', getCM);
 	}
 	handleAddMarkers = () => {
-		var getCM = this.state.clusterManager;
 		var getMap = this.state.map;
-		// getCM.getMarkers();
-		// loadGoogleMaps(this.handleInitMap);
+		var getCM = this.state.clusterManager;
 		this.handleMarkersCreate(getMap);
-		console.log(this.props.schoolQueryRoute);
-		console.log('The link was clicked: ', getCM);
-		console.log('Here is STATE.MARKERS: ', this.state.map);
-		console.log('Here is STATE.MAP: ', this.state.map);
+		// console.log('Here is STATE.MAP: ', getMap);
+		console.log('The clusterManager was populated, STATE.CLUSTERMANAGER: ', getCM);
 	}
 
 	componentDidMount() {
 		loadGoogleMaps(this.handleInitMap);
-		console.log('#######componentDidMOUNT--MAP.JS::{this.props}', this.props);
+		this.handleSchoolQuery(this.props.schoolQueryRoute);
+		// var getMap = this.state.map;
+		// this.handleMarkersCreate(getMap);
+		console.log('####componentDidMOUNT--MAP.JS::{this.props}', this.props);
 	}
 
 	componentDidUpdate(prevProps) {
-		// console.log('#######componentDidUPDATE--MAP.JS::{this.props}', this.props);
-		// const map = document.getElementById('map');
-		// this.handleMarkersCreate(map);
-/*		this.handleMarkersCreate()
-			.then(this.newInfoWindowCreateHandler)
-			.then(this.newMarkerClustererCreateHandler)
-			.catch((err) => {
-				console.error(err);
-			});
-*/
-	}
-	UNSAFE_componentWillReceiveProps(props) {
-		(props.schoolQueryRoute)
-		? this.handleSchoolQuery(props.schoolQueryRoute)
-		: this.handleSchoolQuery(props.match.params.schoolQueryRoute)
+		var getMap = this.state.map;
+		console.log('$$$$componentDidUPDATE--MAP.JS::{this.props} : {prevProps.schoolQueryRoute}', this.props.schoolQueryRoute, prevProps.schoolQueryRoute);
+
+		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
+			this.handleSchoolQuery(this.props.schoolQueryRoute)
+			// this.handleMarkersCreate(getMap);
+			console.log('else clause from compdodidupdate, props & prevProps NOT Equal');
+		} else {
+			console.log('nothing happened, props & prevProps are Equal');
+		}
+		//				: this.handleSchoolQuery(this.props.match.params.schoolQueryRoute)
 	}
 
   render() {
 				// <input onClick={this.handleClearMarkers} onLoadStart={this.handleInitMap} type="button" value="Clear Markers From Map" />
 		return (
 			<div>
-				{ (this.state.isLoading) ? <Loading />
-				: '' }
 				<div id="map"></div>
 				<div id="floating-panel">
 					<input onClick={this.handleClearMarkers} type="button" value="Clear Markers From Map" />
 					<input onClick={this.handleAddMarkers} type="button" value="Add Markers To Map" />
 				</div>
 			</div>
-					);
-
-	/*	if (this.props.state.googleMapsReady) {
-			return (
-				<Loading />
-			);
-		} else {
-			// return ( null );
-			return ();
-		}*/
+		);
   }
 }
 
