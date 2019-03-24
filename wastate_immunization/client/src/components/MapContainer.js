@@ -6,6 +6,8 @@ class MapContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			addButtonEnabled: false,
+			clearButtonEnabled: true,
 			searchQuery: '',
 			schools: [],
 			clusterManager: [],
@@ -105,6 +107,15 @@ class MapContainer extends Component {
 		// console.log('Here is STATE.MAP: ', getMap);
 		console.log('The clusterManager was populated, STATE.CLUSTERMANAGER: ', getCM);
 	}
+	handleToggle = () => {
+		// var addButton = document.getElementById('add-markers');
+		// var clearButton = document.getElementById('clear-markers')
+		this.setState({
+			addButtonEnabled: !this.state.addButtonEnabled,
+			clearButtonEnabled: !this.state.clearButtonEnabled
+		});
+		console.log('hobos');
+	}
 
 	componentDidMount() {
 		loadGoogleMaps(this.handleInitMap);
@@ -115,7 +126,7 @@ class MapContainer extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		var getMap = this.state.map;
+		// var getMap = this.state.map;
 		console.log('$$$$componentDidUPDATE--MAP.JS::{this.props} : {prevProps.schoolQueryRoute}', this.props.schoolQueryRoute, prevProps.schoolQueryRoute);
 
 		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
@@ -133,10 +144,13 @@ class MapContainer extends Component {
 		return (
 			<div>
 				<div id="map"></div>
-				<div id="floating-panel">
-					<input onClick={this.handleClearMarkers} type="button" value="Clear Markers From Map" />
-					<input onClick={this.handleAddMarkers} type="button" value="Add Markers To Map" />
-				</div>
+				<form className="form-inline my-2 my-lg-0" id="floating-panel">
+					<input id="add-markers" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} type="button" value="Add Markers To Map"/>
+					<input id="clear-markers" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled} type="button" value="Clear Markers From Map"/>
+
+					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled}  value="Clear Markers From Map"/>
+					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} value="Add Markers To Map"/>
+				</form>
 			</div>
 		);
   }
