@@ -19,7 +19,7 @@ class MapContainer extends Component {
 
 	handleInitMap() {
 		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
-		const options = {	center: Wenatchee,	zoom: 3	};
+		const options = {	center: Wenatchee,	zoom: 7	};
 
 		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
@@ -68,9 +68,9 @@ class MapContainer extends Component {
 	handlerMarkerCluster = (map, markers) => {
 		var clusterManager = new MarkerClusterer(map, markers, {imagePath: '../images/m'})
 		this.setState({ clusterManager: clusterManager });
-		var getCM = this.state.clusterManager;
-		console.log('99999999', getCM);
-		return () => { clusterManager.clearMarkers() }
+		// var getCM = this.state.clusterManager;
+		// console.log('99999999', getCM);
+		return () => { clusterManager.clearMarkers() }  //<--Not necessary?
 	}
 
 	handleSchoolQuery = (schoolQueryRoute) => {
@@ -92,49 +92,42 @@ class MapContainer extends Component {
 		var getCM = this.state.clusterManager;
 		// this.setState({ clusterManager: null });
 		getCM.clearMarkers();
-		console.log('The link was clicked: ', getCM);
+		// console.log('The link was clicked: ', getCM);
 	}
 	handleClearMarkers = () => {
 		var getCM = this.state.clusterManager;
 		// this.setState({ clusterManager: null });
 		getCM.clearMarkers();
-		console.log('The clusterManager was cleared: ', getCM);
+		// console.log('The clusterManager was cleared: ', getCM);
 	}
 	handleAddMarkers = () => {
 		var getMap = this.state.map;
-		var getCM = this.state.clusterManager;
 		this.handleMarkersCreate(getMap);
+		// var getCM = this.state.clusterManager;
 		// console.log('Here is STATE.MAP: ', getMap);
-		console.log('The clusterManager was populated, STATE.CLUSTERMANAGER: ', getCM);
+		// console.log('The clusterManager was populated, STATE.CLUSTERMANAGER: ', getCM);
 	}
 	handleToggle = () => {
-		// var addButton = document.getElementById('add-markers');
-		// var clearButton = document.getElementById('clear-markers')
-		this.setState({
-			addButtonEnabled: !this.state.addButtonEnabled,
-			clearButtonEnabled: !this.state.clearButtonEnabled
-		});
-		console.log('hobos');
+		this.setState(prevState => ({
+			addButtonEnabled: !prevState.addButtonEnabled,
+			clearButtonEnabled: !prevState.clearButtonEnabled
+		}));
 	}
 
 	componentDidMount() {
 		loadGoogleMaps(this.handleInitMap);
 		this.handleSchoolQuery(this.props.schoolQueryRoute);
-		// var getMap = this.state.map;
-		// this.handleMarkersCreate(getMap);
-		console.log('####componentDidMOUNT--MAP.JS::{this.props}', this.props);
+		// console.log('####componentDidMOUNT--MAP.JS::{this.props}', this.props);
 	}
 
 	componentDidUpdate(prevProps) {
-		// var getMap = this.state.map;
-		console.log('$$$$componentDidUPDATE--MAP.JS::{this.props} : {prevProps.schoolQueryRoute}', this.props.schoolQueryRoute, prevProps.schoolQueryRoute);
+		// console.log('$$$$componentDidUPDATE--MAP.JS::{this.props} : {prevProps.schoolQueryRoute}', this.props.schoolQueryRoute, prevProps.schoolQueryRoute);
 
 		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
 			this.handleSchoolQuery(this.props.schoolQueryRoute)
-			// this.handleMarkersCreate(getMap);
-			console.log('else clause from compdodidupdate, props & prevProps NOT Equal');
+			// console.log('else clause from compdodidupdate, props & prevProps NOT Equal');
 		} else {
-			console.log('nothing happened, props & prevProps are Equal');
+			// console.log('nothing happened, props & prevProps are Equal');
 		}
 		//				: this.handleSchoolQuery(this.props.match.params.schoolQueryRoute)
 	}
@@ -143,14 +136,11 @@ class MapContainer extends Component {
 				// <input onClick={this.handleClearMarkers} onLoadStart={this.handleInitMap} type="button" value="Clear Markers From Map" />
 		return (
 			<div>
+				<div className="marker-buttons">
+					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} value="Add Schools To Map"/>
+					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled}  value="Clear "/>
+				</div>
 				<div id="map"></div>
-				<form className="form-inline my-2 my-lg-0" id="floating-panel">
-					<input id="add-markers" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} type="button" value="Add Markers To Map"/>
-					<input id="clear-markers" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled} type="button" value="Clear Markers From Map"/>
-
-					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled}  value="Clear Markers From Map"/>
-					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} value="Add Markers To Map"/>
-				</form>
 			</div>
 		);
   }

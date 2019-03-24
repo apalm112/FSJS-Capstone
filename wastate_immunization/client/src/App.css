@@ -120,6 +120,14 @@ html, body {
 .bg-light {
 	background-color: #e3f2fd;
 }
+.marker-buttons {
+	width: 110px;
+	padding: 10px;
+}
+.not-found {
+	list-style: none;
+}
+
 /* InfodWindow Styles ****************** */
 .gm-ui-hover-effect {
   background: darkgreyslate;

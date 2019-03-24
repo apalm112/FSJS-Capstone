@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
 	BrowserRouter,
-	// eslint-disable-next-line
 	Redirect,
 	Route,
 	Switch
@@ -25,14 +24,11 @@ export default class App extends Component {
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
-
 						<Route component={NavBar} />
-
 						<Switch>
-							{/* TODO: a MapContainer for each of the 14 routes? */}
+							{/* <Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } /> */}
 
-							<Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } />
-
+<Route exact path= "/" component={MapContainer} />
 							<Route path="/school/all" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/all"} /> }} />
 							<Route path="/school/complete_for_all" render={ () => {return <MapContainer
