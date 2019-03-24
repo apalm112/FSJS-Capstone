@@ -1,28 +1,9 @@
 import React from 'react';
-import {
-	Route,
-	Link,
-	NavLink
-} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Navbar = (props) => (
+const Navbar = (props, {match}) => (
 	<header className="App-header">
 		<h1>WA State School Immuninzation Rates</h1>
-
-		{/* <nav className="main-nav">
-			<ul>
-				<li><NavLink
-			// The to="" prop controls what displays in the URL.
-			to="/">All</NavLink></li>
-				<li><NavLink
-			to="/school/complete_for_all">Percent Complete</NavLink></li>
-				<li><NavLink
-			to="/school/reported_yes">Yes</NavLink></li>
-				<li><NavLink
-			to="/school/reported_no">No</NavLink></li>
-			</ul>
-		</nav>*/ }
-
 
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +16,13 @@ const Navbar = (props) => (
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<Link className="dropdown-item" to="/school/all">All Schools</Link>
+							<NavLink className="dropdown-item" to="/school/all">All Schools</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/school/complete_for_all">100% Immuninzation Rates</Link>
+							<NavLink className="dropdown-item" to="/school/complete_for_all">100% Immuninzation Rates</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/school/reported_yes">Reported Immuninzation Rates</Link>
+							<NavLink className="dropdown-item" to="/school/reported_yes">Reported Yes</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/school/reported_no">Did Not Report Immuninzation Rates</Link>
+							<NavLink className="dropdown-item" to="/school/reported_no">Reported No</NavLink>
 						</div>
 					</li>
 
@@ -50,17 +31,17 @@ const Navbar = (props) => (
 							Exemption by Immuninzation Type
 						</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<Link className="dropdown-item" to="/immunization/hebatitis_b">Hepatitis B</Link>
+							<NavLink className="dropdown-item" to="/immunization/hepatitis_b">Hepatitis B</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/immunization/measles">Measles</Link>
+							<NavLink className="dropdown-item" to="/immunization/measles">Measles</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/immunization/pertussis">Pertussis</Link>
+							<NavLink className="dropdown-item" to="/immunization/pertussis">Pertussis</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/immunization/polio">Polio</Link>
+							<NavLink className="dropdown-item" to="/immunization/polio">Polio</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/immunization/tetanus">Tetanus</Link>
+							<NavLink className="dropdown-item" to="/immunization/tetanus">Tetanus</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/immunization/varicella">Varicella</Link>
+							<NavLink className="dropdown-item" to="/immunization/varicella">Varicella</NavLink>
 						</div>
 					</li>
 
@@ -69,13 +50,13 @@ const Navbar = (props) => (
 							Exemption by Reason
 						</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<Link className="dropdown-item" to="/reason/medical">Medical</Link>
+							<NavLink className="dropdown-item" to="/reason/medical">Medical</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/reason/personal">Personal</Link>
+							<NavLink className="dropdown-item" to="/reason/personal">Personal</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/reason/religous">Religous</Link>
+							<NavLink className="dropdown-item" to="/reason/religous">Religous</NavLink>
 							<div className="dropdown-divider"></div>
-							<Link className="dropdown-item" to="/reason/any">Any Exemption</Link>
+							<NavLink className="dropdown-item" to="/reason/any_exmption">Any Exemption</NavLink>
 						</div>
 					</li>
 				</ul>
@@ -85,8 +66,10 @@ const Navbar = (props) => (
 				</form>
 			</div>
 		</nav>
-		<h3>Current Express Route: {props.searchQuery}</h3>
 	</header>
+
+
+
 );
 
 export default Navbar;

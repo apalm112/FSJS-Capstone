@@ -7,102 +7,65 @@ import {
 	Switch
 } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
-import Loading from './components/Loading';
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
-class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			isLoading: true,
-			searchQuery: '',
-			schools: [],
-		}
-	}
-
-	handleSchoolQuery = (query='/school/all') => {
-	// This function returns whatever query is sent to it.
-		fetch(`${query}`)
-		.then(res => res.json())
-		.then(schools => this.setState({ isLoading: false, searchQuery: query, schools: schools }));
-	}
-/*	These two routes work, but don't need them
-	//  This route code kindof runs, BUT the app is in race conditions, so it only works sometimes.
-	get100PercentImmunizedSchools = (query='/schools/complete_for_all') => {
-	// This function return 65 schools
-		fetch(`${query}`)
-		.then(res => res.json())
-		.then(schools => this.setState({ schools: schools, searchQuery: query, isLoading: false }))
-	}
-
-	getSchoolsCoordsNo = (query='/schools/reported_yes') => {
-//	This function not working, doesn't always return 117 schools
-		fetch(`${query}`)	// should return 117 school coordinates
-		.then(res => res.json())
-		.then(schools => this.setState({ schools: schools, searchQuery: query, isLoading: false }))
-	}*/
-/*	getSchoolsCoordsNo = async (query='/schools/reported_no') => {
-		const response = await fetch(query);
-		const body = await response.json();
-		if (response.status !== 200) throw Error(body.message);
-		this.setState({ isLoading: false });
-		return body;
-	};
-		// NOT WORKING:	TRHOWS THE ERROR: Access to XMLHttpRequest at
- 		// 	'http://schools/complete_for_all' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-		get100PercentImmunizedSchools = (query='/schools/complete_for_all') => {
-		this.setState({ isLoading: true });
-		axios.get(`/${query}`, {
-			headers: {"Access-Control-Allow-Origin": "*"}
-		})
-		.then(response => {
-			this.setState({ schools: response.body,
-				isLoading: false,
-				searchQuery: query,
-			})
-		})
-		.catch(err => {
-			console.error("You What!?  Error axiosing the Express server....");
-		})
-	}*/
-
-	componentDidMount() {
-	// TODO: Create a way to pass in the param from the NavBar href to control the route.
-	// 											(`${routeClickedOn}`)
-		this.handleSchoolQuery('/school/all');
-	}
+export default class App extends Component {
 
   render() {
 		// Show number of unimmunized kids at each school
 		// How many kids are NOT vaccinated by the whole area
 		// Then be able to narrow that down by section.
 		// Show Data by Percentage, then break out further data in each Marker infoWindow.
+		// <Route path="/" render={ () => {return <MapContainer
+		// 	onClick={this.handleClick.bind(this)} /> }} />
     return (
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
 
-						<Route path="/" render={ () => { return <NavBar searchQuery={this.state.searchQuery} /> } } />
-
+						<Route component={NavBar} />
+						
 						<Switch>
-							{/* // TODO: a MapContainer for each of the 14 routes? */}
+							{/* TODO: a MapContainer for each of the 14 routes? */}
 
-							{ (this.state.isLoading) ? <Loading />
-							: <MapContainer
-								handleSchoolQuery={this.handleSchoolQuery}
-								isLoading={this.state.isLoading}
-								schools={this.state.schools}
-								searchQuery={this.state.searchQuery}
-								/>
-							}
+							<Route exact path="/" component={MapContainer} />
+
+							<Route path="/school/all" render={ () => {return <MapContainer
+								schoolQueryRoute={"/school/all"} /> }} />
+							<Route path="/school/complete_for_all" render={ () => {return <MapContainer
+								schoolQueryRoute={"/school/complete_for_all"} /> }} />
+							<Route path="/school/reported_yes" render={ () => {return <MapContainer
+								schoolQueryRoute={"/school/reported_yes"} /> }} />
+							<Route path="/school/reported_no" render={ () => {return <MapContainer
+								schoolQueryRoute={"/school/reported_no"} /> }} />
+							<Route path="/immunization/hepatitis_b" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/hepatitis_b"} /> }} />
+							<Route path="/immunization/measles" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/measles"} /> }} />
+							<Route path="/immunization/pertussis" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/pertussis"} /> }} />
+							<Route path="/immunization/polio" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/polio"} /> }} />
+							<Route path="/immunization/tetanus" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/tetanus"} /> }} />
+							<Route path="/immunization/varicella" render={ () => {return <MapContainer
+								schoolQueryRoute={"/immunization/varicella"} /> }} />
+							<Route path="/reason/medical" render={ () => {return <MapContainer
+								schoolQueryRoute={"/reason/medical"} /> }} />
+							<Route path="/reason/personal" render={ () => {return <MapContainer
+								schoolQueryRoute={"/reason/personal"} /> }} />
+							<Route path="/reason/religous" render={ () => {return <MapContainer
+								schoolQueryRoute={"/reason/religous"} /> }} />
+							<Route path="/reason/any_exmption" render={ () => {return <MapContainer
+								schoolQueryRoute={"/reason/any_exmption"} /> }} />
+
 							<Route component={NotFound} />
-							</Switch>
+						</Switch>
 					</ErrorBoundary>
 	      </div>
 			</BrowserRouter>
     );
   }
 }
-export default App;

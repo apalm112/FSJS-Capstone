@@ -15,8 +15,8 @@ const School = require('./database/models').School;
 
 // const indexRouter = require('./routes/index');
 const immunizationRouter = require('./routes/immunization');
-const schoolRouter = require('./routes/school');
 const reasonRouter = require('./routes/reason');
+const schoolRouter = require('./routes/school');
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
 const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;

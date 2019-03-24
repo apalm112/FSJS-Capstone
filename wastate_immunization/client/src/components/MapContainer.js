@@ -1,141 +1,164 @@
 import React, { Component } from 'react';
+import loadGoogleMaps from '../modules/load-google-maps';
 import Loading from './Loading';
 import MarkerClusterer from '@google/markerclusterer';
 
 class MapContainer extends Component {
 	constructor(props) {
 		super(props);
-		this.onScriptLoad = this.onScriptLoad.bind(this);
+		this.state = {
+			isLoading: false,
+			markers: [],
+			searchQuery: '',
+			schools: [],
+			clusterManager: [],
+			map: {},
+		};
+		this.handleInitMap = this.handleInitMap.bind(this);
+		this.handleMarkersCreate = this.handleMarkersCreate.bind(this);
 	}
 
-	initMap = (map, gotData) => {
-		// TODO: map over this.props.schools to add Something fo marker label? Or not?
-		// Create an array of alphabetical characters used to label the markers.
-		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	handleInitMap() {
+		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
+		const options = {	center: Wenatchee,	zoom: 6	};
 
-		// TODO: Edit the infoWindow so it renders each schools data
-		// probably have to modify the routes/ to return the required data.
-		/* eslint-disable */
-		/*	school_district
-			school_name
-			school_year
-			grade_levels
-			k_12_enrollment
-			location_1: { coordinates	}
-			location_1_address
-			location_1_city
-			reported
-			percent_complete_for_all_immunizations
-			percent_exempt_for_diphtheria_tetanus
-			percent_exempt_for_hepatitisb
-			percent_exempt_for_measles_mumps_rubella
-			percent_exempt_for_pertussis
-			percent_exempt_for_polio
-			percent_exempt_for_varicella
-			percent_with_any_exemption
-			percent_with_medical_exemption
-			percent_with_personal_exemption
-			percent_with_religious_exemption
-			percent_with_religious_membership_exemption*/
+		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
-			//   JSON.stringify(contentString)
-	// TODO: Change the current schools.json to a changeable parameter that can be taken from the text value of a submit button click event,
-		var markers = gotData.map((school, idx) => {
+		this.setState({ map: map });
+	}
+
+	handleMarkersCreate = (map, schoolData=this.state.schools) => {
+		var count = '';
+		var getMap = this.state.map;
+		var markers = schoolData.map((school, idx) => {
 			// Add some markers to the map.
 			var marker = new window.google.maps.Marker({
-				// position: school[idx].location_1.coordinates,
-				position: { lng: this.props.schools[idx].lng, lat: this.props.schools[idx].lat },
-				map: map,
-				label: labels[idx % labels.length],
+				position: { lng: this.state.schools[idx].lng, lat: this.state.schools[idx].lat },
+				map: getMap,
+				// Create an array of numbers used to label the markers.
+				label: count + [idx],
 				content:
 									'<div id="content">'+
-									`<div id="siteNotice"><h2>${this.props.schools[idx].specificRouteData}</h2></div>`+
-									`<h3>${this.props.schools[idx].reported}</h3>`+
-									`<h3 id="firstHeading" class="firstHeading">${this.props.schools[idx].name}</h3>`+
+									`<div id="siteNotice"><h2>${this.state.schools[idx].specificRouteData}</h2></div>`+
+									`<h3>${this.state.schools[idx].reported}</h3>`+
+									`<h3 id="firstHeading" class="firstHeading">${this.state.schools[idx].name}</h3>`+
 									'<div id="bodyContent">'+
-									`<h5>Grade Levels: ${this.props.schools[idx].levels}</h5>`+
-									`<h5>${this.props.schools[idx].k12}</h5>`+
-									`<h5>${this.props.schools[idx].address}</h5>`+
-									`<h5>${this.props.schools[idx].city}</h5>`+
-									`<h5>${this.props.schools[idx].district}</h5>`+
+									`<h5>Grade Levels: ${this.state.schools[idx].levels}</h5>`+
+									`<h5>${this.state.schools[idx].k12}</h5>`+
+									`<h5>${this.state.schools[idx].address}</h5>`+
+									`<h5>${this.state.schools[idx].city}</h5>`+
+									`<h5>${this.state.schools[idx].district}</h5>`+
 									'</div>'+
-									'</div>'
+									'</div>',
+				// icon: 'images/icon-mapmarker.png'
 			});
-			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
+			this.setState({	markers: markers });
 
+			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
 			window.google.maps.event.addListener(marker, 'click', function(event) {
-				// infowindow.setContent(content);
 				infowindow.open(map, marker);
 			});
-
-			google.maps.event.addListener(map, 'click', function(event) {
+			window.google.maps.event.addListener(map, 'click', function(event) {
 				infowindow.close();
 			});
-
-
 			return marker;
-		});	// End of searchQuery.map()
+		});	// End of schoolData.map()
 
-		new MarkerClusterer(map, markers, {imagePath: 'images/m'});
-	}	// End of initMap()
+		this.newMarkerClustererCreateHandler(map, markers);
+   // var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m'});
+	}	// End of handleMarkersCreate()
 
-	onScriptLoad(gotData) {
-		const map = new window.google.maps.Map(
-			document.getElementById('waMap'),
-			{	center: { lat: 47.3232, lng: -120.3232 },	zoom: 4	},
-			this.initMap);
+	newMarkerClustererCreateHandler = (map, markers) => {
+		this.setState({ clusterManager: new MarkerClusterer(map, markers, {imagePath: '../images/m'})
+		});
+	}
 
-		// const gotData = this.props.schools;
+	handleSchoolQuery = (schoolQueryRoute='/school/all') => {
+	// This function returns whatever schoolQueryRoute is sent to it.
+	this.setState({ isLoading: !this.state.isLoading });
+		fetch(`${schoolQueryRoute}`)
+		.then(res => res.json())
+		.then(
+			schools => this.setState({
+				isLoading: !this.state.isLoading,
+				searchQuery: schoolQueryRoute,
+				schools: schools,
+			}),
+			(error) => {
+				return error.message;
+			})
+		console.log(this.state.schools);
+	}
 
-		this.initMap(map, (gotData=this.props.schools) );
+	handleClick = () => {
+		var getCM = this.state.clusterManager;
+		// this.setState({ clusterManager: null });
+		getCM.clearMarkers();
+		console.log('The link was clicked: ', getCM);
+	}
+	handleClearMarkers = () => {
+		var getCM = this.state.clusterManager;
+		// this.setState({ clusterManager: null });
+		getCM.clearMarkers();
+		console.log('The link was clicked: ', getCM);
+	}
+	handleAddMarkers = () => {
+		var getCM = this.state.clusterManager;
+		var getMap = this.state.map;
+		// getCM.getMarkers();
+		// loadGoogleMaps(this.handleInitMap);
+		this.handleMarkersCreate(getMap);
+		console.log(this.props.schoolQueryRoute);
+		console.log('The link was clicked: ', getCM);
+		console.log('Here is STATE.MARKERS: ', this.state.map);
+		console.log('Here is STATE.MAP: ', this.state.map);
 	}
 
 	componentDidMount() {
-		var gotData = this.props.schools;
-		console.log('>>>>>>>>>componentDidMount--MAP.JS::{this.props}', this.props);
-		console.log('OVER HERE LEONARDS!: ', gotData);
-
-		if (!window.google) {
-			let createScriptMap = document.createElement('script');
-			createScriptMap.type =  'text/javascript';
-			createScriptMap.async = true;
-			createScriptMap.defer = true;
-			createScriptMap.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAP_KEY}`;
-
-			document.body.appendChild(createScriptMap);
-
-			// IMPORTANT:: cannot access google.maps until it's finished loading.
-			// IDEA: get this code replaced by a function that runs only on state being updated.
-			createScriptMap.addEventListener('load', event => {
-				this.onScriptLoad();
-			})
-		}
+		loadGoogleMaps(this.handleInitMap);
+		console.log('#######componentDidMOUNT--MAP.JS::{this.props}', this.props);
 	}
 
-/*	componentDidUpdate(prevProps) {
-		if (this.props.searchQuery !== prevProps.searchQuery) {
-			this.props.handleSchoolQuery(this.props.searchQuery);
-		}
-	}*/
-/*	UNSAFE_componentWillReceiveProps(props) {
-		(this.props.searchQuery)
-		? this.props.handleSchoolQuery(this.props.searchQuery)
-		: this.props.handleSchoolQuery()
-	}*/
+	componentDidUpdate(prevProps) {
+		// console.log('#######componentDidUPDATE--MAP.JS::{this.props}', this.props);
+		// const map = document.getElementById('map');
+		// this.handleMarkersCreate(map);
+/*		this.handleMarkersCreate()
+			.then(this.newInfoWindowCreateHandler)
+			.then(this.newMarkerClustererCreateHandler)
+			.catch((err) => {
+				console.error(err);
+			});
+*/
+	}
+	UNSAFE_componentWillReceiveProps(props) {
+		(props.schoolQueryRoute)
+		? this.handleSchoolQuery(props.schoolQueryRoute)
+		: this.handleSchoolQuery(props.match.params.schoolQueryRoute)
+	}
 
   render() {
-
+				// <input onClick={this.handleClearMarkers} onLoadStart={this.handleInitMap} type="button" value="Clear Markers From Map" />
 		return (
 			<div>
-				{ (this.props.isLoading) ? <Loading />
-				: <div
-					className="map"
-					id="waMap"
-					>
+				{ (this.state.isLoading) ? <Loading />
+				: '' }
+				<div id="map"></div>
+				<div id="floating-panel">
+					<input onClick={this.handleClearMarkers} type="button" value="Clear Markers From Map" />
+					<input onClick={this.handleAddMarkers} type="button" value="Add Markers To Map" />
 				</div>
-				}
 			</div>
+					);
+
+	/*	if (this.props.state.googleMapsReady) {
+			return (
+				<Loading />
 			);
+		} else {
+			// return ( null );
+			return ();
+		}*/
   }
 }
 

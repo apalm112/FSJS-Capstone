@@ -50,11 +50,11 @@ html, body {
 
 /* Begin  Custom Styles****************************************************************************/
 /* Always set the map height explicitly to define the size of the div element that contains the map. */
-.map {
+#map {
 	margin: 0 auto;
 	margin-bottom: 20px;
 	height: 80vh;
-	width: 70%;
+	width: 92%;
 }
 
 /* LOADING SPINNER ****************************************/
@@ -117,7 +117,9 @@ html, body {
   color: #fff;
   background: rgba(108, 194, 241, 0.5);
 }
-
+.bg-light {
+	background-color: #e3f2fd;
+}
 /* InfodWindow Styles ****************** */
 .gm-ui-hover-effect {
   background: darkgreyslate;
@@ -128,6 +130,19 @@ html, body {
   height: 50px;
   width: 50px; }
 
+	#floating-panel {
+        position: absolute;
+        bottom: 10px;
+        left: 35%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
 
 /* MEDIA QUERIES These are not needed, Bootstrap has this covered***************************/
 /*@media only screen and (max-width: 767px)  {

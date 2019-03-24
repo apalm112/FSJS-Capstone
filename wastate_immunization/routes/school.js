@@ -65,11 +65,14 @@ router.get('/complete_for_all', (req, res) => {
 				var district = curr.school_district;
 				var grade_levels = curr.grade_levels;
 				var k_12 = curr.k_12_enrollment;
+				var reported = '';
+				allImms =  `Complete for All Immuninzations: ${allImms}%`;
+				k_12 = `K-12 Enrollment: ${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
-					specificRouteData: `Complete for All Immuninzations: ${allImms}%`,
-					// allImms: `Percent Complete for All Immuninzations: ${allImms}%`,
+					specificRouteData: allImms,
+					reported: reported,
 					name: name,
 					address: address,
 					city: city,
@@ -80,27 +83,6 @@ router.get('/complete_for_all', (req, res) => {
 			});
 			res.send(results);
 		});
-	/*	school_district
-			school_name
-			school_year
-			grade_levels
-			k_12_enrollment
-			location_1: { coordinates	}
-			location_1_address
-			location_1_city
-			reported
-			percent_complete_for_all_immunizations
-			percent_exempt_for_diphtheria_tetanus
-			percent_exempt_for_hepatitisb
-			percent_exempt_for_measles_mumps_rubella
-			percent_exempt_for_pertussis
-			percent_exempt_for_polio
-			percent_exempt_for_varicella
-			percent_with_any_exemption
-			percent_with_medical_exemption
-			percent_with_personal_exemption
-			percent_with_religious_exemption
-			percent_with_religious_membership_exemption*/
 });
 
 router.get('/reported_yes', (req, res) => {
@@ -116,7 +98,6 @@ router.get('/reported_yes', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var reportYes = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				// return { lng: coords[0], lat: coords[1] };
 				var name = curr.school_name;
 				var district = curr.school_district;
 				var reported = curr.reported;
@@ -147,27 +128,25 @@ router.get('/reported_no', (req, res) => {
 	School.find({ 'reported': { $eq: 'N' },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			// console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				// return { lng: coords[0], lat: coords[1] };
 				var name = curr.school_name;
 				var district = curr.school_district;
 				var reported = curr.reported;
 				var address = curr.location_1_address;
 				var city = curr.location_1_city;
 				var grade_levels = curr.grade_levels;
-				// var k_12 = curr.k_12_enrollment;
 				return {
 					lng: coords[0],
 					lat: coords[1],
+					specificRouteData: 'Data Not Reported',
+					name:name,
 					address: address,
 					city: city,
-					specificRouteData: `Reported Immuninzation Rates: ${reported}o`,
 					district: district,
-					name:name,
 					levels: grade_levels,
-					k12: 'not reported'  // reported_no schools seems to not have this data.
+					k12: '',  // reported_no schools seems to not have this data.
+					reported: ''
 				};
 			});
 			res.send(results);
