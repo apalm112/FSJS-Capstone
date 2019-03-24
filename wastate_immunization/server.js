@@ -15,8 +15,8 @@ const School = require('./database/models').School;
 
 // const indexRouter = require('./routes/index');
 const immunizationRouter = require('./routes/immunization');
-const schoolRouter = require('./routes/school');
 const reasonRouter = require('./routes/reason');
+const schoolRouter = require('./routes/school');
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI;
 const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
@@ -51,6 +51,10 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'client', 'public')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
+/***************************************************
+	routes to query mLab DB & return data to React	 *
+                                                   *
+ ***************************************************/
 // app.use('/', indexRouter);
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
@@ -118,8 +122,8 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	database.dropCollection('schools');
-	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	// database.dropCollection('schools'); <--COMMMENTING OUT FOR DEVLOPMENT ENVIRONMENT
+	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT===========================',	count );
@@ -136,31 +140,6 @@ socrataView.checkMLabDBForData = function () {
 	});
 };
 socrataView.checkMLabDBForData();
-
-/***************************************************
-	routes to query mLab DB & return data to React	 *
-                                                   *
- ***************************************************/
-app.get('/schools/victor', (req, res) => {
-// This route will display the results for "VICTOR FALLS ELEMENTARY".
-//	Which DOES NOT HAVE COORDINATES.
-	School.find({ 'school_name': 'VICTOR FALLS ELEMENTARY' })
-		.exec(function(error, schools) {
-			console.log('MT', schools[0].location_1.coordinates);
-			res.json(schools);
-		});
-});
-
-
-app.get('/schools/desert', (req, res) => {
-// This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
-//	Which HAS COORDINATES.
-	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-		.exec(function(error, schools) {
-			console.log(schools);
-			res.json(schools[0].location_1.coordinates);
-		});
-});
 
 // Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
 /*app.get('/', (req, res) => {

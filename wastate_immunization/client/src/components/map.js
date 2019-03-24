@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import { render } from 'react-dom';
-import './App.css';
+import '../App.css';
+// import Loading from './Loading';
 import MarkerClusterer from '@google/markerclusterer';
-// import searchQuery from './100percent.json';
 
 class Map extends Component {
 	constructor(props) {
@@ -129,18 +128,26 @@ class Map extends Component {
 		: this.props.onSearch(props.state.schools)
 	}*/
 
-
-
-
   render() {
+
     return (
 			<div
 				className="map"
 				id="waMap"
 			>
 			</div>
-    );
+				);
   }
 }
-
 export default Map;
+/*return (
+	<div>
+		{ (this.props.isLoading) ? <Loading />
+		: <div
+			className="map"
+				id="waMap"
+			>
+			</div>
+		}
+	</div>
+		);*/

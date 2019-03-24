@@ -22,7 +22,7 @@ const School = require('../database/models').School;
 		});
 });*/
 
-router.get('/hebatitis_b', (req, res) => {
+router.get('/hepatitis_b', (req, res) => {
 	// This route will display the percentage_exempt_for_hepatitis_b > 0
 	// There are 1972 schools from this query.
 	//	 Have coordinates
@@ -33,7 +33,36 @@ router.get('/hebatitis_b', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
@@ -50,7 +79,36 @@ router.get('/measles', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
@@ -67,7 +125,36 @@ router.get('/pertussis', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
@@ -84,7 +171,36 @@ router.get('/polio', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
@@ -101,7 +217,36 @@ router.get('/tetanus', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
@@ -118,7 +263,36 @@ router.get('/varicella', (req, res) => {
 			console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
-				return { lng: coords[0], lat: coords[1] };
+				var allImms = curr.percent_complete_for_all_immunizations;
+				var name = curr.school_name;
+				var address = curr.location_1_address;
+				var city = curr.location_1_city;
+				var district = curr.school_district;
+				var reported = curr.reported;
+				var grade_levels = curr.grade_levels;
+				var k_12 = curr.k_12_enrollment;
+				// if (!k_12) { k_12 = 'Not reported'; }
+				if (reported === 'N') {
+					allImms = '';
+					reported = 'Data Not Reported';
+					k_12 = '';
+				} else {
+					reported = `Reported Immuninzation Rates: ${reported}es`;
+					allImms =  `Complete for All Immuninzations: ${allImms}%`;
+					k_12 = `K-12 Enrollment: ${k_12}`;
+				}
+				return {
+					lng: coords[0],
+					lat: coords[1],
+					specificRouteData: allImms,
+					name: name,
+					address: address,
+					city: city,
+					district: district,
+					levels: grade_levels,
+					k12: k_12,
+					reported: reported
+				};
 			});
 			res.send(results);
 		});
