@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navbar = (props, {match}) => (
+const NavBar = (props, {match}) => (
 	<header className="App-header">
 		<h1>WA State School Immuninzation Rates</h1>
 
@@ -75,4 +75,4 @@ const Navbar = (props, {match}) => (
 
 );
 
-export default Navbar;
+export default NavBar;
