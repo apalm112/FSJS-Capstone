@@ -5,6 +5,7 @@ import {
 	Route,
 	Switch
 } from 'react-router-dom';
+import Copy from './components/Copy';
 import ErrorBoundary from './components/ErrorBoundary';
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
@@ -24,9 +25,10 @@ export default class App extends Component {
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
+						<Route component={Copy} />
 						<Route component={NavBar} />
 						<Switch>
-							{/* <Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } /> */}
+							<Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } />
 
 <Route exact path= "/" component={MapContainer} />
 							<Route path="/school/all" render={ () => {return <MapContainer

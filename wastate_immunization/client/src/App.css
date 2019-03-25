@@ -28,20 +28,24 @@ html, body {
 	background-color: aliceblue;
 	height: 100%;
 }
+h3 {
+	display: flex;
+	flex-direction: column;
+}
 
 .App {
   text-align: center;
 }
 
 .App-header {
- /* background-color: #282c34; */
+  background-color: #282c34;
   min-height: 7vh;
-  /*display: flex;
-  flex-direction: column;*/
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* font-size: calc(10px + 2vmin); */
-  /* color: white; */
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
@@ -105,6 +109,9 @@ html, body {
 .add {
 	border-right-width: 35px;
 }
+.bg-light {
+	background-color: #e3f2fd;
+}
 .main-nav a {
   font-size: .95em;
   color: #222;
@@ -114,25 +121,39 @@ html, body {
   padding: 1em;
   transition: .2s;
 }
-.navbar-nav a:hover,
-.navbar-nav .active {
-  color: #fff;
-  background: rgba(108, 194, 241, 0.5);
-}
-.bg-light {
-	background-color: #e3f2fd;
+.navbar {
+	display: flex;
+	flex-direction: column;
 }
 .marker-buttons {
-	display: flex;
+	/* display: flex;
 	flex-direction: row;
+	align-items: center;
 	align-items: flex-start;
+	justify-content: center;
 	padding: 10px;
-	width: 110px;
+	width: 1400px; */
+}
+.navbar-nav a:hover,
+.navbar-nav .active {
+	color: #fff;
+	background: rgba(108, 194, 241, 0.5);
 }
 .not-found {
 	list-style: none;
 }
-
+.vg-one {
+	width: 45px;
+	height: 45px;
+}
+.vg-two {
+	width: 30px;
+	height: 30px;
+}
+.vg-three {
+	width: 30px;
+	height: 30px;
+}
 /* InfodWindow Styles ****************** */
 .gm-ui-hover-effect {
   background: darkgreyslate;
