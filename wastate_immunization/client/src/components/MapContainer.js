@@ -125,7 +125,7 @@ class MapContainer extends Component {
 
 		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
 			this.handleSchoolQuery(this.props.schoolQueryRoute)
-			// console.log('else clause from compdodidupdate, props & prevProps NOT Equal');
+			console.log('componentDidUpdate, this.handleSchoolQuery() executed');
 		} else {
 			// console.log('nothing happened, props & prevProps are Equal');
 		}
@@ -137,8 +137,8 @@ class MapContainer extends Component {
 		return (
 			<div>
 				<div className="marker-buttons">
-					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} value="Add Schools To Map"/>
-					<input className="btn btn-outline-success my-2 my-sm-0" type="button" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled}  value="Clear "/>
+					<input className="btn btn-outline-success add" type="button" onMouseUp={this.handleAddMarkers} onClick={this.handleToggle} disabled={this.state.addButtonEnabled} value="Add Schools To Map"/>
+					<input className="btn btn-outline-success" type="button" onMouseUp={this.handleClearMarkers} onClick={this.handleToggle} disabled={this.state.clearButtonEnabled}  value="Clear "/>
 				</div>
 				<div id="map"></div>
 			</div>
