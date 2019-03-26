@@ -13,13 +13,6 @@ import MapContainer from './components/MapContainer';
 export default class App extends Component {
 
   render() {
-		// Show number of unimmunized kids at each school
-		// How many kids are NOT vaccinated by the whole area
-		// Then be able to narrow that down by section.
-		// Show Data by Percentage, then break out further data in each Marker infoWindow.
-		// <Route path="/" render={ () => {return <MapContainer
-		// 	onClick={this.handleClick.bind(this)} /> }} />
-		// <Route exact path="/" component={MapContainer} />
     return (
 			<BrowserRouter>
 	      <div className="App">
@@ -27,16 +20,18 @@ export default class App extends Component {
 						<Route component={Header} />
 						<Route component={NavBar} />
 						<Switch>
+						{/*	Works better w/out the Redirect, then the markers always load on first route selection!
+							<Route exact path= "/" render={ () => <Redirect to={'/school/complete_for_all'} /> } />  */}
 
 							<Route exact path= "/" component={MapContainer} />
-							<Route path="/school/all" render={ () => {return <MapContainer
-								schoolQueryRoute={"/school/all"} /> }} />
 							<Route path="/school/complete_for_all" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/complete_for_all"} /> }} />
 							<Route path="/school/reported_yes" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/reported_yes"} /> }} />
 							<Route path="/school/reported_no" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/reported_no"} /> }} />
+							<Route path="/school/all" render={ () => {return <MapContainer
+									schoolQueryRoute={"/school/all"} /> }} />
 							<Route path="/immunization/hepatitis_b" render={ () => {return <MapContainer
 								schoolQueryRoute={"/immunization/hepatitis_b"} /> }} />
 							<Route path="/immunization/measles" render={ () => {return <MapContainer

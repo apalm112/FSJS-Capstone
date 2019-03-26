@@ -12,13 +12,13 @@ const NavBar = (props, {match}) => (
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<NavLink className="dropdown-item" to="/school/all">All Schools</NavLink>
-							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/complete_for_all">100% Immuninzation Rates</NavLink>
 							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/reported_yes">Reported Yes</NavLink>
 							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/reported_no">Reported No</NavLink>
+							<div className="dropdown-divider"></div>
+							<NavLink className="dropdown-item" to="/school/all">All Schools</NavLink>
 						</div>
 					</li>
 

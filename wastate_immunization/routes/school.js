@@ -55,7 +55,6 @@ router.get('/complete_for_all', (req, res) => {
 	School.find({ 'percent_complete_for_all_immunizations': { $eq: 100 },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
 			var results = schools.map((curr) => {
 				var coords = curr.location_1.coordinates;
 				var allImms = curr.percent_complete_for_all_immunizations;
@@ -95,7 +94,6 @@ router.get('/reported_yes', (req, res) => {
 	School.find({ 'reported': { $eq: 'Y' },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
 			var reportYes = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var name = curr.school_name;
@@ -114,7 +112,8 @@ router.get('/reported_yes', (req, res) => {
 					district: district,
 					name:name,
 					levels: grade_levels,
-					k12: k_12
+					k12: k_12,
+					reported: ''
 				};
 			});
 			res.send(reportYes);
@@ -171,16 +170,5 @@ router.get('/elma', (req, res) => {
 			res.json(schools);
 		});
 });
-
-/*
-router.get('/schools/desert', (req, res) => {
-// This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
-//	Which HAS COORDINATES.
-	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-		.exec(function(error, schools) {
-			console.log(schools);
-			res.json(schools[0].location_1.coordinates);
-		});
-});*/
 
 module.exports = router;
