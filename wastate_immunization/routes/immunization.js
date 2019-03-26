@@ -26,11 +26,12 @@ router.get('/hepatitis_b', (req, res) => {
 	// This route will display the percentage_exempt_for_hepatitis_b > 0
 	// There are 1972 schools from this query.
 	//	 Have coordinates
-	School.find({
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
 		'percent_exempt_for_hepatitisb': { $gt: 0 },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools[0]);
+			// console.log('# of schools: ', schools[0]);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var exemptHepB = curr.percent_exempt_for_hepatitisb;
@@ -65,11 +66,12 @@ router.get('/measles', (req, res) => {
 	// This route will display the percent_exempt_for_measles_mumps_rubella. > 0
 	// There are 2253 schools from this query.
 	//	1975 Have coordinates
-	School.find({
+		School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
 		'percent_exempt_for_measles_mumps_rubella': { $gt: 0 },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
+			// console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var exemptMeasles = curr.percent_exempt_for_measles_mumps_rubella;
@@ -104,9 +106,10 @@ router.get('/pertussis', (req, res) => {
 	// This route will display the percent_exempt_for_pertussis percent_exempt_for_pertussis > 0
 	// There are  schools from this query.
 	//	1946 Have coordinates
-	School.find({
-		'percent_exempt_for_pertussis': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
+			'percent_exempt_for_pertussis': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
@@ -142,11 +145,12 @@ router.get('/polio', (req, res) => {
 	// This route will display the percent_exempt_for_polio > 0
 	// There are  schools from this query.
 	//	1957 Have coordinates
-	School.find({
-		'percent_exempt_for_polio': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
+			'percent_exempt_for_polio': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
+			// console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var exemptPolio = curr.percent_exempt_for_polio;
@@ -181,9 +185,10 @@ router.get('/tetanus', (req, res) => {
 	// This route will display the percent_exempt_for_diphtheria_tetanus > 0
 	// There are  schools from this query.
 	//	1968 Have coordinates
-	School.find({
-		'percent_exempt_for_diphtheria_tetanus': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
+			'percent_exempt_for_diphtheria_tetanus': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
@@ -219,11 +224,12 @@ router.get('/varicella', (req, res) => {
 	// This route will display the percent_exempt_for_diphtheria_tetanus > 0
 	// There are  schools from this query.
 	//	1992 Have coordinates
-	School.find({
-		'percent_exempt_for_varicella': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({
+			'percent_exempt_for_varicella': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
+			// console.log('# of schools: ', schools.length);
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var exemptVaricella = curr.percent_exempt_for_varicella;
