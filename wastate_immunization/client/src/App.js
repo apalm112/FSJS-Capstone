@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
 	BrowserRouter,
-	Redirect,
 	Route,
 	Switch
 } from 'react-router-dom';
-import Copy from './components/Copy';
+import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
@@ -25,12 +24,11 @@ export default class App extends Component {
 			<BrowserRouter>
 	      <div className="App">
 					<ErrorBoundary>
-						<Route component={Copy} />
+						<Route component={Header} />
 						<Route component={NavBar} />
 						<Switch>
-							<Route exact path= "/" render={ () => <Redirect to={'/school/all'} /> } />
 
-<Route exact path= "/" component={MapContainer} />
+							<Route exact path= "/" component={MapContainer} />
 							<Route path="/school/all" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/all"} /> }} />
 							<Route path="/school/complete_for_all" render={ () => {return <MapContainer
