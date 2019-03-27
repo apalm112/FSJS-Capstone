@@ -2,13 +2,16 @@ import React from 'react';
 
 const Header = () => {
 	return (
-		<header className="App-header">
-			<h1>WA State School Immunization Rates</h1>
-			<p>This is placeholder for the copy deets about this project & the data being displayed.</p>
-			<p>Data source is <a href="https://dev.socrata.com/foundry/data.wa.gov/ndsp-2k9r">Socrata Data.WA.gov</a></p>
-			<hr className="line"></hr>
-			<p>Select any link from the dropdown menus below to fetch the school data associated with it.</p>
-		</header>
+		<div className="jumbotron App-header">
+		  <h1 className="display-4">Washington School Immunization Rates</h1>
+		  <p className="lead">
+				The data displayed is the Washington student immunization rates by school for 2016-2017.</p>
+			<p className="lead"> You can view school locations sorted by different types of immunizations, immunization rates & by exemption reasons.
+			</p>
+		  <p className="lead">Data source is <a href="https://dev.socrata.com/foundry/data.wa.gov/ndsp-2k9r">Socrata Data.WA.gov</a></p>
+			<hr className="line"/>
+		  <p className="push-to-bottom">Select any category from the dropdown menus below to display the school data associated with it.</p>
+		</div>
 	);
 }
 

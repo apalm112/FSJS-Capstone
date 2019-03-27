@@ -17,7 +17,7 @@ class MapContainer extends Component {
 
 	handleInitMap() {
 		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
-		const options = {	center: Wenatchee,	zoom: 3	};
+		const options = {	center: Wenatchee,	zoom: 7	};
 
 		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
@@ -34,7 +34,7 @@ class MapContainer extends Component {
 				position: { lng: this.state.schools[idx].lng, lat: this.state.schools[idx].lat },
 				map: getMap,
 				// Create an array of numbers used to label the markers.
-				label: count + [idx],
+				// label: count + [idx],
 				content:
 									'<div id="content">'+
 									`<div id="siteNotice"><h2>${this.state.schools[idx].specificRouteData}</h2></div>`+
@@ -48,7 +48,7 @@ class MapContainer extends Component {
 									`<h5>${this.state.schools[idx].district}</h5>`+
 									'</div>'+
 									'</div>',
-				// icon: 'images/icon-mapmarker.png'
+				icon: `https://maps.google.com/mapfiles/ms/icons/green-dot.png`
 			});
 
 			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
@@ -69,13 +69,13 @@ class MapContainer extends Component {
 		this.handleSetMCState(clusterManager);
 		var getCM = this.state.clusterManager;
 		console.log('The clusterManager: ', getCM);
-		// return () => { clusterManager.clearMarkers() }  //<--Not necessary?
+		// getCM.redraw(); ????
 	}
 	handleSetMCState = (param) => {
 			this.setState({ clusterManager: param });
 	}
 
-	handleSchoolQuery = (schoolQueryRoute='/') => {
+	handleSchoolQuery = (schoolQueryRoute='') => {
 	// This function returns whatever schoolQueryRoute is sent to it.
 		fetch(`${schoolQueryRoute}`)
 		.then(res => res.json())
@@ -87,7 +87,13 @@ class MapContainer extends Component {
 			(error) => {
 				return error.message;
 			})
-		console.log(this.state.schools);
+		var what = this.props.schoolQueryRoute;
+		console.log('this.props.schoolQueryRoute', this.props.schoolQueryRoute);
+		if (what) {
+			console.log('IS TRUE');
+		} else {
+			console.log('IS FALSE');
+		}
 	}
 
 	handleClearMarkers = () => {
@@ -99,35 +105,38 @@ class MapContainer extends Component {
 		}
 	}
 	handleAddMarkers = () => {
-		this.handleClearMarkers();
 		var getMap = this.state.map;
+		this.handleClearMarkers();
 		this.handleMarkersCreate(getMap);
-		// var getCM = this.state.clusterManager;
-		// console.log('Here is STATE.MAP: ', getMap);
-		// console.log('The clusterManager was populated, STATE.CLUSTERMANAGER: ', getCM);
+		console.log('handleAddMarkers called ');
 	}
 
 	componentDidMount() {
 		this.handleSchoolQuery(this.props.schoolQueryRoute);
 		loadGoogleMaps(this.handleInitMap);
-		// console.log('####componentDidMOUNT--MAP.JS::{this.props}', this.props);
 	}
 
 	componentDidUpdate(prevProps) {
-		// console.log('$$$$componentDidUPDATE--MAP.JS::{this.props} : {prevProps.schoolQueryRoute}', this.props.schoolQueryRoute, prevProps.schoolQueryRoute);
+		var getCM = this.state.clusterManager;
+		var prevZoom = getCM.prevZoom_;
+
+		if (prevZoom > 7) {
+			getCM.fitMapToMarkers();
+		}
 
 		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
 			this.handleSchoolQuery(this.props.schoolQueryRoute)
-			console.log('componentDidUpdate, this.handleSchoolQuery() executed');
+			// console.log('componentDidUpdate, this.handleSchoolQuery() executed');
 			setTimeout(this.handleAddMarkers, 1500);
 		}
-		//				: this.handleSchoolQuery(this.props.match.params.schoolQueryRoute)
+// this.handleSchoolQuery(this.props.match.params.schoolQueryRoute)
 	}
 
   render() {
 		return (
 			<div>
-				<h3>Displaying Markers for the Route: {this.state.searchQuery}</h3>
+				<h3>Markers being displayed for: {this.state.searchQuery}</h3>
+				<h5>Number of Schools query returned: {this.state.schools.length}</h5>
 				<div id="map"></div>
 			</div>
 		);
