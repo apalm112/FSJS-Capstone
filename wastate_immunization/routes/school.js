@@ -27,7 +27,7 @@ router.get('/all', (req, res) => {
 				} else {
 					reported = `Reported Immuninzation Rates: ${reported}es`;
 					allImms =  `Complete for All Immuninzations: ${allImms}%`;
-					k_12 = `K-12 Enrollment: ${k_12}`;
+					k_12 = `${k_12}`;
 				}
 				return {
 					lng: coords[0],
@@ -67,7 +67,7 @@ router.get('/complete_for_all', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				var reported = '';
 				allImms =  `Complete for All Immuninzations: ${allImms}%`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -94,7 +94,7 @@ router.get('/reported_yes', (req, res) => {
 // 	 331 HAVE NO COORDINATES
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'reported': { $eq: 'Y' },
-		'location_1.coordinates': { $ne: [] } })
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			var reportYes = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
@@ -105,6 +105,7 @@ router.get('/reported_yes', (req, res) => {
 				var city = curr.location_1_city;
 				var grade_levels = curr.grade_levels;
 				var k_12 = curr.k_12_enrollment;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -133,7 +134,7 @@ router.get('/reported_no', (req, res) => {
 				var coords = curr.location_1.coordinates;
 				var name = curr.school_name;
 				var district = curr.school_district;
-				var reported = curr.reported;
+				var reported = '';
 				var address = curr.location_1_address;
 				var city = curr.location_1_city;
 				var grade_levels = curr.grade_levels;
@@ -146,8 +147,8 @@ router.get('/reported_no', (req, res) => {
 					city: city,
 					district: district,
 					levels: grade_levels,
-					k12: '',  // reported_no schools seems to not have this data.
-					reported: ''
+					k12: 'N/A',  // reported_no schools seems to not have this data.
+					reported: reported
 				};
 			});
 			res.send(results);

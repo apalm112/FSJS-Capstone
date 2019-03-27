@@ -23,7 +23,7 @@ router.get('/medical', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students w/ Medical Exemption: ${reported}`;
 				exemptMedical = `${exemptMedical}% w/ Medical Exemption`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -63,7 +63,7 @@ router.get('/personal', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students w/ Personal Exemption: ${reported}`;
 				exemptPersonal = `${exemptPersonal}% w/ Personal Exemption`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -99,7 +99,7 @@ router.get('/religous', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students w/ Religious Exemption: ${reported}`;
 				exemptReligulous = `${exemptReligulous}% w/ Religious Exemption`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -135,7 +135,7 @@ router.get('/any_exmption', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students w/ Any Exemption: ${reported}`;
 				exemptAny = `${exemptAny}% w/ Any Exemption`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],

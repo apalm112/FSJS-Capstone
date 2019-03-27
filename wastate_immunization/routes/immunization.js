@@ -44,7 +44,7 @@ router.get('/hepatitis_b', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Hepatitis B: ${reported}`;
 				exemptHepB =  `${exemptHepB}% Exempt for Hepatitis B`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -84,7 +84,7 @@ router.get('/measles', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Measles, Mumps, Rubella: ${reported}`;
 				exemptMeasles =  `${exemptMeasles}% Exempt for Measles, Mumps, Rubella`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -123,7 +123,7 @@ router.get('/pertussis', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Pertussis: ${reported}`;
 				exemptPertussis =  `${exemptPertussis}% Exempt for Pertussis`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -163,7 +163,7 @@ router.get('/polio', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Polio: ${reported}`;
 				exemptPolio =  `${exemptPolio}% Exempt for Polio`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -202,7 +202,7 @@ router.get('/tetanus', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Tetanus: ${reported}`;
 				exemptTetanus = `${exemptTetanus}% Exempt for Tetanus`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -242,7 +242,7 @@ router.get('/varicella', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				reported = `Number of Students Exempt for Varicella: ${reported}`;
 				exemptVaricella = `${exemptVaricella}% Exempt for Varicella`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
