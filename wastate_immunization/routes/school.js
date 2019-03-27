@@ -6,7 +6,8 @@ const School = require('../database/models').School;
 router.get('/all', (req, res) => {
 	// Find All Schools in the mLab DB Collection: There 2248 Schools w/ valid coordinates.
 	// 347 Schools which have the coordinates as an empty value, i.e.-- {}
-	School.find({ 'location_1.coordinates': { $ne: [] }  })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({ 'location_1.coordinates': { $ne: [] }  })
 		.exec(function(error, schools) {
 			var getAllSchoolsCoords = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
@@ -26,7 +27,7 @@ router.get('/all', (req, res) => {
 				} else {
 					reported = `Reported Immuninzation Rates: ${reported}es`;
 					allImms =  `Complete for All Immuninzations: ${allImms}%`;
-					k_12 = `K-12 Enrollment: ${k_12}`;
+					k_12 = `${k_12}`;
 				}
 				return {
 					lng: coords[0],
@@ -55,7 +56,6 @@ router.get('/complete_for_all', (req, res) => {
 	School.find({ 'percent_complete_for_all_immunizations': { $eq: 100 },
 		'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
 			var results = schools.map((curr) => {
 				var coords = curr.location_1.coordinates;
 				var allImms = curr.percent_complete_for_all_immunizations;
@@ -67,7 +67,7 @@ router.get('/complete_for_all', (req, res) => {
 				var k_12 = curr.k_12_enrollment;
 				var reported = '';
 				allImms =  `Complete for All Immuninzations: ${allImms}%`;
-				k_12 = `K-12 Enrollment: ${k_12}`;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -92,10 +92,10 @@ router.get('/reported_yes', (req, res) => {
 //		^-- 7 which have the wrong coordinates, they are placed outside of WA state.
 // TODO:  Remove those 7 schools from the search results.
 // 	 331 HAVE NO COORDINATES
-	School.find({ 'reported': { $eq: 'Y' },
-		'location_1.coordinates': { $ne: [] } })
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+		.find({ 'reported': { $eq: 'Y' },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
-			console.log('# of schools: ', schools.length);
 			var reportYes = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
 				var name = curr.school_name;
@@ -105,6 +105,7 @@ router.get('/reported_yes', (req, res) => {
 				var city = curr.location_1_city;
 				var grade_levels = curr.grade_levels;
 				var k_12 = curr.k_12_enrollment;
+				k_12 = `${k_12}`;
 				return {
 					lng: coords[0],
 					lat: coords[1],
@@ -114,7 +115,8 @@ router.get('/reported_yes', (req, res) => {
 					district: district,
 					name:name,
 					levels: grade_levels,
-					k12: k_12
+					k12: k_12,
+					reported: ''
 				};
 			});
 			res.send(reportYes);
@@ -132,7 +134,7 @@ router.get('/reported_no', (req, res) => {
 				var coords = curr.location_1.coordinates;
 				var name = curr.school_name;
 				var district = curr.school_district;
-				var reported = curr.reported;
+				var reported = '';
 				var address = curr.location_1_address;
 				var city = curr.location_1_city;
 				var grade_levels = curr.grade_levels;
@@ -145,8 +147,8 @@ router.get('/reported_no', (req, res) => {
 					city: city,
 					district: district,
 					levels: grade_levels,
-					k12: '',  // reported_no schools seems to not have this data.
-					reported: ''
+					k12: 'N/A',  // reported_no schools seems to not have this data.
+					reported: reported
 				};
 			});
 			res.send(results);
@@ -155,32 +157,40 @@ router.get('/reported_no', (req, res) => {
 
 router.get('/coords/no', (req, res) => {
 // This route will display the results for all schools w/ NO COORDINATES. There are 347
-	School.find({ 'location_1.coordinates': { $eq: [] } })
+
+	// School.find({ 'location_1.coordinates': { $eq: [] } })
+	School.find({ 'location_1.coordinates[1]': { $eq: []  } })
 		.exec(function(error, schools) {
+			// console.log('# of schools: ', schools[0].location_1.coordinates);
 			console.log('# of schools: ', schools.length);
-			res.send(schools);
+			res.json(schools.length);
+		});
+});
+/* eslint-disable */
+router.get('/coords/wa_only', (req, res) => {
+// This route will display the results for all schools w/ COORDINATES Outside of WA state. There are 7 total.
+	School.find({ 'location_1.coordinates': { $in: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+	// longitude range: -125 to -117
+	// latitude range: 45 to 46.5
+		.exec(function(error, schools) {
+			console.log('# of schools: ', schools[0].location_1.coordinates);
+			console.log('# of schools: ', schools.length);
+			var results = schools.map(curr => {
+				var coords = curr.location_1.coordinates;
+				return { lng: coords[0] };
+			});
+		res.send(results);
 		});
 });
 
 router.get('/elma', (req, res) => {
 // This route will display the results for "VICTOR FALLS ELEMENTARY".
 //	Which DOES NOT HAVE COORDINATES.
-	School.find({ 'school_name': 'MARY M KNIGHT HIGH SCHOOL' })
+	School.find({ 'school_name': 'GEORGE ELEMENTARY' })
 		.exec(function(error, schools) {
-			console.log('XXXXXXXXX', schools[0]);
-			res.json(schools);
-		});
-});
-
-/*
-router.get('/schools/desert', (req, res) => {
-// This route will display the results for "DESERT HILLS MIDDLE SCHOOL"
-//	Which HAS COORDINATES.
-	School.find({ 'school_name': 'DESERT HILLS MIDDLE SCHOOL' })
-		.exec(function(error, schools) {
-			console.log(schools);
+			// console.log('XXXXXXXXX', schools[0]);
 			res.json(schools[0].location_1.coordinates);
 		});
-});*/
+});
 
 module.exports = router;

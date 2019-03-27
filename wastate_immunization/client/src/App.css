@@ -18,71 +18,70 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 /* Optional: Makes the sample page fill the window. */
 html, body {
 	background-color: aliceblue;
 	height: 100%;
 }
-
+h3 {
+	display: flex;
+	flex-direction: column;
+}
+hr {
+    display: flex;
+    height: 1px;
+    border: 0px solid grey;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+p {
+	font-size: 0.7em;
+}
+/* Class Styles ***************************/
 .App {
+	padding-bottom: 5px;
   text-align: center;
 }
 
 .App-header {
- /* background-color: #282c34; */
+  background-color: #282c34;
+	position: relative;
   min-height: 7vh;
-  /*display: flex;
-  flex-direction: column;*/
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* font-size: calc(10px + 2vmin); */
-  /* color: white; */
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
   color: #61dafb;
 }
+.gm-style-iw-c {
 
-/* Begin  Custom Styles****************************************************************************/
-/* Always set the map height explicitly to define the size of the div element that contains the map. */
-#map {
-	margin: 0 auto;
-	margin-bottom: 20px;
-	height: 80vh;
-	width: 92%;
+}
+.bodyContent {
+	/* display: flex;
+	flex-direction: row; */
+}
+.content {
+	background-color: rgba(200, 200, 200, 0.1);
+}
+.push-to-bottom {
+	position: relative;
+	top: 45px;
+	left: auto;
+	right: auto;
+}
+.lead {
+	padding-left: 40px;
+}
+.line {
+	width: 90%;
 }
 
-/* LOADING SPINNER ****************************************/
- .spinner:before {
-  width: 100%;
-	list-style: none;
-	box-sizing: border-box;
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	height: 100px;
-	width: 100px;
-	margin-top: -30px;
-	margin-left: -30px;
-	border-radius: 50%;
-	border-top: 3px solid blue;
-	border-right: 3px solid transparent;
-	animation: spinner 0.3s linear infinite;
-	}
-@keyframes spinner {
-	to {
-		transform: rotate(360deg);
-	}
-}
-.spinner {
-	list-style: none;
-}
 .icon-gif {
   font-size: 6em;
   margin-bottom: -10px;
@@ -94,33 +93,35 @@ html, body {
   margin-bottom: .25em;
 }
 
-.btn-secondary {
-	background-color: rgba(178, 209, 244, 0.5);
-}
-
 .nav-link & active {
 	background-color: rgba(55, 130, 163, 0.5);
 }
-/* MAIN NAV ------------------------------------------------------- */
 
-.main-nav a {
-  font-size: .95em;
-  color: #222;
-  text-align: center;
-  text-transform: uppercase;
-  display: block;
-  padding: 1em;
-  transition: .2s;
+/* MAIN NAV ------------------------------------------------------- */
+.bg-light {
+	background-color: #72add7;
+}
+.navbar {
+	display: flex;
+	flex-direction: column;
 }
 .navbar-nav a:hover,
 .navbar-nav .active {
-  color: #fff;
-  background: rgba(108, 194, 241, 0.5);
+	color: #fff;
+	background: rgba(108, 194, 241, 0.5);
 }
-.bg-light {
-	background-color: #e3f2fd;
+.not-found {
+	list-style: none;
 }
-/* InfodWindow Styles ****************** */
+
+/* Always set the map height explicitly to define the size of the div element that contains the map. */
+#map {
+	margin: 0 auto;
+	margin-bottom: 20px;
+	height: 80vh;
+	width: 92%;
+}
+/* InfoWindow Styles ********************************************/
 .gm-ui-hover-effect {
   background: darkgreyslate;
 	height: 55px;
@@ -130,44 +131,29 @@ html, body {
   height: 50px;
   width: 50px; }
 
-	#floating-panel {
-        position: absolute;
-        bottom: 10px;
-        left: 35%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-
-/* MEDIA QUERIES These are not needed, Bootstrap has this covered***************************/
-/*@media only screen and (max-width: 767px)  {
-  body {
-    padding-top: 2em;
-  }
-  .photo-container li {
-    margin: auto;
-  }
+/* LOADING SPINNER ****************************************/
+.spinner:before {
+	width: 100%;
+	list-style: none;
+	box-sizing: border-box;
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 100px;
+	width: 100px;
+	margin-top: -30px;
+	margin-left: -30px;
+	border-radius: 50%;
+	border-top: 3px solid rgb(63, 74, 212);
+	border-right: 3px solid transparent;
+	animation: spinner 0.6s linear infinite;
 }
-
-@media only screen and (min-width: 768px)  {
-  body {
-    padding-top: 4em;
-  }
-  .container {
-    max-width: 960px;
-    margin: auto;
-  }
-  .main-nav ul {
-    display: flex;
-    justify-content: center;
-  }
-  .main-nav li {
-    margin: 10px;
-    width: 100px;
-  }
-}*/
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+.spinner {
+	list-style: none;
+}

@@ -2,9 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const NavBar = (props, {match}) => (
-	<header className="App-header">
-		<h1>WA State School Immuninzation Rates</h1>
-
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
@@ -12,17 +9,16 @@ const NavBar = (props, {match}) => (
 
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
-
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schools</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<NavLink className="dropdown-item" to="/school/all">All Schools</NavLink>
-							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/complete_for_all">100% Immuninzation Rates</NavLink>
 							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/reported_yes">Reported Yes</NavLink>
 							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/school/reported_no">Reported No</NavLink>
+							<div className="dropdown-divider"></div>
+							<NavLink className="dropdown-item" to="/school/all">All Schools</NavLink>
 						</div>
 					</li>
 
@@ -60,19 +56,8 @@ const NavBar = (props, {match}) => (
 						</div>
 					</li>
 				</ul>
-				<form className="form-inline my-2 my-lg-0">
-					<input className="form-control mr-sm-2" type="search" placeholder="Search by Address" aria-label="Search"></input>
-					<button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
 			</div>
-			<form className="form-inline my-2 my-lg-0">
-				<button className="btn btn-outline-success my-2 my-sm-0" type="button">Add Markers To Map</button>
-		 	</form>
 		</nav>
-	</header>
-
-
-
 );
 
 export default NavBar;
