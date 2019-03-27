@@ -8,7 +8,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const path = require('path');
-const sassMiddleware = require('node-sass-middleware');
+// const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
 const School = require('./database/models').School;
@@ -41,14 +41,14 @@ app.use(express.json());
 // express || body-parser middleware parses request to make it accessible to req.body
 app.use(express.urlencoded({ extended: false }));
 
-app.use(sassMiddleware({
-	src: path.join(__dirname, 'public'),
-	dest: path.join(__dirname, 'public'),
-	indentedSyntax: true, // true = .sass and false = .scss
-	sourceMap: true
-}));
+// app.use(sassMiddleware({
+// 	src: path.join(__dirname, 'public'),
+// 	dest: path.join(__dirname, 'public'),
+// 	indentedSyntax: true, // true = .sass and false = .scss
+// 	sourceMap: true
+// }));
 //	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
-app.use(express.static(path.join(__dirname, 'client', 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
 /***************************************************
@@ -83,12 +83,12 @@ database.once('open', () => {
 });
 
 
-	app.get('/api/hello', (req, res) => {
-		res.send({ express: 'Hellos froms Expresses' });
-	});
-	app.post('/api/puff', (req, res) => {
-		res.send(`Express server received your POST request. This is what you sent: ${req.body.post}`);
-	});
+// app.get('/api/hello', (req, res) => {
+// 	res.send({ express: 'Hellos froms Expresses' });
+// });
+// app.post('/api/puff', (req, res) => {
+// 	res.send(`Express server received your POST request. This is what you sent: ${req.body.post}`);
+// });
 
 /**********************************************************************************/
 /* Validate mLab Schools collection if it's already populated or not.************************/
