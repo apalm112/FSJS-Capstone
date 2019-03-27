@@ -52,7 +52,7 @@ const NavBar = (props, {match}) => (
 							<div className="dropdown-divider"></div>
 							<NavLink className="dropdown-item" to="/reason/religous">Religous</NavLink>
 							<div className="dropdown-divider"></div>
-							<NavLink className="dropdown-item" to="/reason/any_exmption">Any Exemption</NavLink>
+							<NavLink className="dropdown-item" to="/reason/any_exemption">Any Exemption</NavLink>
 						</div>
 					</li>
 				</ul>

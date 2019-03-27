@@ -117,7 +117,7 @@ router.get('/religous', (req, res) => {
 		});
 });
 
-router.get('/any_exmption', (req, res) => {
+router.get('/any_exemption', (req, res) => {
 // This route will display the results for. There are 2018
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'percent_with_any_exemption': { $gt: 0},

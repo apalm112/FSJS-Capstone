@@ -64,8 +64,8 @@ export default class App extends Component {
 							<Route exact path="/reason/religous" render={ () => {return <MapContainer
 								schoolQueryRoute={"/reason/religous"} /> }} />
 
-							<Route exact path="/reason/any_exmption" render={ () => {return <MapContainer
-								schoolQueryRoute={"/reason/any_exmption"} /> }} />
+							<Route exact path="/reason/any_exemption" render={ () => {return <MapContainer
+								schoolQueryRoute={"/reason/any_exemption"} /> }} />
 
 							<Route component={NotFound} />
 						</Switch>
