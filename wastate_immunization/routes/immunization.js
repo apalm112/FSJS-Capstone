@@ -9,8 +9,8 @@ router.get('/hepatitis_b', (req, res) => {
 		1967 have coordinates			*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
-		'percent_exempt_for_hepatitisb': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+			'percent_exempt_for_hepatitisb': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
@@ -46,10 +46,10 @@ router.get('/measles', (req, res) => {
 /*	This route will display the percent_exempt_for_measles_mumps_rubella. > 0
 		There are 2253 schools from this query
 		1975 Have coordinates		*/
-		School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
+	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
-		'percent_exempt_for_measles_mumps_rubella': { $gt: 0 },
-		'location_1.coordinates': { $ne: [] } })
+			'percent_exempt_for_measles_mumps_rubella': { $gt: 0 },
+			'location_1.coordinates': { $ne: [] } })
 		.exec(function(error, schools) {
 			var results = schools.map(curr => {
 				var coords = curr.location_1.coordinates;
