@@ -45,7 +45,6 @@ class MapContainer extends Component {
 									'</div>',
 				icon: `https://maps.google.com/mapfiles/ms/icons/green-dot.png`
 			});
-
 			var infowindow = new window.google.maps.InfoWindow({ content: marker.content });
 			window.google.maps.event.addListener(marker, 'click', function(event) {
 				infowindow.open(map, marker);
@@ -55,7 +54,6 @@ class MapContainer extends Component {
 			});
 			return marker;
 		});
-
 		this.handlerMarkerCluster(map, markers);
 	}
 
@@ -67,17 +65,6 @@ class MapContainer extends Component {
 	}
 	handleSetMCState = (param) => {
 			this.setState({ clusterManager: param });
-	}
-
-	fetchData = (schoolQueryRoute='') => {
-	// This function returns whatever schoolQueryRoute is sent to it.
-		fetch(`${schoolQueryRoute}`)
-		.then(res => res.json())
-		.then(
-			schools => this.setState({ schools }),
-			(error) => {
-				return error.message;
-			})
 	}
 	handleMapSetZoom = () => {
 		var getCM = this.state.clusterManager;
@@ -113,7 +100,6 @@ class MapContainer extends Component {
 			this.setState({ schools })
 			this.handleAddMarkers();
 		}
-// this.fetchData(this.props.match.params.schoolQueryRoute)
 	}
 
   render() {
