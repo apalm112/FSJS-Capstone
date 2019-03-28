@@ -3,7 +3,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-//  Code for Capstone Project:
 var SchoolSchema = new Schema({
 	grade_levels: { type: String },
 	k_12_enrollment: { type: Number },
