@@ -24,7 +24,7 @@ const NavBar = () => (
 
 					<li className="nav-item dropdown">
 						<a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Exemption by Immuninzation Type
+							Exemption by Immunization Type
 						</a>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 							<NavLink className="dropdown-item" to="/immunization/hepatitis_b">Hepatitis B</NavLink>
