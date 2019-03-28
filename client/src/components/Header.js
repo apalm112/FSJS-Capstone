@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
 	return (
 		<div className="jumbotron App-header">
-		  <h1 className="display-4">Washington School Immunization Rates</h1>
+		  <h1 className="display-4 lead">Washington School Immunization Rates</h1>
 		  <p className="lead">
 			The data is from the Washington state Department of Health.</p>
 			<p className="lead">For student immunization rates, kindergarten through 12th grade, by school for 2016-2017.</p>
