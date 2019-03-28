@@ -66,7 +66,7 @@ mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: f
 // Create a variable to hold the database connection object.
 const database = mongoose.connection;
 
-// mongoose.set('debug', true);  //<--runs debugger in terminal
+mongoose.set('debug', true);  //<--runs debugger in terminal
 
 database.on('error', (error) => {
 	// set terminal stdout color red for error message
@@ -101,31 +101,25 @@ socrataView.fetchAll = function() {
 			console.error('Error fetching the data: ', e); //eslint-disable-line no-console
 		});
 	});
-};	// end socrataView.fetchAll()
+};
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	database.dropCollection('schools'); //<--COMMMENTING OUT FOR DEVLOPMENT ENVIRONMENT
+	database.dropCollection('schools');
 	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
-		console.log('COUNT===========================',	count );
+		console.log('COUNT',	count );
 		//	--if not, then do fetch data from socrata
 		if (!count) {
-			console.log('Express, data got fetched');
+			console.log('Express fetched the data');
 			socrataView.fetchAll();
 		}
 	});
 };
 socrataView.checkMLabDBForData();
 
-// Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
-/*app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
-});*/
-/******************************************************************************/
-
-/* Error Handling ****************************************************************************/
+/* Error Handling *************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
