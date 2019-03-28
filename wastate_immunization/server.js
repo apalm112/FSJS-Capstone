@@ -26,13 +26,13 @@ const app = express();
 //	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
-app.use(cors());
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
 
+app.use(cors());
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
@@ -60,10 +60,6 @@ app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
 
-// Not sure about this line here, trying it out tho:
-app.use(require('cors')());
-app.use(methodOverride('_method'));
-
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
 
@@ -82,20 +78,8 @@ database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');	// eslint-disable-line no-console
 });
 
-
-// app.get('/api/hello', (req, res) => {
-// 	res.send({ express: 'Hellos froms Expresses' });
-// });
-// app.post('/api/puff', (req, res) => {
-// 	res.send(`Express server received your POST request. This is what you sent: ${req.body.post}`);
-// });
-
-/**********************************************************************************/
-/* Validate mLab Schools collection if it's already populated or not.************************/
-// TODO: 	** Tried running this code from inside the routes/index.js file, but it would not work.  Only seems to work properly here in the server.js
-//				** Place the socrataView{} inside a post route??
+/********************************************************/
 const socrataView = {};
-
 socrataView.fetchAll = function() {
 	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
 	const url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
@@ -107,7 +91,6 @@ socrataView.fetchAll = function() {
 		});
 		res.on('end', () => {
 			var data = JSON.parse(body);
-			// console.log('# of schools: ', data[0]);
 			data.map( (eachSchool) => {
 				var school = new School(eachSchool);
 				school.save( (error) => {
@@ -122,21 +105,16 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	// database.dropCollection('schools'); //<--COMMMENTING OUT FOR DEVLOPMENT ENVIRONMENT
-	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	database.dropCollection('schools'); //<--COMMMENTING OUT FOR DEVLOPMENT ENVIRONMENT
+	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT===========================',	count );
 		//	--if not, then do fetch data from socrata
 		if (!count) {
-			console.log('COUNT IS TRUE  Express, data got fetched');
+			console.log('Express, data got fetched');
 			socrataView.fetchAll();
-			// 	--if so, then do not fetch data
 		}
-		// else {
-		// 	// call function to first drop the collection each time
-		// 	socrataView.dropSchools();
-		// }
 	});
 };
 socrataView.checkMLabDBForData();
