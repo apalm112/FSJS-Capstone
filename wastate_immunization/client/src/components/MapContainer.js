@@ -103,20 +103,20 @@ class MapContainer extends Component {
 	}
 
   render() {
-		// if (this.props.isLoading) {
-		// 	return (
-		// 		<Loading />
-		// 	);
-		// } else {
-		// 	// return ( null );
-		// 	return (
-		// 		<div>
-		// 			{/* <h3>Markers being displayed for: {this.state.searchQuery}</h3> */}
-		// 			<h5>Number of schools displayed: {this.state.schools.length}</h5>
-		// 			<div id="map"></div>
-		// 		</div>
-		// 	);
-		// }
+		/*		if (this.props.isLoading) {
+			return (
+				<Loading />
+			);
+		} else {
+			// return ( null );
+			return (
+				<div>
+					<h3>Markers being displayed for: {this.state.searchQuery}</h3>
+					<h5>Number of schools displayed: {this.state.schools.length}</h5>
+					<div id="map"></div>
+				</div>
+			);
+		}		*/
 		return (
 			<div>
 				<h3>Current Route: {this.props.schoolQueryRoute}</h3>
