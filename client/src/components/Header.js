@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
 	return (
-		<div className="jumbotron App-header">
+		<div className="jumbotron jumbotron-fluid App-header">
 		  <h1 className="display-4 lead">Washington School Immunization Rates</h1>
 		  <p className="lead">
 			The data is from the Washington state Department of Health.</p>

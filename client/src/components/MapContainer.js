@@ -16,7 +16,7 @@ class MapContainer extends Component {
 
 	handleInitMap() {
 		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
-		const options = {	center: Wenatchee,	zoom: 3, gestureHandling: 'greedy'	};
+		const options = {	center: Wenatchee,	zoom: 7, gestureHandling: 'greedy'	};
 
 		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
@@ -87,8 +87,12 @@ class MapContainer extends Component {
 		this.handleMarkersCreate(getMap);
 	}
 
-	componentDidMount() {
-		loadGoogleMaps(this.handleInitMap);
+	async componentDidMount() {
+		await loadGoogleMaps(this.handleInitMap);
+		const res = await fetch(this.props.schoolQueryRoute)
+		const schools = await res.json()
+		this.setState({ schools })
+		this.handleAddMarkers();
 	}
 
 	async componentDidUpdate(prevProps) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
 	BrowserRouter,
+	Redirect,
 	Route,
 	Switch
 } from 'react-router-dom';
@@ -20,7 +21,7 @@ export default class App extends Component {
 						<Route component={Header} />
 						<Route component={NavBar} />
 						<Switch>
-							<Route exact path= "/" component={MapContainer} />
+							<Redirect exact path= "/" push to="/school/all" />
 
 							<Route exact path="/school/complete_for_all" render={ () => {return <MapContainer
 								schoolQueryRoute={"/school/complete_for_all"} /> }} />

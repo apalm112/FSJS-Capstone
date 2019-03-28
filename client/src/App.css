@@ -171,6 +171,7 @@ p {
   .jumbotron {
     max-width: 960px;
     margin: auto;
+		text-align: left;
   }
   .main-nav ul {
     display: flex;
