@@ -2,6 +2,9 @@
   "name": "wastate-immunization",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "10.15.3"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -24,8 +27,5 @@
     "debug": "~2.6.9",
     "http-errors": "^1.7.2",
     "morgan": "^1.9.1"
-  },
-  "engines": {
-    "node": "10.15.3"
   }
 }
