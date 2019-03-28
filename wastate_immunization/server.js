@@ -8,12 +8,10 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const path = require('path');
-const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
 const School = require('./database/models').School;
 
-// const indexRouter = require('./routes/index');
 const immunizationRouter = require('./routes/immunization');
 const reasonRouter = require('./routes/reason');
 const schoolRouter = require('./routes/school');
@@ -23,53 +21,36 @@ const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 const app = express();
 
-//	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
+//	The port (4000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
-app.use(cors());
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
 
+app.use(cors());
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
-// app object registers middleware w/ use(), applies it to all routes.
 app.use(express.json());
 // express || body-parser middleware parses request to make it accessible to req.body
 app.use(express.urlencoded({ extended: false }));
 
-app.use(sassMiddleware({
-	src: path.join(__dirname, 'public'),
-	dest: path.join(__dirname, 'public'),
-	indentedSyntax: true, // true = .sass and false = .scss
-	sourceMap: true
-}));
 //	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
-app.use(express.static(path.join(__dirname, 'client', 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
-/***************************************************
-	routes to query mLab DB & return data to React	 *
-                                                   *
- ***************************************************/
-// app.use('/', indexRouter);
+/*	Binds the routes to app object, mounts the routes to the express app specifiying '/<route>' as the path. Routes query mLab DB & return data to React **/
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
-
-// Not sure about this line here, trying it out tho:
-app.use(require('cors')());
-app.use(methodOverride('_method'));
 
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
 
 // Create a variable to hold the database connection object.
 const database = mongoose.connection;
-
 // mongoose.set('debug', true);  //<--runs debugger in terminal
 
 database.on('error', (error) => {
@@ -82,20 +63,8 @@ database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');	// eslint-disable-line no-console
 });
 
-
-	app.get('/api/hello', (req, res) => {
-		res.send({ express: 'Hellos froms Expresses' });
-	});
-	app.post('/api/puff', (req, res) => {
-		res.send(`Express server received your POST request. This is what you sent: ${req.body.post}`);
-	});
-
-/**********************************************************************************/
-/* Validate mLab Schools collection if it's already populated or not.************************/
-// TODO: 	** Tried running this code from inside the routes/index.js file, but it would not work.  Only seems to work properly here in the server.js
-//				** Place the socrataView{} inside a post route??
+/********************************************************/
 const socrataView = {};
-
 socrataView.fetchAll = function() {
 	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
 	const url = `${socrata}&$limit=3000&$$app_token=${SOCRATA_API_KEY}`;
@@ -107,7 +76,6 @@ socrataView.fetchAll = function() {
 		});
 		res.on('end', () => {
 			var data = JSON.parse(body);
-			// console.log('# of schools: ', data[0]);
 			data.map( (eachSchool) => {
 				var school = new School(eachSchool);
 				school.save( (error) => {
@@ -118,36 +86,25 @@ socrataView.fetchAll = function() {
 			console.error('Error fetching the data: ', e); //eslint-disable-line no-console
 		});
 	});
-};	// end socrataView.fetchAll()
+};
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	// database.dropCollection('schools'); //<--COMMMENTING OUT FOR DEVLOPMENT ENVIRONMENT
-	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	database.dropCollection('schools');
+	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
-		console.log('COUNT===========================',	count );
+		console.log('COUNT',	count );
 		//	--if not, then do fetch data from socrata
 		if (!count) {
-			console.log('COUNT IS TRUE  Express, data got fetched');
+			console.log('Express fetched the data');
 			socrataView.fetchAll();
-			// 	--if so, then do not fetch data
 		}
-		// else {
-		// 	// call function to first drop the collection each time
-		// 	socrataView.dropSchools();
-		// }
 	});
 };
 socrataView.checkMLabDBForData();
 
-// Teh "catch-all" handler:  It needs to be near the bottom of your server file so that it will only be enacted if the API routes above it don't handle the request. It's in charge of sending the main index.html file back to the client if it didn't receive a request it recognized otherwise.
-/*app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, 'client', 'public', 'index.html'));
-});*/
-/******************************************************************************/
-
-/* Error Handling ****************************************************************************/
+/* Error Handling *************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
