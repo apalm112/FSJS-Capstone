@@ -8,12 +8,10 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const path = require('path');
-// const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
 const School = require('./database/models').School;
 
-// const indexRouter = require('./routes/index');
 const immunizationRouter = require('./routes/immunization');
 const reasonRouter = require('./routes/reason');
 const schoolRouter = require('./routes/school');
@@ -23,7 +21,7 @@ const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 const app = express();
 
-//	The port (3000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
+//	The port (4000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
 app.use(function (req, res, next) {
@@ -36,26 +34,14 @@ app.use(cors());
 app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
-// app object registers middleware w/ use(), applies it to all routes.
 app.use(express.json());
 // express || body-parser middleware parses request to make it accessible to req.body
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(sassMiddleware({
-// 	src: path.join(__dirname, 'public'),
-// 	dest: path.join(__dirname, 'public'),
-// 	indentedSyntax: true, // true = .sass and false = .scss
-// 	sourceMap: true
-// }));
 //	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// Binds the routes to app object, mounts the routes to the express app specifiying '/' as the path.
-/***************************************************
-	routes to query mLab DB & return data to React	 *
-                                                   *
- ***************************************************/
-// app.use('/', indexRouter);
+/*	Binds the routes to app object, mounts the routes to the express app specifiying '/<route>' as the path. Routes query mLab DB & return data to React **/
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
@@ -65,8 +51,7 @@ mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: f
 
 // Create a variable to hold the database connection object.
 const database = mongoose.connection;
-
-mongoose.set('debug', true);  //<--runs debugger in terminal
+// mongoose.set('debug', true);  //<--runs debugger in terminal
 
 database.on('error', (error) => {
 	// set terminal stdout color red for error message
