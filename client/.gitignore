@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# production
+# /src*
+# public/*
+build/static/css/*.map
+build/static/js/*.map
+
+# misc
+.env
+npm-debug.log*
+package-lock.json
+README.md
