@@ -4,6 +4,7 @@
 # production
 # /src*
 # public/*
+build/*
 build/static/css/*.map
 build/static/js/*.map
 
