@@ -20,9 +20,6 @@ export default class App extends Component {
 						<Route component={Header} />
 						<Route component={NavBar} />
 						<Switch>
-						{/*	Works better w/out the Redirect, then the markers always load on first route selection!
-							<Route exact path= "/" render={ () => <Redirect to={'/school/complete_for_all'} /> } />  */}
-
 							<Route exact path= "/" component={MapContainer} />
 
 							<Route exact path="/school/complete_for_all" render={ () => {return <MapContainer
