@@ -2,11 +2,9 @@
 
 const express = require('express');
 const createError = require('http-errors');
-const cors = require('cors');
 const http = require('https');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const methodOverride = require('method-override');
 const path = require('path');
 require('dotenv').config();
 
@@ -24,14 +22,7 @@ const app = express();
 //	The port (4000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
 
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	next();
-});
 
-app.use(cors());
-app.use(methodOverride('_method'));
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
 app.use(express.json());
@@ -39,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 /*	Binds the routes to app object, mounts the routes to the express app specifiying '/<route>' as the path. Routes query mLab DB & return data to React **/
 app.use('/immunization', immunizationRouter);
@@ -117,11 +108,11 @@ app.use((req, res, next) => {
 });
 
 // Catches requests that fall through w/out triggering any route handlers, send 404 if no other route matched
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
 	let error = new Error('Something went wrong.  API Route Not Found.');
 	error.status = 404;
 	next(error);
-});
+});*/
 
 // global error handler { "error": {} }
 app.use((err, req, res, next) => {
