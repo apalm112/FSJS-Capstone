@@ -47,11 +47,13 @@ p {
 	margin-bottom: 40px;
 	height: 80vh;
 	width: 92%;
+	/* for the bootstrap scrollSpy()  */
+	overflow-y: scroll;
+	position: relative;
 }
 
 /* Class Styles ***************************/
 .App {
-	padding-bottom: 35px;
   text-align: center;
 }
 

@@ -88,21 +88,28 @@ class MapContainer extends Component {
 	}
 
 	async componentDidMount() {
-		await loadGoogleMaps(this.handleInitMap);
-		const res = await fetch(this.props.schoolQueryRoute)
-		const schools = await res.json()
-		this.setState({ schools })
-		this.handleAddMarkers();
-	}
-
-	async componentDidUpdate(prevProps) {
-	this.handleMapSetZoom();
-
-		if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
+		try {
+			await loadGoogleMaps(this.handleInitMap);
 			const res = await fetch(this.props.schoolQueryRoute)
 			const schools = await res.json()
 			this.setState({ schools })
 			this.handleAddMarkers();
+		} catch(err) {
+			console.error(err);
+		}
+	}
+
+	async componentDidUpdate(prevProps) {
+	this.handleMapSetZoom();
+		try {
+			if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
+				const res = await fetch(this.props.schoolQueryRoute)
+				const schools = await res.json()
+				this.setState({ schools })
+				this.handleAddMarkers();
+			}
+		} catch(err) {
+				console.error(err);
 		}
 	}
 
