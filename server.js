@@ -99,7 +99,7 @@ socrataView.checkMLabDBForData();
 // Function is a catch all for routes that get missed.  Stops JSON from being sent to browser on refresh.
 // TODO: NOT WORKING!
 app.get('/*', (req, res, next) => {
-	res.sendFile(path.join(__dirname, 'client/public/index.html'), (err) => {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'), (err) => {
 		if (err) { res.status(500).send(err); }
 	});
 });
