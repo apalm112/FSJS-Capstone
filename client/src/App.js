@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	BrowserRouter,
+	HashRouter,
 	Redirect,
 	Route,
 	Switch
@@ -13,7 +14,7 @@ import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
 const App = () => (
-	<BrowserRouter>
+	<HashRouter>
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
@@ -69,7 +70,7 @@ const App = () => (
 				</Switch>
 			</ErrorBoundary>
     </div>
-	</BrowserRouter>
+	</HashRouter>
 );
 
 export default App;

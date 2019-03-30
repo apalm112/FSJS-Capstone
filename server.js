@@ -39,7 +39,7 @@ app.use('/reason', reasonRouter);
 
 
 // Middleware to proxy requests through a specified index page, useful for Single Page Applications that utilise the HTML5 History API.
-app.use(history());
+// app.use(history());
 
 
 /* Database Connection ********************************************************************/
@@ -104,7 +104,7 @@ socrataView.checkMLabDBForData();
 // Function is a catch all for routes that get missed.  Stops JSON from being sent to browser on refresh.
 // TODO: NOT WORKING!
 app.get('/*', (req, res) => {
-	res.send(path.join(__dirname, 'client/build/index.html'), (err) => {
+	res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
 		if (err) { res.status(500).send(err); }
 	});
 });
