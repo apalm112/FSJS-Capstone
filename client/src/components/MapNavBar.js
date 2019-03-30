@@ -5,7 +5,7 @@ const NavBar = () => (
 		<nav className="navbar navbar-expand-lg navbar-collapse-sm navbar-light bg-light">
 			<div id="navbarSupportedContent">
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-one">
-					<button data={window.scrollBy(0, 200)} type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 						Schools
 					</button>
 					<div className="dropdown-menu">
@@ -19,7 +19,7 @@ const NavBar = () => (
 					</div>
 				</div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-two">
-					<button data={window.scrollBy(0, 200)} type="button" className="btn btn-primary dropdown-toggle middle-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button type="button" className="btn btn-primary dropdown-toggle middle-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Exemption by Immunization
 					</button>
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -37,7 +37,7 @@ const NavBar = () => (
 					</div>
 				</div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-three">
-					<button data={window.scrollBy(0, 200)} type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Exemption By Reason
 					</button>
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">

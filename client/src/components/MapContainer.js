@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import loadGoogleMaps from '../modules/load-google-maps';
 import MarkerClusterer from '@google/markerclusterer';
-import NavBar from './NavBar';
+import MapNavBar from './MapNavBar';
 
 class MapContainer extends Component {
 	constructor(props) {
@@ -62,7 +62,9 @@ class MapContainer extends Component {
 		var clusterManager = new MarkerClusterer(map, markers, {imagePath: '../images/m'})
 		this.handleSetMCState(clusterManager);
 		var getCM = this.state.clusterManager;
-		getCM.redraw();
+		if (getCM.length) {
+			getCM.redraw();
+		}
 	}
 	handleSetMCState = (param) => {
 			this.setState({ clusterManager: param });
@@ -131,7 +133,9 @@ class MapContainer extends Component {
 		}		*/
 		return (
 			<div>
-				<NavBar />
+			<p className="lead">Each drop down menu selection displays the school data for that single category.
+			</p>
+				<MapNavBar />
 				<h3 className="center">Current Route: {this.props.schoolQueryRoute}</h3>
 				<h5 className="center">Number of schools: {this.state.schools.length}</h5>
 				<div id="map"></div>

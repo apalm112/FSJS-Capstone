@@ -5,6 +5,7 @@ import {
 	Route,
 	Switch
 } from 'react-router-dom';
+import About from './components/About';
 import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 // import NavBar from './components/NavBar';
@@ -16,9 +17,11 @@ const App = () => (
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
-				
+
 				<Switch>
 					<Redirect exact path= "/" push to="/school/all" />
+
+					<Route path="/about" component={About} />
 
 					<Route path="/school/complete_for_all" render={ () => {return <MapContainer
 						schoolQueryRoute={"/school/complete_for_all"} /> }} />

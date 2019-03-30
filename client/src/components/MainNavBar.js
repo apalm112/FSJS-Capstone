@@ -8,10 +8,10 @@ const MainNavBar = () => (
 				<span className="navbar-toggler-icon"></span>
 			</button>
 
-			<div className="collapse navbar-collapse" id="navbarSupportedContent">
+			<div className="navbar-collapse collapse" id="navbarSupportedContent">
 
-				<a className="flex-sm-fill text-sm nav-link" href="/">Home</a>
-				<a className="flex-sm-fill text-sm nav-link" href="/about">About</a>
+				<NavLink className="flex-sm-fill text-sm nav-link" to="/school/all">Home</NavLink>
+				<NavLink className="flex-sm-fill text-sm nav-link" to="/about">About</NavLink>
 			</div>
 		</nav>
 );
