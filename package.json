@@ -5,11 +5,11 @@
   "engines": {
     "node": "10.15.3"
   },
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/apalm112/FSJS-Capstone.git"
-	},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apalm112/FSJS-Capstone.git"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -19,23 +19,23 @@
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
+    "concurrently": "^4.1.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "debug": "~2.6.9",
+    "dotenv": "^6.2.0",
     "es6-promise": "^4.2.6",
     "express": "~4.16.0",
-    "https": "^1.0.0",
-    "mongoose": "^5.4.17"
-  },
-  "devDependencies": {
-    "dotenv": "^6.2.0",
-    "concurrently": "^4.1.0",
-    "debug": "~2.6.9",
     "http-errors": "^1.7.2",
+    "https": "^1.0.0",
+    "mongoose": "^5.4.17",
     "morgan": "^1.9.1"
   },
-	"keywords": [
+  "devDependencies": {},
+  "keywords": [
     "node",
     "react",
     "create-react-app",
     "heroku",
-		"google maps"
+    "google maps"
   ]
 }
