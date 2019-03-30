@@ -2,6 +2,7 @@
 
 const express = require('express'),
 	createError = require('http-errors'),
+	history = require('connect-history-api-fallback'),
 	http = require('https'),
 	logger = require('morgan'),
 	mongoose = require('mongoose'),
@@ -10,18 +11,17 @@ require('dotenv').config();
 
 const School = require('./database/models').School;
 
-const immunizationRouter = require('./routes/immunization'),
-	reasonRouter = require('./routes/reason'),
-	schoolRouter = require('./routes/school');
+const immunizationRouter = require('./routes/immunization');
+const reasonRouter = require('./routes/reason');
+const schoolRouter = require('./routes/school');
 
-const MONGOLAB_URI  = process.env.MONGOLAB_URI,
-	SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
+const MONGOLAB_URI  = process.env.MONGOLAB_URI;
+const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 const app = express();
 
 //	The port (4000) in the “proxy” line, which goes in the create-react-app's package.json file in the client folder, must match the port that your Express server is running on!
 app.set('port', process.env.PORT || 4000);
-
 
 // morgan gives us http request logging output for the CLI
 app.use(logger('dev'));
@@ -36,6 +36,11 @@ app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
+
+
+// Middleware to proxy requests through a specified index page, useful for Single Page Applications that utilise the HTML5 History API.
+app.use(history());
+
 
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
@@ -81,8 +86,8 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	// database.dropCollection('schools');
-	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	database.dropCollection('schools');
+	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT',	count );
