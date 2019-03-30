@@ -98,11 +98,22 @@ socrataView.checkMLabDBForData();
 /* Error Handling *************************************************************/
 // Function is a catch all for routes that get missed.  Stops JSON from being sent to browser on refresh.
 // TODO: NOT WORKING!
-app.get('/*', (req, res) => {
+/*app.get('/*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'), (err) => {
 		if (err) { res.status(500).send(err); }
 	});
-});
+});*/
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));		// server the static react app
+	app.get(/^\/(?!school).*/, (req, res) => {	// don't serve school routes to react app
+		res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
+			if (err) { res.status(500).send(err); }
+		});
+		console.log('Serving React App...');
+	});
+}
+
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
 	next(createError(404));
