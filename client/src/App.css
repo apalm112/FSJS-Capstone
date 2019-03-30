@@ -91,7 +91,7 @@ p {
 /* Jumbotron content positioning */
 	display: flex;
 	flex-direction: column;
-	padding-left: 40px;
+	padding-left: 30px;
 	align-items: center;
 	justify-content: center;
 }
@@ -112,8 +112,12 @@ p {
   margin-bottom: .25em;
 }
 
+.jumbo-left {
+	display: inline-block !important;
+}
+
 #main-navbar {
-	display: inline-block;
+	display: block;
 	align-items: left;
 	justify-content: left;
 	font-size: 0.7em;

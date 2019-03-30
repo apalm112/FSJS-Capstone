@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
@@ -16,7 +16,7 @@ const App = () => (
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
-				<Route component={NavBar} />
+				
 				<Switch>
 					<Redirect exact path= "/" push to="/school/all" />
 

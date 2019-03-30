@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import loadGoogleMaps from '../modules/load-google-maps';
 import MarkerClusterer from '@google/markerclusterer';
+import NavBar from './NavBar';
 
 class MapContainer extends Component {
 	constructor(props) {
@@ -130,6 +131,7 @@ class MapContainer extends Component {
 		}		*/
 		return (
 			<div>
+				<NavBar />
 				<h3 className="center">Current Route: {this.props.schoolQueryRoute}</h3>
 				<h5 className="center">Number of schools: {this.state.schools.length}</h5>
 				<div id="map"></div>
