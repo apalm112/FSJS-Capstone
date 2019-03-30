@@ -1,21 +1,21 @@
 'use strict';
 
-const express = require('express');
-const createError = require('http-errors');
-const http = require('https');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const path = require('path');
+const express = require('express'),
+	createError = require('http-errors'),
+	http = require('https'),
+	logger = require('morgan'),
+	mongoose = require('mongoose'),
+	path = require('path');
 require('dotenv').config();
 
 const School = require('./database/models').School;
 
-const immunizationRouter = require('./routes/immunization');
-const reasonRouter = require('./routes/reason');
-const schoolRouter = require('./routes/school');
+const immunizationRouter = require('./routes/immunization'),
+	reasonRouter = require('./routes/reason'),
+	schoolRouter = require('./routes/school');
 
-const MONGOLAB_URI  = process.env.MONGOLAB_URI;
-const SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
+const MONGOLAB_URI  = process.env.MONGOLAB_URI,
+	SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
 
 const app = express();
 
@@ -81,8 +81,8 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	database.dropCollection('schools');
-	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	// database.dropCollection('schools');
+	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT',	count );

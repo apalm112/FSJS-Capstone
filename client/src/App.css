@@ -18,9 +18,17 @@ html, body {
 }
 
 .middle-button {
-/* Adds space inbetween the NavBar buttons  */
+/* Adds space inbetween the MapNavBar buttons  */
 	margin-left: 10px !important;
 	margin-right: 10px;
+}
+
+h1 {
+/* Jumbotron h1 content positioning */
+	flex-direction: column;
+	padding-left: 130px;
+	align-items: center;
+	justify-content: center;
 }
 
 h3 {
@@ -33,8 +41,9 @@ hr {
     height: 1px;
     border: 0px solid grey;
     border-top: 1px solid #ccc;
-    margin: 1em 0;
+    margin: 1em 1em;
     padding: 0;
+		max-width: 95%;
 }
 
 p {
@@ -54,27 +63,22 @@ p {
 
 /* Class Styles ***************************/
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-header {
   background-color: #282c34;
-	position: relative;
-  min-height: 7vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-	font-size: calc(10px + 2vmin);
 	color: white;
+	font-size: calc(10px + 2vmin);
+  min-height: 7vh;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.gm-style-iw-c {
-
+.center {
+	text-align: center;
 }
 
 .content {
@@ -89,15 +93,19 @@ p {
 }
 
 .lead {
-	padding-left: 40px;
+/* Jumbotron content positioning */
+	display: flex;
+	flex-direction: column;
+	padding-left: 30px;
+	align-items: center;
+	justify-content: center;
 }
 
 .line {
-	width: 90%;
 }
 
 .icon-gif {
-  font-size: 6em;
+  font-size: 16em;
   margin-bottom: -10px;
   color: #7bcbc4;
   display: block;
@@ -108,6 +116,22 @@ p {
   margin-bottom: .25em;
 }
 
+.jumbo-left {
+	display: inline-block !important;
+}
+
+#main-navbar {
+	display: inline-block;
+	margin-top: -30px;
+	align-items: left;
+	justify-content: left;
+	font-size: 0.7em;
+}
+
+.main-nav-link {
+
+}
+
 .nav-link & active {
 	background-color: rgba(55, 130, 163, 0.5);
 }
@@ -116,9 +140,21 @@ p {
 	list-style: none;
 }
 
-/* MAIN NAV ------------------------------------------------------- */
+/* MAP NAVBAR-------------------------------------------- */
 .bg-light {
 	background-color: #72add7;
+}
+
+.btn-one {
+
+}
+
+.btn-two {
+
+}
+
+.btn-three {
+
 }
 
 .navbar {
@@ -133,6 +169,10 @@ p {
 }
 
 /* InfoWindow Styles ********************************************/
+.gm-style-iw-c {
+
+}
+
 .gm-ui-hover-effect {
   background: darkgreyslate;
 	height: 55px;
@@ -192,8 +232,26 @@ p {
 }
 
 @media only screen and (max-width: 614px)  {
-.middle-button {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	.btn-two {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
+
+@media only screen and (max-width: 559px)  {
+	h1 {
+	/* Jumbotron h1 content positioning */
+		padding-left: 40px;
+	}
+	.btn-one {
+		display: inline-flex;
+		margin-left: 75px;
+	}
+	.btn-two {
+		display: inherit;
+
+	}
+	.btn-three {
+		margin-left: 30px;
+	}
 }
