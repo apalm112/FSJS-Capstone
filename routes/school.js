@@ -42,7 +42,7 @@ router.get('/all', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
+			res.set('Content-Type', 'application/javascript');
 			res.send(getAllSchoolsCoords);
 		});
 });
@@ -82,7 +82,7 @@ router.get('/complete_for_all', (req, res) => {
 					k12: k_12
 				};
 			});
-			res.set('Content-Type', 'text/html');
+			res.set('Content-Type', 'application/javascript');
 			res.send(results);
 		});
 });
@@ -121,7 +121,7 @@ TODO:  Remove those 7 schools from the search results.
 					reported: ''
 				};
 			});
-			res.set('Content-Type', 'text/html');
+			res.set('Content-Type', 'application/javascript');
 			res.send(reportYes);
 		});
 });
@@ -154,7 +154,7 @@ router.get('/reported_no', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
+			res.set('Content-Type', 'application/javascript');
 			res.send(results);
 		});
 });
