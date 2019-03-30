@@ -54,19 +54,14 @@ p {
 
 /* Class Styles ***************************/
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-header {
   background-color: #282c34;
-	position: relative;
-  min-height: 7vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-	font-size: calc(10px + 2vmin);
 	color: white;
+	font-size: calc(10px + 2vmin);
+  min-height: 7vh;
 }
 
 .App-link {
@@ -75,6 +70,10 @@ p {
 
 .gm-style-iw-c {
 
+}
+
+.center {
+	text-align: center;
 }
 
 .content {
@@ -89,7 +88,12 @@ p {
 }
 
 .lead {
+/* Jumbotron content positioning */
+	display: flex;
+	flex-direction: column;
 	padding-left: 40px;
+	align-items: center;
+	justify-content: center;
 }
 
 .line {
@@ -97,7 +101,7 @@ p {
 }
 
 .icon-gif {
-  font-size: 6em;
+  font-size: 16em;
   margin-bottom: -10px;
   color: #7bcbc4;
   display: block;
@@ -108,6 +112,17 @@ p {
   margin-bottom: .25em;
 }
 
+#main-navbar {
+	display: inline-block;
+	align-items: left;
+	justify-content: left;
+	font-size: 0.7em;
+}
+
+.main-nav-link {
+
+}
+
 .nav-link & active {
 	background-color: rgba(55, 130, 163, 0.5);
 }
@@ -116,9 +131,21 @@ p {
 	list-style: none;
 }
 
-/* MAIN NAV ------------------------------------------------------- */
+/* MAP NAVBAR-------------------------------------------------- */
 .bg-light {
 	background-color: #72add7;
+}
+
+.btn-one {
+	/* margin-left: 75px; */
+}
+
+.btn-two {
+
+}
+
+.btn-three {
+	/* margin-left: 30px; */
 }
 
 .navbar {
@@ -192,8 +219,22 @@ p {
 }
 
 @media only screen and (max-width: 614px)  {
-.middle-button {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	.btn-two {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
+
+@media only screen and (max-width: 559px)  {
+	.btn-one {
+		display: inline-flex;
+		margin-left: 75px;
+	}
+	.btn-two {
+		display: inherit;
+
+	}
+	.btn-three {
+		margin-left: 30px;
+	}
 }

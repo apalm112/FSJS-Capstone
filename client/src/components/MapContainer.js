@@ -130,8 +130,8 @@ class MapContainer extends Component {
 		}		*/
 		return (
 			<div>
-				<h3>Current Route: {this.props.schoolQueryRoute}</h3>
-				<h5>Number of schools: {this.state.schools.length}</h5>
+				<h3 className="center">Current Route: {this.props.schoolQueryRoute}</h3>
+				<h5 className="center">Number of schools: {this.state.schools.length}</h5>
 				<div id="map"></div>
 			</div>
 		);

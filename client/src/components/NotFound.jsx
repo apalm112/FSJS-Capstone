@@ -2,10 +2,10 @@ import React from 'react';
 
 const fourZeroFour = () => {
 	return (
-		<li className='not-found'>
-			<i className="material-icons icon-gif not-found">sentiment_very_dissatisfied</i>
+		<li className='center not-found'>
 			<h3>404, Eh.</h3>
-			<p>Page Not Found.</p>
+			<h5>Page Not Found.</h5>
+			<i className="material-icons icon-gif not-found">sentiment_very_dissatisfied</i>
 		</li>
 	);
 };
