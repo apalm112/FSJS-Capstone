@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
 	BrowserRouter,
 	Redirect,
 	Route,
 	Switch
 } from 'react-router-dom';
+import About from './components/About';
 import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
@@ -16,9 +17,11 @@ const App = () => (
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
-				<Route component={NavBar} />
+
 				<Switch>
 					<Redirect exact path= "/" push to="/school/all" />
+
+					<Route path="/about" component={About} />
 
 					<Route path="/school/complete_for_all" render={ () => {return <MapContainer
 						schoolQueryRoute={"/school/complete_for_all"} /> }} />
