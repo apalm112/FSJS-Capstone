@@ -37,7 +37,6 @@ router.get('/medical', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
 			res.send(results);
 		});
 });
@@ -76,7 +75,6 @@ router.get('/personal', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
 			res.send(results);
 		});
 });
@@ -114,7 +112,6 @@ router.get('/religous', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
 			res.send(results);
 		});
 });
@@ -152,7 +149,6 @@ router.get('/any_exemption', (req, res) => {
 					reported: reported
 				};
 			});
-			res.set('Content-Type', 'text/html');
 			res.send(results);
 		});
 });

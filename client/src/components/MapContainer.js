@@ -7,6 +7,7 @@ class MapContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isLoading: false,
 			schools: [],
 			clusterManager: [],
 			map: {},
@@ -21,7 +22,7 @@ class MapContainer extends Component {
 
 		const map = new window.google.maps.Map(	document.getElementById('map'),	options);
 
-		this.setState({ map: map });
+		this.setState({ map });
 		this.handleMarkersCreate(map);
 	}
 
@@ -67,7 +68,9 @@ class MapContainer extends Component {
 		}
 	}
 	handleSetMCState = (param) => {
+		let isLoading = this.state.isLoading;
 			this.setState({ clusterManager: param });
+			this.toggleIsLoading(isLoading);
 	}
 	handleMapSetZoom = () => {
 		var getCM = this.state.clusterManager;
@@ -89,6 +92,13 @@ class MapContainer extends Component {
 		this.handleClearMarkers();
 		this.handleMarkersCreate(getMap);
 	}
+	toggleIsLoading = (isLoading) => {
+		if (isLoading) {
+			this.setState({ isLoading: false });
+		} else {
+			this.setState({ isLoading: true });
+		}
+	}
 
 	async componentDidMount() {
 		try {
@@ -104,8 +114,10 @@ class MapContainer extends Component {
 
 	async componentDidUpdate(prevProps) {
 	this.handleMapSetZoom();
+	let isLoading = this.state.isLoading;
 		try {
 			if (this.props.schoolQueryRoute !== prevProps.schoolQueryRoute) {
+				this.toggleIsLoading(isLoading);
 				const res = await fetch(this.props.schoolQueryRoute)
 				const schools = await res.json()
 				this.setState({ schools })
@@ -117,27 +129,15 @@ class MapContainer extends Component {
 	}
 
   render() {
-		/*		if (this.props.isLoading) {
-			return (
-				<Loading />
-			);
-		} else {
-			// return ( null );
-			return (
-				<div>
-					<h3>Markers being displayed for: {this.state.searchQuery}</h3>
-					<h5>Number of schools displayed: {this.state.schools.length}</h5>
-					<div id="map"></div>
-				</div>
-			);
-		}		*/
+		const isLoading = this.state.isLoading;
+		const currentRoute = this.props.schoolQueryRoute;
+		const schoolNum = this.state.schools.length;
 		return (
 			<div>
-			<p className="lead">Each drop down menu selection displays the school data for that single category.
-			</p>
-				<MapNavBar />
-				<h3 className="center">Current Route: {this.props.schoolQueryRoute}</h3>
-				<h5 className="center">Number of schools: {this.state.schools.length}</h5>
+				<p className="lead">Each drop down menu selection displays the school data for that single category.</p>
+				<MapNavBar isLoading={isLoading} />
+				<h3 className="center">Current Route: {currentRoute}</h3>
+				<h5 className="center">Number of schools: {schoolNum}</h5>
 				<div id="map"></div>
 			</div>
 		);

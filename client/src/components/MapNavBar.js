@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => (
-		<nav className="navbar navbar-expand-lg navbar-collapse-sm navbar-light bg-light">
-			<div id="navbarSupportedContent">
+export default class MapNavBar extends Component {
+	render() {
+		const loading = this.props.isLoading;
+		return (
+		<nav className="navbar navbar-light bg-light">
+			<div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-one">
-					<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+
+					{ loading ? <button className="btn btn-dark btn-load-one" type="button" disabled>
+						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						Loading...
+					</button>
+					:	<button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 						Schools
 					</button>
+					}
+
 					<div className="dropdown-menu">
 						<NavLink className="dropdown-item" to="/school/complete_for_all">100% Immunization Rate</NavLink>
 						<div className="dropdown-divider"></div>
@@ -19,9 +29,15 @@ const NavBar = () => (
 					</div>
 				</div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-two">
-					<button type="button" className="btn btn-primary dropdown-toggle middle-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+					{ loading ? <button className="btn btn-dark btn-load-two" type="button" disabled>
+						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						Loading...
+					</button>
+					:	<button type="button" className="btn btn-primary dropdown-toggle middle-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Exemption by Immunization
 					</button>
+					}
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 						<NavLink className="dropdown-item" to="/immunization/hepatitis_b">Hepatitis B</NavLink>
 						<div className="dropdown-divider"></div>
@@ -37,9 +53,15 @@ const NavBar = () => (
 					</div>
 				</div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-three">
-					<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{ loading ? <button className="btn btn-dark btn-load-three" type="button" disabled>
+						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						Loading...
+					</button>
+					:		<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Exemption By Reason
 					</button>
+					}
+
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 						<NavLink className="dropdown-item" to="/reason/medical">Medical</NavLink>
 						<div className="dropdown-divider"></div>
@@ -52,6 +74,6 @@ const NavBar = () => (
 				</div>
 			</div>
 		</nav>
-);
-
-export default NavBar;
+		);
+	}
+}
