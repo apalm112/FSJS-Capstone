@@ -80,8 +80,8 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	// database.dropCollection('schools');
-	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	database.dropCollection('schools');
+	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT',	count );
