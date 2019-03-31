@@ -17,15 +17,3 @@ const MainNavBar = () => (
 );
 
 export default MainNavBar;
-
-
-/* <ul className="nav nav-pills" id="main-navbar">
-	<li className="nav-item">
-		<NavLink className="main-nav-link nav-link" to="/">Home
-			<span className="sr-only">(current)</span>
-		</NavLink>
-	</li>
-	<li className="nav-item">
-		<NavLink className="main-nav-link nav-link" to="/about">About</NavLink>
-	</li>
-</ul> */

@@ -145,15 +145,16 @@ p {
 	background-color: #72add7;
 }
 
-.btn-one {
+.btn-load-one {
 
 }
 
-.btn-two {
-
+.btn-load-two {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-.btn-three {
+.btn-load-three {
 
 }
 
@@ -185,7 +186,10 @@ p {
 }
 
 /* LOADING SPINNER ****************************************/
-.spinner:before {
+.middle-btn {
+	margin: 5px 10px;
+}
+/* .spinner:before {
 	width: 100%;
 	list-style: none;
 	box-sizing: border-box;
@@ -211,7 +215,7 @@ p {
 
 .spinner {
 	list-style: none;
-}
+} */
 
 /* MEDIA QUERIES ****************************************/
 
@@ -252,6 +256,15 @@ p {
 
 	}
 	.btn-three {
+		margin-left: 30px;
+	}
+	.btn-load-one {
+		margin-left: -15px;
+	}
+	.btn-load-two {
+		margin-left: 60px;
+	}
+	.btn-load-three {
 		margin-left: 30px;
 	}
 }

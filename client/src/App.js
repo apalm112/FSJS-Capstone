@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	BrowserRouter,
 	HashRouter,
 	Redirect,
 	Route,
@@ -9,7 +8,6 @@ import {
 import About from './components/About';
 import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
-// import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
