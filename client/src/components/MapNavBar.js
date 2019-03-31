@@ -3,21 +3,21 @@ import { NavLink } from 'react-router-dom';
 
 export default class MapNavBar extends Component {
 	render() {
-		const loading = this.props.isLoading;
+		const { loading } = this.props;
+
 		return (
 		<nav className="navbar navbar-light bg-light">
 			<div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-one">
 
-					{ loading ? <button className="btn btn-dark btn-load-one" type="button" disabled>
+					{ loading ? <button className="btn btn-primary btn-load-one d-flex justify-content-center" id="btn-loading" type="button" disabled>
 						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 						Loading...
 					</button>
-					:	<button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					:	<button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Schools
 					</button>
 					}
-
 					<div className="dropdown-menu">
 						<NavLink className="dropdown-item" to="/school/complete_for_all">100% Immunization Rate</NavLink>
 						<div className="dropdown-divider"></div>
@@ -30,12 +30,12 @@ export default class MapNavBar extends Component {
 				</div>
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-two">
 
-					{ loading ? <button className="btn btn-dark btn-load-two" type="button" disabled>
+					{ !loading ? <button className="btn btn-primary dropdown-toggle middle-button" id="btn-two" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Exemption by Immunization
+					</button>
+					: <button className="btn btn-primary btn-load-one d-flex justify-content-center" id="btn-loading" type="button" disabled>
 						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 						Loading...
-					</button>
-					:	<button type="button" className="btn btn-primary dropdown-toggle middle-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Exemption by Immunization
 					</button>
 					}
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -52,13 +52,14 @@ export default class MapNavBar extends Component {
 						<NavLink className="dropdown-item" to="/immunization/varicella">Varicella</NavLink>
 					</div>
 				</div>
+
 				<div className="btn-group d-block-sm d-inline-md d-inline-lg btn-three">
-					{ loading ? <button className="btn btn-dark btn-load-three" type="button" disabled>
+					{ !loading ? <button className="btn btn-primary dropdown-toggle" id="btn-three" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Exemption By Reason
+					</button>
+					:  <button className="btn btn-primary btn-load-one d-flex justify-content-center" id="btn-loading" type="button" disabled>
 						<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 						Loading...
-					</button>
-					:		<button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Exemption By Reason
 					</button>
 					}
 

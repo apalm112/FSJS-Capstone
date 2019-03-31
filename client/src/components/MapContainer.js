@@ -135,7 +135,7 @@ class MapContainer extends Component {
 		return (
 			<div>
 				<p className="lead">Each drop down menu selection displays the school data for that single category.</p>
-				<MapNavBar isLoading={isLoading} />
+				<MapNavBar loading={isLoading} />
 				<h3 className="center">Current Route: {currentRoute}</h3>
 				<h5 className="center">Number of schools: {schoolNum}</h5>
 				<div id="map"></div>
