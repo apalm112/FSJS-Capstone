@@ -97,7 +97,7 @@ socrataView.checkMLabDBForData();
 /* Error Handling *************************************************************/
 // Function is a catch all for routes that get missed.
 app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
+	res.sendFile(path.join(__dirname, '/client/build/index.html'), (err) => {
 		if (err) { res.status(500).send(err); }
 	});
 });

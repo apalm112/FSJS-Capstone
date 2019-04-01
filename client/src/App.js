@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	BrowserRouter,
+	BrowserRouter as Router,
 	Redirect,
 	Route,
 	Switch
@@ -10,12 +10,9 @@ import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
-const supportHistory = 'pushState' in window.history;
 
 const App = () => (
-	<BrowserRouter
-		forceRefresh={!supportHistory}
-	>
+	<Router>
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
@@ -71,7 +68,7 @@ const App = () => (
 				</Switch>
 			</ErrorBoundary>
     </div>
-	</BrowserRouter>
+	</Router>
 );
 
 export default App;
