@@ -36,10 +36,10 @@ app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
 
-// Function is a catchall handler for routes that don't match. (wildcard route)
-app.get('*', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'), (err) => {
-		if (err) { next(err); }
+// Function is a catch all for routes that get missed.
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
+		if (err) { res.status(500).send(err); }
 	});
 });
 
@@ -87,8 +87,8 @@ socrataView.fetchAll = function() {
 
 socrataView.checkMLabDBForData = function () {
 	// drop the collection from the mLab DB
-	database.dropCollection('schools');
-	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	// database.dropCollection('schools');
+	// console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
 		console.log('COUNT',	count );
