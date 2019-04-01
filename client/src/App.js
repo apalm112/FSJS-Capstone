@@ -10,7 +10,6 @@ import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
-const supportHistory = 'pushState' in window.history;
 
 const App = () => (
 	<BrowserRouter>
