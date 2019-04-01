@@ -13,9 +13,7 @@ import MapContainer from './components/MapContainer';
 const supportHistory = 'pushState' in window.history;
 
 const App = () => (
-	<BrowserRouter
-		forceRefresh={!supportHistory}
-	>
+	<BrowserRouter>
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
