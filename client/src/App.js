@@ -12,7 +12,7 @@ import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
 const App = () => (
-	<BrowserRouter>
+	<BrowserRouter basename="/client/build/index.html">
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
