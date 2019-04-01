@@ -1,7 +1,7 @@
 {
   "name": "wastate-immunization",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "author": "Adam Palmer",
   "engines": {
     "node": "10.15.3"
   },
@@ -12,7 +12,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "client": "cd client && npm run start",
     "server": "node ./server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
