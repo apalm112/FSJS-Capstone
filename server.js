@@ -36,6 +36,13 @@ app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
 
+// Function is a catch all for routes that get missed.
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
+		if (err) { res.status(500).send(err); }
+	});
+});
+
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
 
@@ -95,13 +102,6 @@ socrataView.checkMLabDBForData = function () {
 socrataView.checkMLabDBForData();
 
 /* Error Handling *************************************************************/
-// Function is a catch all for routes that get missed.
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, 'client/build/index.html'), (err) => {
-		if (err) { res.status(500).send(err); }
-	});
-});
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
 	next(createError(404));

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	HashRouter,
+	BrowserRouter,
 	Redirect,
 	Route,
 	Switch
@@ -10,9 +10,12 @@ import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
+const supportHistory = 'pushState' in window.history;
 
 const App = () => (
-	<HashRouter>
+	<BrowserRouter
+		forceRefresh={!supportHistory}
+	>
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
@@ -68,7 +71,7 @@ const App = () => (
 				</Switch>
 			</ErrorBoundary>
     </div>
-	</HashRouter>
+	</BrowserRouter>
 );
 
 export default App;
