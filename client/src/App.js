@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	BrowserRouter as Router,
+	BrowserRouter,
 	Redirect,
 	Route,
 	Switch
@@ -12,7 +12,7 @@ import NotFound from './components/NotFound';
 import MapContainer from './components/MapContainer';
 
 const App = () => (
-	<Router>
+	<BrowserRouter>
     <div className="App">
 			<ErrorBoundary>
 				<Route component={Header} />
@@ -68,7 +68,7 @@ const App = () => (
 				</Switch>
 			</ErrorBoundary>
     </div>
-	</Router>
+	</BrowserRouter>
 );
 
 export default App;
