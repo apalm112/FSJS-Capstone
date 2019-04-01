@@ -17,14 +17,8 @@ html, body {
 	height: 100%;
 }
 
-.middle-button {
-/* Adds space inbetween the MapNavBar buttons  */
-	margin-left: 10px !important;
-	margin-right: 10px;
-}
-
-h1 {
 /* Jumbotron h1 content positioning */
+h1 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -49,7 +43,8 @@ p {
 	font-size: 0.7em;
 }
 
-/* Google Map Style:  Always set the map height explicitly to define the size of the div element that contains the map. */
+/* Google Map Style:
+Always set the map height explicitly to define the size of the div element that contains the map. */
 #map {
 	margin: 0 auto;
 	margin-bottom: 40px;
@@ -61,6 +56,10 @@ p {
 }
 
 /* Class Styles ***************************/
+.about-container > ul {
+	list-style: none;
+}
+
 .App {
   text-align: center;
 }
@@ -82,6 +81,12 @@ p {
 
 .content {
 	background-color: rgba(200, 200, 200, 0.1);
+}
+
+.middle-button {
+/* Adds space inbetween the MapNavBar buttons  */
+	margin-left: 10px !important;
+	margin-right: 10px;
 }
 
 .push-to-bottom {
@@ -152,10 +157,10 @@ p {
 	flex-direction: column;
 }
 
-.navbar-nav a:hover,
-.navbar-nav .active {
+.navbar a:hover,
+.navbar .active {
 	color: #fff;
-	background: rgba(108, 194, 241, 0.5);
+	background: rgba(0, 123, 255, 0.9);
 }
 
 /* InfoWindow Styles ********************************************/
