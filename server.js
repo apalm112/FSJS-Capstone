@@ -38,11 +38,9 @@ app.use('/reason', reasonRouter);
 
 
 
-// Function is a catch all for routes that get missed.
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'), (err) => {
-		if (err) { res.status(500).send(err); }
-	});
+// Function is a catchall handler for routes that don't match.
+app.get('*', function (req, res) {
+	res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 
