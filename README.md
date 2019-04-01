@@ -35,13 +35,13 @@ ___________________________________________________________________________
 
 		`REACT_APP_MAP_KEY=<Google Maps API Key>`
 
- 2 [Socrata App Token](https://opendata.socrata.com/signup)
+ 	2 [Socrata App Token](https://opendata.socrata.com/signup)
 
 	* In the `/client/.env` file add:
 
 		`SOCRATA_API_KEY=<Socrata App Token>`
 
-  3 [mLab Database](https://mlab.com/login/) account
+  	3 [mLab Database](https://mlab.com/login/) account
 	* Hopefully you already have an mLab account, they're not giving out new ones.
 	* Login to your mLab account & create a new MongoDB Deployment, the free option works.
 	* Add a new database user & password to it.
