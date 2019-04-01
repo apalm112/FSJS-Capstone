@@ -29,22 +29,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 /*	Binds the routes to app object, mounts the routes to the express app specifiying '/<route>' as the path. Routes query mLab DB & return data to React **/
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
 
-
-
-// Function is a catchall handler for routes that don't match.
-app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'));
+// Function is a catchall handler for routes that don't match. (wildcard route)
+app.get('*', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '/client/build/index.html'), (err) => {
+		if (err) { next(err); }
+	});
 });
-
-
-
 
 /* Database Connection ********************************************************************/
 mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });

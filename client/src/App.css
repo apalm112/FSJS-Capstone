@@ -28,6 +28,7 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 50px;
 }
 
 h3 {
@@ -46,7 +47,7 @@ hr {
 }
 
 p {
-	font-size: 0.7em;
+	font-size: 0.5em;
 }
 
 /* Google Map Style:  Always set the map height explicitly to define the size of the div element that contains the map. */
@@ -179,7 +180,7 @@ p {
   .jumbotron {
     max-width: 960px;
     margin: auto;
-		text-align: left;
+		/* text-align: left; */
   }
   .main-nav ul {
     display: flex;
@@ -191,17 +192,38 @@ p {
   }
 }
 
+@media only screen and (min-width: 630px) {
+	.lead {
+		padding: 0 10px;
+	}
+}
+
 @media only screen and (max-width: 614px)  {
 	.btn-two {
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
+
+	.display-4 {
+		padding: 0 50px;
+	}
+
+	.lead {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
 }
 
 @media only screen and (max-width: 559px)  {
 	/* Jumbotron h1 content positioning */
-	h1 {
-		padding-left: 40px;
+	.display-4 {
+		padding: 50px;
+		font-size: 2em;
+	}
+	.lead {
+		font-size: .9em;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	/* MapNavBar button positioning */
 	.btn-one {
