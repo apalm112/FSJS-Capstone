@@ -1,10 +1,10 @@
 # FSJS-Capstone-Project
-A MERN stack web application deployed on Heroku,
-which combines a React frontend with a Express backend.
+A MERN stack web application [deployed on Heroku](https://wa-vaccine.herokuapp.com),
+with a React frontend with a Express backend.
 
 This project uses REST API design and Express to create API routes, along with Mongoose and MongoDB for data modeling and persistence.  
 The app will provide a way for users to:
-* display immunization data for Washington state schools by immunization type, exemption reason & more on a Google map
+* see immunization data for Washington state schools by immunization type, exemption reason & more on a Google map
 * interact with the map displaying schools in the database
 * each map marker will display an infowindow w/ that schools immunization data
 ___________________________________________________________________________
@@ -43,7 +43,7 @@ ___________________________________________________________________________
 
 		`SOCRATA_API_KEY=<Socrata App Token>`
 
-  	3 [mLab Database](https://mlab.com/login/) account
+  	3 existing [mLab Database](https://mlab.com/login/) account (they are no longer creating new ones)
 	* Login to your mLab account & create a new MongoDB Deployment, under the free option.
 	* Add a new database user & password to it.
 	* Add the [ standard MongoDB URI](https://docs.mlab.com/connecting/#connect-string) from the deployment into the root directory `.env` file:
