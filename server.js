@@ -28,10 +28,9 @@ app.use(express.json());
 // express || body-parser middleware parses request to make it accessible to req.body
 app.use(express.urlencoded({ extended: false }));
 
-//	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client. So when the browser requests logo.png from your site, it knows to look in the public folder for that.
+//	This line tells Express(Node.js) to use the provided CSS, Image files. Serve static files from the React app, `express.static` is in charge of sending static files requests to the client.
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-/*	Binds the routes to app object, mounts the routes to the express app specifiying '/<route>' as the path. Routes query mLab DB & return data to React **/
 app.use('/immunization', immunizationRouter);
 app.use('/school', schoolRouter);
 app.use('/reason', reasonRouter);
@@ -48,7 +47,6 @@ mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: f
 
 // Create a variable to hold the database connection object.
 const database = mongoose.connection;
-// mongoose.set('debug', true);  //<--runs debugger in terminal
 
 database.on('error', (error) => {
 	// set terminal stdout color red for error message
@@ -60,7 +58,7 @@ database.once('open', () => {
 	console.log('\n                \x1b[42m%s\x1b[0m', '-----------------Database Connection Successfully Opened------------------------');	// eslint-disable-line no-console
 });
 
-/********************************************************/
+/* Data Handling  *******************************************************/
 const socrataView = {};
 socrataView.fetchAll = function() {
 	const socrata = 'https://data.wa.gov/resource/ndsp-2k9r.json?';
@@ -86,13 +84,12 @@ socrataView.fetchAll = function() {
 };
 
 socrataView.checkMLabDBForData = function () {
-	// drop the collection from the mLab DB
+	// This function will drop the collection from the mLab database & re-fetch it from Socrata.
 	database.dropCollection('schools');
-	console.log('::::::::::::::::::::Collection has been dropped ::::::::::::');
+	console.log(':: Collection has been dropped ::');
 	// Query checks mLab DB if data is already saved
 	School.countDocuments({ }, (err, count) => {
-		console.log('COUNT',	count );
-		//	--if not, then do fetch data from socrata
+		//	--if not, then fetch data from socrata
 		if (!count) {
 			console.log('Express fetched the data');
 			socrataView.fetchAll();
@@ -125,11 +122,11 @@ app.use((err, req, res, next) => {
 	res.send({
 		err: err,
 		status: err.status,
-		message: 'you what?'
+		message: err.message
 	});
 });
 
 // start listening on our port, log message to stdout
 const server = app.listen(app.get('port'), () => {
-	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization Express server is listening on port ${server.address().port}`, '\n');	// eslint-disable-line no-console
+	console.log('\n                \x1b[45m%s\x1b[0m', `The wastate_immunization server is listening on port ${server.address().port}`, '\n');	// eslint-disable-line no-console
 });

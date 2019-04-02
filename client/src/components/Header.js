@@ -12,8 +12,10 @@ const Header = () => {
 		  <p className="lead">
 			The data is from the Washington state Department of Health.</p>
 			<p className="lead">For student immunization rates, kindergarten through 12th grade, by school for 2016-2017.</p>
-			<p className="lead"> You can view school locations sorted by immunization rates, different types of immunizations & by exemption reasons.
+			<p className="lead"> You can view school locations sorted by different types of immunizations, by exemption reasons and more.
 			</p>
+			<p className="lead">Each drop down menu selection displays the school data for that single category.</p>
+			<p className="lead"> Each map marker can be clicked to open an infoWindow displaying its data.</p>
 		</div>
 	);
 }

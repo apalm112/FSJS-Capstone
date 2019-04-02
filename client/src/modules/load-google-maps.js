@@ -2,6 +2,8 @@ const loadGoogleMaps = (callback) => {
 	/*	This function checks the index.html file for the Google Maps script tag
 			if it isn't there, then it adds one. Then executes the callback initMap(),
 			which is passed to it in the MapContainer component.
+
+			Source:  https://cleverbeagle.com/blog/articles/tutorial-how-to-load-third-party-scripts-dynamically-in-javascript
 	*/
 	const existingScript = document.getElementById('googleMaps');
 

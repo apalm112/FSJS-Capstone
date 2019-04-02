@@ -16,6 +16,7 @@ class MapContainer extends Component {
 		this.handleMarkersCreate = this.handleMarkersCreate.bind(this);
 	}
 
+	// Creates a new Google map & adds it the state object.
 	handleInitMap() {
 		const Wenatchee = { lat: 47.3232, lng: -120.3232 };
 		const options = {	center: Wenatchee,	zoom: 7, gestureHandling: 'greedy'	};
@@ -26,10 +27,11 @@ class MapContainer extends Component {
 		this.handleMarkersCreate(map);
 	}
 
+	// Creates markers & InfoWindows for the data passed in.
 	handleMarkersCreate = (map, schoolData=this.state.schools) => {
 		var getMap = this.state.map;
 		var markers = schoolData.map((school, idx) => {
-			// Add some markers to the map.
+			// Add the markers to the map.
 			var marker = new window.google.maps.Marker({
 				position: { lng: this.state.schools[idx].lng, lat: this.state.schools[idx].lat },
 				map: getMap,
@@ -59,6 +61,7 @@ class MapContainer extends Component {
 		this.handlerMarkerCluster(map, markers);
 	}
 
+	// Create the Google MarkerClusterer for the map.
 	handlerMarkerCluster = (map, markers) => {
 		var clusterManager = new MarkerClusterer(map, markers, {imagePath: '../images/m'})
 		this.handleSetMCState(clusterManager);
@@ -67,11 +70,15 @@ class MapContainer extends Component {
 			getCM.redraw();
 		}
 	}
+
+	// Update the MarkerClusterer state & loading value.
 	handleSetMCState = (param) => {
 		let isLoading = this.state.isLoading;
 			this.setState({ clusterManager: param });
 			this.toggleIsLoading(isLoading);
 	}
+
+	// Zooms the map out on route change if needed.
 	handleMapSetZoom = () => {
 		var getCM = this.state.clusterManager;
 		getCM.minClusterSize_ = 5;
@@ -80,6 +87,8 @@ class MapContainer extends Component {
 			getCM.fitMapToMarkers();
 		}
 	}
+
+	// Removes the markers from the map.
 	handleClearMarkers = () => {
 		var getCM = this.state.clusterManager;
 		let clusterNotEmpty = getCM.markers_;
@@ -87,11 +96,15 @@ class MapContainer extends Component {
 			getCM.clearMarkers();
 		}
 	}
+
+	// Adds markers to the map.
 	handleAddMarkers = () => {
 		var getMap = this.state.map;
 		this.handleClearMarkers();
 		this.handleMarkersCreate(getMap);
 	}
+
+	// Switch the loading state for the Bootstrap loading spinner buttons.
 	toggleIsLoading = (isLoading) => {
 		if (isLoading) {
 			this.setState({ isLoading: false });
@@ -100,6 +113,7 @@ class MapContainer extends Component {
 		}
 	}
 
+	// On page load adds the Google map & MarkerClusterer.
 	async componentDidMount() {
 		try {
 			await loadGoogleMaps(this.handleInitMap);
@@ -112,6 +126,7 @@ class MapContainer extends Component {
 		}
 	}
 
+	// On route change updates the MarkerClusterer state.
 	async componentDidUpdate(prevProps) {
 	this.handleMapSetZoom();
 	let isLoading = this.state.isLoading;
@@ -134,9 +149,8 @@ class MapContainer extends Component {
 		const schoolNum = this.state.schools.length;
 		return (
 			<div>
-				<p className="lead">Each drop down menu selection displays the school data for that single category.</p>
 				<MapNavBar loading={isLoading} />
-				<h3 className="center">Current Route: {currentRoute}</h3>
+				<h5 className="center">Showing Schools for: {currentRoute}</h5>
 				<h5 className="center">Number of schools: {schoolNum}</h5>
 				<div id="map"></div>
 			</div>

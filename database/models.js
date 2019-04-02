@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
+// SchoolSchema is based on the format of the data returned by the Socrata API.
 var SchoolSchema = new Schema({
 	grade_levels: { type: String },
 	k_12_enrollment: { type: Number },
