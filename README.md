@@ -39,7 +39,7 @@ ___________________________________________________________________________
 
  	2 [Socrata App Token](https://opendata.socrata.com/signup)
 
-	* In the `/client/.env` file add:
+	* In the root directory `.env` file add:
 
 		`SOCRATA_API_KEY=<Socrata App Token>`
 
