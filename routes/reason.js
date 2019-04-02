@@ -5,8 +5,7 @@ const School = require('../database/models').School;
 
 router.get('/medical', (req, res) => {
 /*	This route displays the results for the percent_with_medical_exemption > 0
-		There 1617 Schools w/ valid coordinates.
-		There are  Schools which have the coordinates as an empty value, i.e.-- {}		*/
+		There 1617 Schools w/ valid coordinates.	*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'percent_with_medical_exemption': { $gt: 0 },
 			'location_1.coordinates': { $ne: [] } })
@@ -43,8 +42,7 @@ router.get('/medical', (req, res) => {
 
 router.get('/personal', (req, res) => {
 /*	This route displays the results for the percent_with_personal_exemption > 0
-		 Total Schools 1958
-		 1952 HAVE COORDINATES		*/
+		1952 have coordinates.	*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'percent_with_personal_exemption': { $gt: 0 },
 			'location_1.coordinates': { $ne: [] } })
@@ -81,7 +79,7 @@ router.get('/personal', (req, res) => {
 
 router.get('/religous', (req, res) => {
 /*	This route displays the results for the percent_with_religious_exemption > 0
-		There are 1067 schools w/ coordinates			*/
+		There are 1067 schools w/ coordinates.	*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'percent_with_religious_exemption': { $gt: 0 },
 			'location_1.coordinates': { $ne: [] } })
@@ -118,7 +116,7 @@ router.get('/religous', (req, res) => {
 
 router.get('/any_exemption', (req, res) => {
 /*	This route displays the results for the percent_with_any_exemption > 0
- 		There are 2018			*/
+ 		There are 2018 schools w/ coordinates.	*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({ 'percent_with_any_exemption': { $gt: 0},
 			'location_1.coordinates': { $ne: [] } })

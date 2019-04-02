@@ -2,9 +2,11 @@
 A MERN stack web application deployed on Heroku,
 which combines a React frontend with a Express backend.
 
-This project uses REST API design, Node.js, and Express to create API routes, along with Mongoose and MongoDB for data modeling and persistence.  
-The API will provide a way for users to:
-* review immunization data for Washington state by school. Users can see a Google map displaying schools in the database.
+This project uses REST API design and Express to create API routes, along with Mongoose and MongoDB for data modeling and persistence.  
+The app will provide a way for users to:
+* display immunization data for Washington state schools by immunization type, exemption reason & more on a Google map
+* interact with the map displaying schools in the database
+* each map marker will display an infowindow w/ that schools immunization data
 ___________________________________________________________________________
 
 ### Installation
@@ -42,10 +44,9 @@ ___________________________________________________________________________
 		`SOCRATA_API_KEY=<Socrata App Token>`
 
   	3 [mLab Database](https://mlab.com/login/) account
-	* Hopefully you already have an mLab account, they're not giving out new ones.
-	* Login to your mLab account & create a new MongoDB Deployment, the free option works.
+	* Login to your mLab account & create a new MongoDB Deployment, under the free option.
 	* Add a new database user & password to it.
-	* Copy the [ standard MongoDB URI](https://docs.mlab.com/connecting/#connect-string) from the deployment into the root directory `.env` file:
+	* Add the [ standard MongoDB URI](https://docs.mlab.com/connecting/#connect-string) from the deployment into the root directory `.env` file:
 
 	`MONGOLAB_URI=mongodb://<dbuser>:<dbpassword>@ds<number>.mlab.com:<number>/<deployment name>`
 

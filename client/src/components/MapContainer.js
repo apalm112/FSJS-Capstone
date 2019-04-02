@@ -35,10 +35,10 @@ class MapContainer extends Component {
 				map: getMap,
 				content:
 									'<div class="content">'+
-									`<div><h5 class="firstHeading">${this.state.schools[idx].specificRouteData}</h5></div>`+
+									`<div><h5>${this.state.schools[idx].specificRouteData}</h5></div>`+
 									`<h5>${this.state.schools[idx].reported}</h5>`+
 									`<h5>${this.state.schools[idx].name}</h5>`+
-									'<div class="bodyContent">'+
+									'<div>'+
 									`<h6>Grade Levels:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.state.schools[idx].levels}</h6>`+
 									`<h6>K-12 Enrollment:&nbsp;&nbsp;&nbsp;&nbsp; ${this.state.schools[idx].k12}</h6>`+
 									`<h6>${this.state.schools[idx].address},&nbsp; ${this.state.schools[idx].city}</h6>`+

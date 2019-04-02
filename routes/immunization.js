@@ -5,8 +5,8 @@ const School = require('../database/models').School;
 
 router.get('/hepatitis_b', (req, res) => {
 /*	This route will display the percentage_exempt_for_hepatitis_b > 0
-		There are 1972 schools from this query
-		1967 have coordinates			*/
+		There are 1972 schools
+		1967 have valid coordinates			*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_hepatitisb': { $gt: 0 },
@@ -43,9 +43,9 @@ router.get('/hepatitis_b', (req, res) => {
 });
 
 router.get('/measles', (req, res) => {
-/*	This route will display the percent_exempt_for_measles_mumps_rubella. > 0
-		There are 2253 schools from this query
-		1975 Have coordinates		*/
+/*	This route will display the percent_exempt_for_measles_mumps_rubella > 0
+		There are 2253 schools
+		1970 have valid coordinates		*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_measles_mumps_rubella': { $gt: 0 },
@@ -82,9 +82,9 @@ router.get('/measles', (req, res) => {
 });
 
 router.get('/pertussis', (req, res) => {
-/*	This route will display the percent_exempt_for_pertussis percent_exempt_for_pertussis > 0
+/*	This route will display the percent_exempt_for_pertussis > 0
 		There are  schools from this query
-		1946 Have coordinates		*/
+		1940 have valid coordinates		*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_pertussis': { $gt: 0 },
@@ -123,7 +123,7 @@ router.get('/pertussis', (req, res) => {
 router.get('/polio', (req, res) => {
 /*	This route will display the percent_exempt_for_polio > 0
 		There are  schools from this query.
-		1957 Have coordinates*/
+		1952 have valid coordinates*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_polio': { $gt: 0 },
@@ -161,8 +161,7 @@ router.get('/polio', (req, res) => {
 
 router.get('/tetanus', (req, res) => {
 /*	This route will display the percent_exempt_for_diphtheria_tetanus > 0
-		There are  schools from this query.
-		1968 Have coordinates		*/
+		1962 have valid coordinates		*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_diphtheria_tetanus': { $gt: 0 },
@@ -200,8 +199,7 @@ router.get('/tetanus', (req, res) => {
 
 router.get('/varicella', (req, res) => {
 /*	This route will display the percent_exempt_for_diphtheria_tetanus > 0
-		There are  schools from this query.
-		1992 Have coordinates		*/
+		1987 have valid coordinates		*/
 	School.remove({ 'location_1.coordinates': { $nin: [ -70.994001, -83.290819, -89.627144, -98.736722, -111.447261, -118.257991, -121.810542 ] }})
 		.find({
 			'percent_exempt_for_varicella': { $gt: 0 },
