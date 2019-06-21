@@ -36,8 +36,8 @@ const About = (props) => {
         for the percentage of schools that did not report.
         "</p>
         <ul>
-          <li><a href="https://www.github.com/apalm112/FSJS-Capstone" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-          <li><a href="https://www.linkedin.com/in/adapalmer" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+          <li><a href="https://www.github.com/apalm112/FSJS-Capstone" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/adapalmer" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></li>
         </ul>
       </div>
     );
