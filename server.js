@@ -7,6 +7,7 @@ const express = require('express'),
 	mongoose = require('mongoose'),
 	path = require('path');
 require('dotenv').config();
+const MongoClient = require('mongodb').MongoClient;
 
 const School = require('./database/models').School;
 
@@ -15,7 +16,9 @@ const immunizationRouter = require('./routes/immunization'),
 	schoolRouter = require('./routes/school');
 
 const MONGOLAB_URI  = process.env.MONGOLAB_URI,
-	SOCRATA_API_KEY = process.env.SOCRATA_API_KEY;
+	SOCRATA_API_KEY = process.env.SOCRATA_API_KEY,
+	USER_NAME = process.env.USER_NAME,
+	PSSWRD = process.env.PSSWRD;
 
 const app = express();
 
@@ -43,7 +46,20 @@ app.get('/*', (req, res) => {
 });
 
 /* Database Connection ********************************************************************/
-mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
+// mongoose.connect(MONGOLAB_URI || 'mongodb://localhost:27017/api', { autoIndex: false, useNewUrlParser: true });
+
+// ATLAS: (import:) mongoimport --uri mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.g0tik.mongodb.net/Immnunization --collection WaSchools --type json --file json
+
+const uri = "mongodb+srv://USER_NAME:PSSWRD@cluster0.g0tik.mongodb.net/WaSchools?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+	const collection = client.db("test").collection("devices");
+	// perform actions on the collection object
+	client.close();
+});
+mongoose.connect(uri, { autoIndex: false, useNewUrlParser: true });
+/* END Database Connection ********************************************************************/
+
 
 // Create a variable to hold the database connection object.
 const database = mongoose.connection;

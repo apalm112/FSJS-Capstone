@@ -9,11 +9,11 @@ const loadGoogleMaps = (callback) => {
 
 	if (!existingScript) {
 		const script = document.createElement('script');
-		script.id = 'googleMaps';
-		script.type =  'text/javascript';
 		script.async = true;
 		script.defer = true;
 		script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAP_KEY}`;
+		script.type =  'text/javascript';
+		script.id = 'googleMaps';
 
 		document.body.appendChild(script);
 

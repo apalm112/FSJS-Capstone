@@ -20,8 +20,9 @@
   },
   "dependencies": {
     "express": "~4.16.0",
-    "https": "^1.0.0",
     "http-errors": "^1.7.2",
+    "https": "^1.0.0",
+    "mongodb": "^3.6.4",
     "mongoose": "^5.4.17"
   },
   "devDependencies": {
