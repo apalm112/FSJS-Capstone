@@ -50,7 +50,7 @@ app.get('/*', (req, res) => {
 
 // ATLAS: (import:) mongoimport --uri mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.g0tik.mongodb.net/Immnunization --collection WaSchools --type json --file json
 
-const uri = "mongodb+srv://USER_NAME:PSSWRD@cluster0.g0tik.mongodb.net/WaSchools?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${USER_NAME}:${PSSWRD}@cluster0.g0tik.mongodb.net/WaSchools?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
 	const collection = client.db("test").collection("devices");
